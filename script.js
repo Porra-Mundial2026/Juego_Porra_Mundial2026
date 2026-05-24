@@ -1,46 +1,6 @@
 /* ======================================================
-FLAGS SVG
-====================================================== */
-
-function obtenerBandera(pais){
-
-    const flags = {
-
-        "España":"https://flagcdn.com/w80/es.png",
-        "Brasil":"https://flagcdn.com/w80/br.png",
-        "Argentina":"https://flagcdn.com/w80/ar.png",
-        "Francia":"https://flagcdn.com/w80/fr.png",
-        "Alemania":"https://flagcdn.com/w80/de.png",
-        "Portugal":"https://flagcdn.com/w80/pt.png",
-        "Inglaterra":"https://flagcdn.com/w80/gb.png",
-        "Estados Unidos":"https://flagcdn.com/w80/us.png",
-        "México":"https://flagcdn.com/w80/mx.png",
-        "Canadá":"https://flagcdn.com/w80/ca.png",
-        "Japón":"https://flagcdn.com/w80/jp.png",
-        "Corea del Sur":"https://flagcdn.com/w80/kr.png",
-        "Australia":"https://flagcdn.com/w80/au.png",
-        "Uruguay":"https://flagcdn.com/w80/uy.png",
-        "Marruecos":"https://flagcdn.com/w80/ma.png",
-        "Croacia":"https://flagcdn.com/w80/hr.png",
-        "Países Bajos":"https://flagcdn.com/w80/nl.png",
-        "Bélgica":"https://flagcdn.com/w80/be.png",
-        "Suiza":"https://flagcdn.com/w80/ch.png",
-        "Senegal":"https://flagcdn.com/w80/sn.png",
-        "Dinamarca":"https://flagcdn.com/w80/dk.png",
-        "Serbia":"https://flagcdn.com/w80/rs.png",
-        "Polonia":"https://flagcdn.com/w80/pl.png",
-        "Arabia Saudí":"https://flagcdn.com/w80/sa.png",
-        "Cabo Verde":"https://flagcdn.com/w80/cv.png"
-
-    };
-
-    return flags[pais] || "https://flagcdn.com/w80/un.png";
-
-}
-
-/* ======================================================
 PORRA MUNDIAL 2026
-APPLE EDITION — FIXED & STABLE
+APPLE EDITION — FLAGS FIXED
 ====================================================== */
 
 const DATA_URL = "./data/matches.json";
@@ -58,6 +18,47 @@ JSON.parse(localStorage.getItem("f_reales")) || {};
 
 let grupoSeleccionado = "A";
 let filtroActual = "todos";
+
+/* ======================================================
+FLAGS
+====================================================== */
+
+function obtenerBandera(pais){
+
+    const flags = {
+
+        "España":"https://flagcdn.com/es.svg",
+        "Brasil":"https://flagcdn.com/br.svg",
+        "Argentina":"https://flagcdn.com/ar.svg",
+        "Francia":"https://flagcdn.com/fr.svg",
+        "Alemania":"https://flagcdn.com/de.svg",
+        "Portugal":"https://flagcdn.com/pt.svg",
+        "Inglaterra":"https://flagcdn.com/gb-eng.svg",
+        "Estados Unidos":"https://flagcdn.com/us.svg",
+        "México":"https://flagcdn.com/mx.svg",
+        "Canadá":"https://flagcdn.com/ca.svg",
+        "Japón":"https://flagcdn.com/jp.svg",
+        "Corea del Sur":"https://flagcdn.com/kr.svg",
+        "Australia":"https://flagcdn.com/au.svg",
+        "Uruguay":"https://flagcdn.com/uy.svg",
+        "Marruecos":"https://flagcdn.com/ma.svg",
+        "Croacia":"https://flagcdn.com/hr.svg",
+        "Países Bajos":"https://flagcdn.com/nl.svg",
+        "Bélgica":"https://flagcdn.com/be.svg",
+        "Suiza":"https://flagcdn.com/ch.svg",
+        "Senegal":"https://flagcdn.com/sn.svg",
+        "Dinamarca":"https://flagcdn.com/dk.svg",
+        "Serbia":"https://flagcdn.com/rs.svg",
+        "Polonia":"https://flagcdn.com/pl.svg",
+        "Arabia Saudí":"https://flagcdn.com/sa.svg",
+        "Cabo Verde":"https://flagcdn.com/cv.svg"
+
+    };
+
+    return flags[pais] ||
+    "https://flagcdn.com/un.svg";
+
+}
 
 /* ======================================================
 LOAD
@@ -94,7 +95,7 @@ window.onload = async () => {
 };
 
 /* ======================================================
-CARGAR PARTIDOS JSON
+CARGAR JSON
 ====================================================== */
 
 async function cargarPartidos(){
@@ -113,17 +114,24 @@ async function cargarPartidos(){
 
         FixtureOficial = await response.json();
 
-        document.getElementById("totalPartidos").innerText =
-        FixtureOficial.length;
+        document.getElementById(
+            "totalPartidos"
+        ).innerText = FixtureOficial.length;
 
     }catch(error){
 
-        console.error("Error cargando JSON:", error);
+        console.error(error);
 
-        document.getElementById("grid-fixture").innerHTML = `
-            <div class="text-red-400 text-center col-span-full py-20">
+        document.getElementById(
+            "grid-fixture"
+        ).innerHTML = `
+
+            <div class="text-red-400 text-center py-20 col-span-full">
+
                 Error cargando matches.json
+
             </div>
+
         `;
 
     }
@@ -131,7 +139,7 @@ async function cargarPartidos(){
 }
 
 /* ======================================================
-RELOJES MUNDIALES
+RELOJES
 ====================================================== */
 
 function obtenerHoraLocal(timezone){
@@ -147,7 +155,7 @@ function obtenerHoraLocal(timezone){
 
         }).format(new Date());
 
-    }catch(err){
+    }catch{
 
         return "--:--";
 
@@ -175,7 +183,7 @@ function iniciarRelojes(){
 }
 
 /* ======================================================
-SIMULACIÓN API
+SIMULACIÓN RESULTADOS
 ====================================================== */
 
 function actualizarResultadosAPI(){
@@ -212,10 +220,13 @@ function actualizarResultadosAPI(){
             JSON.stringify(reales)
         );
 
-        document.getElementById("totalJugados").innerText =
-        jugados;
+        document.getElementById(
+            "totalJugados"
+        ).innerText = jugados;
 
-        document.getElementById("totalLive").innerText =
+        document.getElementById(
+            "totalLive"
+        ).innerText =
         Math.floor(jugados * 0.12);
 
         ejecutarMotor();
@@ -382,9 +393,13 @@ function dibujarClasificacion(puntos){
     if(ranking.length === 0){
 
         cont.innerHTML = `
+
             <div class="empty-state">
+
                 No hay participantes
+
             </div>
+
         `;
 
         return;
@@ -675,9 +690,11 @@ function dibujarFixture(){
 
                 <div class="team-side">
 
-                    <div class="flag">
-                        ${p.flagA || "🏳️"}
-                    </div>
+                    <img
+                        src="${obtenerBandera(p.eqA)}"
+                        alt="${p.eqA}"
+                        class="flag-img"
+                    >
 
                     <div class="team-name">
                         ${p.eqA || "TBD"}
@@ -691,9 +708,11 @@ function dibujarFixture(){
 
                 <div class="team-side">
 
-                    <div class="flag">
-                        ${p.flagB || "🏳️"}
-                    </div>
+                    <img
+                        src="${obtenerBandera(p.eqB)}"
+                        alt="${p.eqB}"
+                        class="flag-img"
+                    >
 
                     <div class="team-name">
                         ${p.eqB || "TBD"}
