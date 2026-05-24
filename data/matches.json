@@ -1,57 +1,2954 @@
-{
-  "id": 1,
-  "apiId": null,
-  "stage": "GROUP",
-  "group": "A",
-
-  "matchday": 1,
-
-  "status": "SCHEDULED",
-
-  "kickoffUTC": "2026-06-11T22:00:00Z",
-
-  "localTime": {
-    "stadium": "16:00",
-    "timezone": "America/Mexico_City"
+[
+  {
+    "id": 1,
+    "stage": "GROUP",
+    "group": "A",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-11T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "México",
+      "code": "MEX",
+      "flag": "🇲🇽"
+    },
+    "awayTeam": {
+      "name": "Sudáfrica",
+      "code": "RSA",
+      "flag": "🇿🇦"
+    },
+    "score": { "home": null, "away": null }
   },
-
-  "venue": {
-    "stadium": "Estadio Azteca",
-    "city": "Ciudad de México",
-    "country": "México"
+  {
+    "id": 2,
+    "stage": "GROUP",
+    "group": "A",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-12T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "Estadio Akron",
+      "city": "Guadalajara",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Corea del Sur",
+      "code": "KOR",
+      "flag": "🇰🇷"
+    },
+    "awayTeam": {
+      "name": "República Checa",
+      "code": "CZE",
+      "flag": "🇨🇿"
+    },
+    "score": { "home": null, "away": null }
   },
-
-  "homeTeam": {
-    "name": "México",
-    "code": "MEX",
-    "flag": "🇲🇽",
-    "fifaId": null
+  {
+    "id": 3,
+    "stage": "GROUP",
+    "group": "B",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-12T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "BMO Field",
+      "city": "Toronto",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Canadá",
+      "code": "CAN",
+      "flag": "🇨🇦"
+    },
+    "awayTeam": {
+      "name": "Bosnia y Herzegovina",
+      "code": "BIH",
+      "flag": "🇧🇦"
+    },
+    "score": { "home": null, "away": null }
   },
-
-  "awayTeam": {
-    "name": "Suiza",
-    "code": "SUI",
-    "flag": "🇨🇭",
-    "fifaId": null
+  {
+    "id": 4,
+    "stage": "GROUP",
+    "group": "D",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-13T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Estados Unidos",
+      "code": "USA",
+      "flag": "🇺🇸"
+    },
+    "awayTeam": {
+      "name": "Paraguay",
+      "code": "PAR",
+      "flag": "🇵🇾"
+    },
+    "score": { "home": null, "away": null }
   },
-
-  "score": {
-    "home": null,
-    "away": null
+  {
+    "id": 5,
+    "stage": "GROUP",
+    "group": "B",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-13T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Levi's Stadium",
+      "city": "San Francisco",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Catar",
+      "code": "QAT",
+      "flag": "🇶🇦"
+    },
+    "awayTeam": {
+      "name": "Suiza",
+      "code": "SUI",
+      "flag": "🇨🇭"
+    },
+    "score": { "home": null, "away": null }
   },
-
-  "penalties": {
-    "home": null,
-    "away": null
+  {
+    "id": 6,
+    "stage": "GROUP",
+    "group": "C",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-13T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Brasil",
+      "code": "BRA",
+      "flag": "🇧🇷"
+    },
+    "awayTeam": {
+      "name": "Marruecos",
+      "code": "MAR",
+      "flag": "🇲🇦"
+    },
+    "score": { "home": null, "away": null }
   },
-
-  "winner": null,
-
-  "featured": false,
-
-  "tv": [],
-
-  "predictionsLocked": false,
-
-  "lastUpdated": null
-}
+  {
+    "id": 7,
+    "stage": "GROUP",
+    "group": "C",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-14T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Gillette Stadium",
+      "city": "Boston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Haití",
+      "code": "HAI",
+      "flag": "🇭🇹"
+    },
+    "awayTeam": {
+      "name": "Escocia",
+      "code": "SCO",
+      "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 8,
+    "stage": "GROUP",
+    "group": "D",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-14T04:00:00Z",
+    "localTime": {
+      "stadium": "00:00",
+      "timezone": "America/Vancouver"
+    },
+    "horaEspana": "06:00",
+    "venue": {
+      "stadium": "BC Place",
+      "city": "Vancouver",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Australia",
+      "code": "AUS",
+      "flag": "🇦🇺"
+    },
+    "awayTeam": {
+      "name": "Turquía",
+      "code": "TUR",
+      "flag": "🇹🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 9,
+    "stage": "GROUP",
+    "group": "E",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-14T16:00:00Z",
+    "localTime": {
+      "stadium": "12:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "18:00",
+    "venue": {
+      "stadium": "NRG Stadium",
+      "city": "Houston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Alemania",
+      "code": "GER",
+      "flag": "🇩🇪"
+    },
+    "awayTeam": {
+      "name": "Curazao",
+      "code": "CUW",
+      "flag": "🇨🇼"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 10,
+    "stage": "GROUP",
+    "group": "F",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-14T20:00:00Z",
+    "localTime": {
+      "stadium": "16:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "22:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Países Bajos",
+      "code": "NED",
+      "flag": "🇳🇱"
+    },
+    "awayTeam": {
+      "name": "Japón",
+      "code": "JPN",
+      "flag": "🇯🇵"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 11,
+    "stage": "GROUP",
+    "group": "E",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-14T23:00:00Z",
+    "localTime": {
+      "stadium": "19:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "01:00",
+    "venue": {
+      "stadium": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Costa de Marfil",
+      "code": "CIV",
+      "flag": "🇨🇮"
+    },
+    "awayTeam": {
+      "name": "Ecuador",
+      "code": "ECU",
+      "flag": "🇪🇨"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 12,
+    "stage": "GROUP",
+    "group": "F",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-15T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Monterrey"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "Estadio BBVA",
+      "city": "Monterrey",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Suecia",
+      "code": "SWE",
+      "flag": "🇸🇪"
+    },
+    "awayTeam": {
+      "name": "Túnez",
+      "code": "TUN",
+      "flag": "🇹🇳"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 13,
+    "stage": "GROUP",
+    "group": "H",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-15T16:00:00Z",
+    "localTime": {
+      "stadium": "12:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "18:00",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "España",
+      "code": "ESP",
+      "flag": "🇪🇸"
+    },
+    "awayTeam": {
+      "name": "Cabo Verde",
+      "code": "CPV",
+      "flag": "🇨🇻"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 14,
+    "stage": "GROUP",
+    "group": "G",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-15T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Lumen Field",
+      "city": "Seattle",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Bélgica",
+      "code": "BEL",
+      "flag": "🇧🇪"
+    },
+    "awayTeam": {
+      "name": "Egipto",
+      "code": "EGY",
+      "flag": "🇪🇬"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 15,
+    "stage": "GROUP",
+    "group": "H",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-15T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Hard Rock Stadium",
+      "city": "Miami",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Arabia Saudí",
+      "code": "KSA",
+      "flag": "🇸🇦"
+    },
+    "awayTeam": {
+      "name": "Uruguay",
+      "code": "URU",
+      "flag": "🇺🇾"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 16,
+    "stage": "GROUP",
+    "group": "G",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-16T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Irán",
+      "code": "IRN",
+      "flag": "🇮🇷"
+    },
+    "awayTeam": {
+      "name": "Nueva Zelanda",
+      "code": "NZL",
+      "flag": "🇳🇿"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 17,
+    "stage": "GROUP",
+    "group": "I",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-16T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Francia",
+      "code": "FRA",
+      "flag": "🇫🇷"
+    },
+    "awayTeam": {
+      "name": "Senegal",
+      "code": "SEN",
+      "flag": "🇸🇳"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 18,
+    "stage": "GROUP",
+    "group": "I",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-16T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Gillette Stadium",
+      "city": "Boston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Irak",
+      "code": "IRQ",
+      "flag": "🇮🇶"
+    },
+    "awayTeam": {
+      "name": "Noruega",
+      "code": "NOR",
+      "flag": "🇳🇴"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 19,
+    "stage": "GROUP",
+    "group": "J",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-17T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Argentina",
+      "code": "ARG",
+      "flag": "🇦🇷"
+    },
+    "awayTeam": {
+      "name": "Argelia",
+      "code": "ALG",
+      "flag": "🇩🇿"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 20,
+    "stage": "GROUP",
+    "group": "J",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-17T04:00:00Z",
+    "localTime": {
+      "stadium": "00:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "06:00",
+    "venue": {
+      "stadium": "Levi's Stadium",
+      "city": "San Francisco",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Austria",
+      "code": "AUT",
+      "flag": "🇦🇹"
+    },
+    "awayTeam": {
+      "name": "Jordania",
+      "code": "JOR",
+      "flag": "🇯🇴"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 21,
+    "stage": "GROUP",
+    "group": "K",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-17T17:00:00Z",
+    "localTime": {
+      "stadium": "13:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "19:00",
+    "venue": {
+      "stadium": "NRG Stadium",
+      "city": "Houston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "🇵🇹"
+    },
+    "awayTeam": {
+      "name": "RD Congo",
+      "code": "COD",
+      "flag": "🇨🇩"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 22,
+    "stage": "GROUP",
+    "group": "L",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-17T20:00:00Z",
+    "localTime": {
+      "stadium": "16:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "22:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Inglaterra",
+      "code": "ENG",
+      "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+    },
+    "awayTeam": {
+      "name": "Croacia",
+      "code": "CRO",
+      "flag": "🇭🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 23,
+    "stage": "GROUP",
+    "group": "L",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-17T23:00:00Z",
+    "localTime": {
+      "stadium": "19:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "01:00",
+    "venue": {
+      "stadium": "BMO Field",
+      "city": "Toronto",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Ghana",
+      "code": "GHA",
+      "flag": "🇬🇭"
+    },
+    "awayTeam": {
+      "name": "Panamá",
+      "code": "PAN",
+      "flag": "🇵🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 24,
+    "stage": "GROUP",
+    "group": "K",
+    "matchday": 1,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-18T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Mexico_City"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Uzbekistán",
+      "code": "UZB",
+      "flag": "🇺🇿"
+    },
+    "awayTeam": {
+      "name": "Colombia",
+      "code": "COL",
+      "flag": "🇨🇴"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 25,
+    "stage": "GROUP",
+    "group": "A",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-18T16:00:00Z",
+    "localTime": {
+      "stadium": "12:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "18:00",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "República Checa",
+      "code": "CZE",
+      "flag": "🇨🇿"
+    },
+    "awayTeam": {
+      "name": "Sudáfrica",
+      "code": "RSA",
+      "flag": "🇿🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 26,
+    "stage": "GROUP",
+    "group": "B",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-18T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Suiza",
+      "code": "SUI",
+      "flag": "🇨🇭"
+    },
+    "awayTeam": {
+      "name": "Bosnia y Herzegovina",
+      "code": "BIH",
+      "flag": "🇧🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 27,
+    "stage": "GROUP",
+    "group": "B",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-18T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Vancouver"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "BC Place",
+      "city": "Vancouver",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Canadá",
+      "code": "CAN",
+      "flag": "🇨🇦"
+    },
+    "awayTeam": {
+      "name": "Catar",
+      "code": "QAT",
+      "flag": "🇶🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 28,
+    "stage": "GROUP",
+    "group": "A",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-19T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Mexico_City"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Estadio Akron",
+      "city": "Guadalajara",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "México",
+      "code": "MEX",
+      "flag": "🇲🇽"
+    },
+    "awayTeam": {
+      "name": "Corea del Sur",
+      "code": "KOR",
+      "flag": "🇰🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 29,
+    "stage": "GROUP",
+    "group": "D",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-19T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Lumen Field",
+      "city": "Seattle",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Estados Unidos",
+      "code": "USA",
+      "flag": "🇺🇸"
+    },
+    "awayTeam": {
+      "name": "Australia",
+      "code": "AUS",
+      "flag": "🇦🇺"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 30,
+    "stage": "GROUP",
+    "group": "C",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-19T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Gillette Stadium",
+      "city": "Boston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Escocia",
+      "code": "SCO",
+      "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+    },
+    "awayTeam": {
+      "name": "Marruecos",
+      "code": "MAR",
+      "flag": "🇲🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 31,
+    "stage": "GROUP",
+    "group": "C",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-20T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Brasil",
+      "code": "BRA",
+      "flag": "🇧🇷"
+    },
+    "awayTeam": {
+      "name": "Haití",
+      "code": "HAI",
+      "flag": "🇭🇹"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 32,
+    "stage": "GROUP",
+    "group": "D",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-20T04:00:00Z",
+    "localTime": {
+      "stadium": "00:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "06:00",
+    "venue": {
+      "stadium": "Levi's Stadium",
+      "city": "San Francisco",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Turquía",
+      "code": "TUR",
+      "flag": "🇹🇷"
+    },
+    "awayTeam": {
+      "name": "Paraguay",
+      "code": "PAR",
+      "flag": "🇵🇾"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 33,
+    "stage": "GROUP",
+    "group": "F",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-20T17:00:00Z",
+    "localTime": {
+      "stadium": "13:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "19:00",
+    "venue": {
+      "stadium": "NRG Stadium",
+      "city": "Houston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Países Bajos",
+      "code": "NED",
+      "flag": "🇳🇱"
+    },
+    "awayTeam": {
+      "name": "Suecia",
+      "code": "SWE",
+      "flag": "🇸🇪"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 34,
+    "stage": "GROUP",
+    "group": "E",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-20T20:00:00Z",
+    "localTime": {
+      "stadium": "16:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "22:00",
+    "venue": {
+      "stadium": "BMO Field",
+      "city": "Toronto",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Alemania",
+      "code": "GER",
+      "flag": "🇩🇪"
+    },
+    "awayTeam": {
+      "name": "Costa de Marfil",
+      "code": "CIV",
+      "flag": "🇨🇮"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 35,
+    "stage": "GROUP",
+    "group": "E",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-21T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ecuador",
+      "code": "ECU",
+      "flag": "🇪🇨"
+    },
+    "awayTeam": {
+      "name": "Curazao",
+      "code": "CUW",
+      "flag": "🇨🇼"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 36,
+    "stage": "GROUP",
+    "group": "F",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-21T04:00:00Z",
+    "localTime": {
+      "stadium": "00:00",
+      "timezone": "America/Monterrey"
+    },
+    "horaEspana": "06:00",
+    "venue": {
+      "stadium": "Estadio BBVA",
+      "city": "Monterrey",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Túnez",
+      "code": "TUN",
+      "flag": "🇹🇳"
+    },
+    "awayTeam": {
+      "name": "Japón",
+      "code": "JPN",
+      "flag": "🇯🇵"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 37,
+    "stage": "GROUP",
+    "group": "H",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-21T16:00:00Z",
+    "localTime": {
+      "stadium": "12:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "18:00",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "España",
+      "code": "ESP",
+      "flag": "🇪🇸"
+    },
+    "awayTeam": {
+      "name": "Arabia Saudí",
+      "code": "KSA",
+      "flag": "🇸🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 38,
+    "stage": "GROUP",
+    "group": "G",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-21T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Bélgica",
+      "code": "BEL",
+      "flag": "🇧🇪"
+    },
+    "awayTeam": {
+      "name": "Irán",
+      "code": "IRN",
+      "flag": "🇮🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 39,
+    "stage": "GROUP",
+    "group": "H",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-21T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Hard Rock Stadium",
+      "city": "Miami",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Uruguay",
+      "code": "URU",
+      "flag": "🇺🇾"
+    },
+    "awayTeam": {
+      "name": "Cabo Verde",
+      "code": "CPV",
+      "flag": "🇨🇻"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 40,
+    "stage": "GROUP",
+    "group": "G",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-22T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Vancouver"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "BC Place",
+      "city": "Vancouver",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Nueva Zelanda",
+      "code": "NZL",
+      "flag": "🇳🇿"
+    },
+    "awayTeam": {
+      "name": "Egipto",
+      "code": "EGY",
+      "flag": "🇪🇬"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 41,
+    "stage": "GROUP",
+    "group": "J",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-22T17:00:00Z",
+    "localTime": {
+      "stadium": "13:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "19:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Argentina",
+      "code": "ARG",
+      "flag": "🇦🇷"
+    },
+    "awayTeam": {
+      "name": "Austria",
+      "code": "AUT",
+      "flag": "🇦🇹"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 42,
+    "stage": "GROUP",
+    "group": "I",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-22T21:00:00Z",
+    "localTime": {
+      "stadium": "17:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "23:00",
+    "venue": {
+      "stadium": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Francia",
+      "code": "FRA",
+      "flag": "🇫🇷"
+    },
+    "awayTeam": {
+      "name": "Irak",
+      "code": "IRQ",
+      "flag": "🇮🇶"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 43,
+    "stage": "GROUP",
+    "group": "I",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-23T00:00:00Z",
+    "localTime": {
+      "stadium": "20:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "02:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Noruega",
+      "code": "NOR",
+      "flag": "🇳🇴"
+    },
+    "awayTeam": {
+      "name": "Senegal",
+      "code": "SEN",
+      "flag": "🇸🇳"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 44,
+    "stage": "GROUP",
+    "group": "J",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-23T03:00:00Z",
+    "localTime": {
+      "stadium": "23:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "05:00",
+    "venue": {
+      "stadium": "Levi's Stadium",
+      "city": "San Francisco",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Jordania",
+      "code": "JOR",
+      "flag": "🇯🇴"
+    },
+    "awayTeam": {
+      "name": "Argelia",
+      "code": "ALG",
+      "flag": "🇩🇿"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 45,
+    "stage": "GROUP",
+    "group": "K",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-23T17:00:00Z",
+    "localTime": {
+      "stadium": "13:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "19:00",
+    "venue": {
+      "stadium": "NRG Stadium",
+      "city": "Houston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "🇵🇹"
+    },
+    "awayTeam": {
+      "name": "Uzbekistán",
+      "code": "UZB",
+      "flag": "🇺🇿"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 46,
+    "stage": "GROUP",
+    "group": "L",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-23T20:00:00Z",
+    "localTime": {
+      "stadium": "16:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "22:00",
+    "venue": {
+      "stadium": "Gillette Stadium",
+      "city": "Boston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Inglaterra",
+      "code": "ENG",
+      "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+    },
+    "awayTeam": {
+      "name": "Ghana",
+      "code": "GHA",
+      "flag": "🇬🇭"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 47,
+    "stage": "GROUP",
+    "group": "L",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-23T23:00:00Z",
+    "localTime": {
+      "stadium": "19:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "01:00",
+    "venue": {
+      "stadium": "BMO Field",
+      "city": "Toronto",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Panamá",
+      "code": "PAN",
+      "flag": "🇵🇦"
+    },
+    "awayTeam": {
+      "name": "Croacia",
+      "code": "CRO",
+      "flag": "🇭🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 48,
+    "stage": "GROUP",
+    "group": "K",
+    "matchday": 2,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-24T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Mexico_City"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "Estadio Akron",
+      "city": "Guadalajara",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Colombia",
+      "code": "COL",
+      "flag": "🇨🇴"
+    },
+    "awayTeam": {
+      "name": "RD Congo",
+      "code": "COD",
+      "flag": "🇨🇩"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 49,
+    "stage": "GROUP",
+    "group": "B",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-24T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Vancouver"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "BC Place",
+      "city": "Vancouver",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Suiza",
+      "code": "SUI",
+      "flag": "🇨🇭"
+    },
+    "awayTeam": {
+      "name": "Canadá",
+      "code": "CAN",
+      "flag": "🇨🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 50,
+    "stage": "GROUP",
+    "group": "B",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-24T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Lumen Field",
+      "city": "Seattle",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Bosnia y Herzegovina",
+      "code": "BIH",
+      "flag": "🇧🇦"
+    },
+    "awayTeam": {
+      "name": "Catar",
+      "code": "QAT",
+      "flag": "🇶🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 51,
+    "stage": "GROUP",
+    "group": "C",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-24T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Hard Rock Stadium",
+      "city": "Miami",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Escocia",
+      "code": "SCO",
+      "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿"
+    },
+    "awayTeam": {
+      "name": "Brasil",
+      "code": "BRA",
+      "flag": "🇧🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 52,
+    "stage": "GROUP",
+    "group": "C",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-24T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Marruecos",
+      "code": "MAR",
+      "flag": "🇲🇦"
+    },
+    "awayTeam": {
+      "name": "Haití",
+      "code": "HAI",
+      "flag": "🇭🇹"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 53,
+    "stage": "GROUP",
+    "group": "A",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-25T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Mexico_City"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "República Checa",
+      "code": "CZE",
+      "flag": "🇨🇿"
+    },
+    "awayTeam": {
+      "name": "México",
+      "code": "MEX",
+      "flag": "🇲🇽"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 54,
+    "stage": "GROUP",
+    "group": "A",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-25T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Monterrey"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Estadio BBVA",
+      "city": "Monterrey",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Sudáfrica",
+      "code": "RSA",
+      "flag": "🇿🇦"
+    },
+    "awayTeam": {
+      "name": "Corea del Sur",
+      "code": "KOR",
+      "flag": "🇰🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 55,
+    "stage": "GROUP",
+    "group": "E",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-25T20:00:00Z",
+    "localTime": {
+      "stadium": "16:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "22:00",
+    "venue": {
+      "stadium": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Curazao",
+      "code": "CUW",
+      "flag": "🇨🇼"
+    },
+    "awayTeam": {
+      "name": "Costa de Marfil",
+      "code": "CIV",
+      "flag": "🇨🇮"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 56,
+    "stage": "GROUP",
+    "group": "E",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-25T20:00:00Z",
+    "localTime": {
+      "stadium": "16:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "22:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ecuador",
+      "code": "ECU",
+      "flag": "🇪🇨"
+    },
+    "awayTeam": {
+      "name": "Alemania",
+      "code": "GER",
+      "flag": "🇩🇪"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 57,
+    "stage": "GROUP",
+    "group": "F",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-25T23:00:00Z",
+    "localTime": {
+      "stadium": "19:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "01:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Japón",
+      "code": "JPN",
+      "flag": "🇯🇵"
+    },
+    "awayTeam": {
+      "name": "Suecia",
+      "code": "SWE",
+      "flag": "🇸🇪"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 58,
+    "stage": "GROUP",
+    "group": "F",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-25T23:00:00Z",
+    "localTime": {
+      "stadium": "19:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "01:00",
+    "venue": {
+      "stadium": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Túnez",
+      "code": "TUN",
+      "flag": "🇹🇳"
+    },
+    "awayTeam": {
+      "name": "Países Bajos",
+      "code": "NED",
+      "flag": "🇳🇱"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 59,
+    "stage": "GROUP",
+    "group": "D",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-26T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Turquía",
+      "code": "TUR",
+      "flag": "🇹🇷"
+    },
+    "awayTeam": {
+      "name": "Estados Unidos",
+      "code": "USA",
+      "flag": "🇺🇸"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 60,
+    "stage": "GROUP",
+    "group": "D",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-26T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "Levi's Stadium",
+      "city": "San Francisco",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Paraguay",
+      "code": "PAR",
+      "flag": "🇵🇾"
+    },
+    "awayTeam": {
+      "name": "Australia",
+      "code": "AUS",
+      "flag": "🇦🇺"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 61,
+    "stage": "GROUP",
+    "group": "I",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-26T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Gillette Stadium",
+      "city": "Boston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Noruega",
+      "code": "NOR",
+      "flag": "🇳🇴"
+    },
+    "awayTeam": {
+      "name": "Francia",
+      "code": "FRA",
+      "flag": "🇫🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 62,
+    "stage": "GROUP",
+    "group": "I",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-26T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "BMO Field",
+      "city": "Toronto",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Senegal",
+      "code": "SEN",
+      "flag": "🇸🇳"
+    },
+    "awayTeam": {
+      "name": "Irak",
+      "code": "IRQ",
+      "flag": "🇮🇶"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 63,
+    "stage": "GROUP",
+    "group": "H",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T00:00:00Z",
+    "localTime": {
+      "stadium": "20:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "02:00",
+    "venue": {
+      "stadium": "NRG Stadium",
+      "city": "Houston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Cabo Verde",
+      "code": "CPV",
+      "flag": "🇨🇻"
+    },
+    "awayTeam": {
+      "name": "Arabia Saudí",
+      "code": "KSA",
+      "flag": "🇸🇦"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 64,
+    "stage": "GROUP",
+    "group": "H",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T00:00:00Z",
+    "localTime": {
+      "stadium": "20:00",
+      "timezone": "America/Mexico_City"
+    },
+    "horaEspana": "02:00",
+    "venue": {
+      "stadium": "Estadio Akron",
+      "city": "Guadalajara",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Uruguay",
+      "code": "URU",
+      "flag": "🇺🇾"
+    },
+    "awayTeam": {
+      "name": "España",
+      "code": "ESP",
+      "flag": "🇪🇸"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 65,
+    "stage": "GROUP",
+    "group": "G",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T03:00:00Z",
+    "localTime": {
+      "stadium": "23:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "05:00",
+    "venue": {
+      "stadium": "Lumen Field",
+      "city": "Seattle",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Egipto",
+      "code": "EGY",
+      "flag": "🇪🇬"
+    },
+    "awayTeam": {
+      "name": "Irán",
+      "code": "IRN",
+      "flag": "🇮🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 66,
+    "stage": "GROUP",
+    "group": "G",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T03:00:00Z",
+    "localTime": {
+      "stadium": "23:00",
+      "timezone": "America/Vancouver"
+    },
+    "horaEspana": "05:00",
+    "venue": {
+      "stadium": "BC Place",
+      "city": "Vancouver",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Nueva Zelanda",
+      "code": "NZL",
+      "flag": "🇳🇿"
+    },
+    "awayTeam": {
+      "name": "Bélgica",
+      "code": "BEL",
+      "flag": "🇧🇪"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 67,
+    "stage": "GROUP",
+    "group": "L",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T21:00:00Z",
+    "localTime": {
+      "stadium": "17:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "23:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Panamá",
+      "code": "PAN",
+      "flag": "🇵🇦"
+    },
+    "awayTeam": {
+      "name": "Inglaterra",
+      "code": "ENG",
+      "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 68,
+    "stage": "GROUP",
+    "group": "L",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T21:00:00Z",
+    "localTime": {
+      "stadium": "17:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "23:00",
+    "venue": {
+      "stadium": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Croacia",
+      "code": "CRO",
+      "flag": "🇭🇷"
+    },
+    "awayTeam": {
+      "name": "Ghana",
+      "code": "GHA",
+      "flag": "🇬🇭"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 69,
+    "stage": "GROUP",
+    "group": "K",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T23:30:00Z",
+    "localTime": {
+      "stadium": "19:30",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "01:30",
+    "venue": {
+      "stadium": "Hard Rock Stadium",
+      "city": "Miami",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Colombia",
+      "code": "COL",
+      "flag": "🇨🇴"
+    },
+    "awayTeam": {
+      "name": "Portugal",
+      "code": "POR",
+      "flag": "🇵🇹"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 70,
+    "stage": "GROUP",
+    "group": "K",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-27T23:30:00Z",
+    "localTime": {
+      "stadium": "19:30",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "01:30",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "RD Congo",
+      "code": "COD",
+      "flag": "🇨🇩"
+    },
+    "awayTeam": {
+      "name": "Uzbekistán",
+      "code": "UZB",
+      "flag": "🇺🇿"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 71,
+    "stage": "GROUP",
+    "group": "J",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-28T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Argelia",
+      "code": "ALG",
+      "flag": "🇩🇿"
+    },
+    "awayTeam": {
+      "name": "Austria",
+      "code": "AUT",
+      "flag": "🇦🇹"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 72,
+    "stage": "GROUP",
+    "group": "J",
+    "matchday": 3,
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-28T02:00:00Z",
+    "localTime": {
+      "stadium": "22:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "04:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Jordania",
+      "code": "JOR",
+      "flag": "🇯🇴"
+    },
+    "awayTeam": {
+      "name": "Argentina",
+      "code": "ARG",
+      "flag": "🇦🇷"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 73,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-28T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "2º Grupo A",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo B",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 74,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-29T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Gillette Stadium",
+      "city": "Boston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo E",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º A/B/C/D/F",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 75,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-29T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Monterrey"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Estadio BBVA",
+      "city": "Monterrey",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "1º Grupo F",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo C",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 76,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-30T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "NRG Stadium",
+      "city": "Houston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo C",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo F",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 77,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-30T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo I",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º C/D/F/G/H",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 78,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-06-30T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "2º Grupo E",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo I",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 79,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-01T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Mexico_City"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "1º Grupo A",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º C/E/F/H/I",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 80,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-01T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo L",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º E/H/I/J/K",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 81,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-01T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Levi's Stadium",
+      "city": "San Francisco",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo D",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º B/E/F/I/J",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 82,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-02T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Lumen Field",
+      "city": "Seattle",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo G",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º A/E/H/I/J",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 83,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-02T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "BMO Field",
+      "city": "Toronto",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "2º Grupo K",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo L",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 84,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-02T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo H",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo J",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 85,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-03T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Vancouver"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "BC Place",
+      "city": "Vancouver",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "1º Grupo B",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º E/F/G/I/J",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 86,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-03T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Hard Rock Stadium",
+      "city": "Miami",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo J",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo H",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 87,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-03T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "1º Grupo K",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "3º D/E/I/J/L",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 88,
+    "stage": "ROUND_OF_32",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-04T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "2º Grupo D",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "2º Grupo G",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 89,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-04T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P74",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P77",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 90,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-04T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "NRG Stadium",
+      "city": "Houston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P73",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P75",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 91,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-05T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P76",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P78",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 92,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-06T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Mexico_City"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "country": "México"
+    },
+    "homeTeam": {
+      "name": "Ganador P79",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P80",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 93,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-06T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P83",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P84",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 94,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-07T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "Lumen Field",
+      "city": "Seattle",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P81",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P82",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 95,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-07T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P86",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P88",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 96,
+    "stage": "ROUND_OF_16",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-08T01:00:00Z",
+    "localTime": {
+      "stadium": "21:00",
+      "timezone": "America/Vancouver"
+    },
+    "horaEspana": "03:00",
+    "venue": {
+      "stadium": "BC Place",
+      "city": "Vancouver",
+      "country": "Canadá"
+    },
+    "homeTeam": {
+      "name": "Ganador P85",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P87",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 97,
+    "stage": "QUARTER_FINAL",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-09T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Gillette Stadium",
+      "city": "Boston",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P89",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P90",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 98,
+    "stage": "QUARTER_FINAL",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-10T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Los_Angeles"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "SoFi Stadium",
+      "city": "Los Ángeles",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P93",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P94",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 99,
+    "stage": "QUARTER_FINAL",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-11T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Hard Rock Stadium",
+      "city": "Miami",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P91",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P92",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 100,
+    "stage": "QUARTER_FINAL",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-11T22:00:00Z",
+    "localTime": {
+      "stadium": "18:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "00:00",
+    "venue": {
+      "stadium": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P95",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P96",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 101,
+    "stage": "SEMI_FINAL",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-14T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/Chicago"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "AT&T Stadium",
+      "city": "Dallas",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P97",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P98",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 102,
+    "stage": "SEMI_FINAL",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-15T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P99",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P100",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 103,
+    "stage": "THIRD_PLACE",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-18T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "Hard Rock Stadium",
+      "city": "Miami",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Perdedor P101",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Perdedor P102",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 104,
+    "stage": "FINAL",
+    "status": "SCHEDULED",
+    "kickoffUTC": "2026-07-19T19:00:00Z",
+    "localTime": {
+      "stadium": "15:00",
+      "timezone": "America/New_York"
+    },
+    "horaEspana": "21:00",
+    "venue": {
+      "stadium": "MetLife Stadium",
+      "city": "Nueva York",
+      "country": "Estados Unidos"
+    },
+    "homeTeam": {
+      "name": "Ganador P101",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "awayTeam": {
+      "name": "Ganador P102",
+      "code": "TBD",
+      "flag": "🏳️"
+    },
+    "score": { "home": null, "away": null }
+  }
+]
