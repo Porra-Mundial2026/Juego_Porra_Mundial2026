@@ -1,4 +1,44 @@
 /* ======================================================
+FLAGS SVG
+====================================================== */
+
+function obtenerBandera(pais){
+
+    const flags = {
+
+        "España":"https://flagcdn.com/w80/es.png",
+        "Brasil":"https://flagcdn.com/w80/br.png",
+        "Argentina":"https://flagcdn.com/w80/ar.png",
+        "Francia":"https://flagcdn.com/w80/fr.png",
+        "Alemania":"https://flagcdn.com/w80/de.png",
+        "Portugal":"https://flagcdn.com/w80/pt.png",
+        "Inglaterra":"https://flagcdn.com/w80/gb.png",
+        "Estados Unidos":"https://flagcdn.com/w80/us.png",
+        "México":"https://flagcdn.com/w80/mx.png",
+        "Canadá":"https://flagcdn.com/w80/ca.png",
+        "Japón":"https://flagcdn.com/w80/jp.png",
+        "Corea del Sur":"https://flagcdn.com/w80/kr.png",
+        "Australia":"https://flagcdn.com/w80/au.png",
+        "Uruguay":"https://flagcdn.com/w80/uy.png",
+        "Marruecos":"https://flagcdn.com/w80/ma.png",
+        "Croacia":"https://flagcdn.com/w80/hr.png",
+        "Países Bajos":"https://flagcdn.com/w80/nl.png",
+        "Bélgica":"https://flagcdn.com/w80/be.png",
+        "Suiza":"https://flagcdn.com/w80/ch.png",
+        "Senegal":"https://flagcdn.com/w80/sn.png",
+        "Dinamarca":"https://flagcdn.com/w80/dk.png",
+        "Serbia":"https://flagcdn.com/w80/rs.png",
+        "Polonia":"https://flagcdn.com/w80/pl.png",
+        "Arabia Saudí":"https://flagcdn.com/w80/sa.png",
+        "Cabo Verde":"https://flagcdn.com/w80/cv.png"
+
+    };
+
+    return flags[pais] || "https://flagcdn.com/w80/un.png";
+
+}
+
+/* ======================================================
 PORRA MUNDIAL 2026
 APPLE EDITION — FIXED & STABLE
 ====================================================== */
