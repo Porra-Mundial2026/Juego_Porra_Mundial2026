@@ -792,34 +792,24 @@ const Filters = {
     const select = document.getElementById('select-grupo');
     if (!select) return;
     
-    // Solo regenerar si está vacío
     if (select.options.length === 0) {
       select.innerHTML = CONFIG.GROUPS.map(g => 
         `<option value="${g}" ${State.grupoActivo === g ? 'selected' : ''}>Grupo ${g}</option>`
       ).join('');
     } else {
-      // Solo actualizar el selected
       select.value = State.grupoActivo;
     }
   },
   setActiveFilter(filtro) {
     State.filtroActivo = filtro;
     this.updateButtons();
-    if ('startViewTransition' in document) {
-      document.startViewTransition(() => Fixture.render());
-    } else {
-      Fixture.render();
-    }
+    Fixture.render();
   },
   selectGroup(g) {
     State.grupoActivo = g;
     State.filtroActivo = 'grupo';
     this.updateButtons();
-    if ('startViewTransition' in document) {
-      document.startViewTransition(() => Fixture.render());
-    } else {
-      Fixture.render();
-    }
+    Fixture.render();
   },
   updateButtons() {
     ['grupo', 'espana', 'todos'].forEach(btn => {
@@ -832,7 +822,6 @@ const Filters = {
     });
   }
 };
-
 /* ======================================================
    13. STATS (Hero)
    ====================================================== */
@@ -1011,12 +1000,11 @@ const Events = {
         case 'refresh':
           App.refresh();
           break;
-// Select de grupos
-const selectGrupo = document.getElementById('select-grupo');
-if (selectGrupo) {
-  selectGrupo.addEventListener('change', (e) => {
-    Filters.selectGroup(e.target.value);
-  });
+// Select de grupos (nuevo)
+document.getElementById('select-grupo')?.addEventListener('change', (e) => {
+  Filters.selectGroup(e.target.value);
+});
+
 }
       }
     });

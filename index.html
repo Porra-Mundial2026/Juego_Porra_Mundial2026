@@ -1,62 +1,31 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
   <meta name="color-scheme" content="dark light" />
-
   <title>World Cup 2026 • Family Predictor</title>
-
-  <!-- SEO + SOCIAL -->
   <meta name="description" content="Porra familiar del Mundial 2026 con resultados en vivo, clasificación automática y experiencia Apple Ultra." />
-  <meta name="keywords" content="mundial 2026, world cup, porra, quiniela, predictor, FIFA, España" />
-  <meta name="author" content="Family Predictor" />
   <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="World Cup 2026 • Family Predictor" />
-  <meta property="og:description" content="La porra del Mundial reinventada. Resultados en vivo, clasificación familiar y experiencia premium." />
-  <meta property="og:image" content="./icons/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="World Cup 2026 • Family Predictor" />
-  <meta name="twitter:description" content="La porra del Mundial reinventada." />
-  <meta name="twitter:image" content="./icons/og-image.png" />
-
-  <!-- iOS PWA -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="WC 2026" />
   <meta name="format-detection" content="telephone=no" />
-
-  <!-- Favicon + PWA -->
   <link rel="manifest" href="./manifest.json" />
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png" />
-
-  <!-- PRECONNECT / PRELOAD -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://flagcdn.com" />
   <link rel="preconnect" href="https://api.football-data.org" />
-  <link rel="dns-prefetch" href="https://flagcdn.com" />
-  <link rel="dns-prefetch" href="https://api.football-data.org" />
-
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" />
   </noscript>
-
-  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -65,39 +34,22 @@
     "startDate": "2026-06-11",
     "endDate": "2026-07-19",
     "eventStatus": "https://schema.org/EventScheduled",
-    "location": {
-      "@type": "Place",
-      "name": "USA, México, Canadá"
-    },
-    "organizer": {
-      "@type": "Organization",
-      "name": "FIFA"
-    }
+    "location": { "@type": "Place", "name": "USA, México, Canadá" },
+    "organizer": { "@type": "Organization", "name": "FIFA" }
   }
   </script>
-
-  <!-- CSS -->
   <link rel="stylesheet" href="./style.css" />
-
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
-        }
-      }
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
     }
   </script>
 </head>
-
 <body class="bg-[#020617] text-white min-h-screen overflow-x-hidden antialiased">
-
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
-  <!-- BACKGROUND ORBS -->
   <div class="fixed inset-0 z-[-2] bg-[#020617]" aria-hidden="true"></div>
   <div class="fixed inset-0 z-[-1] pointer-events-none" aria-hidden="true">
     <div class="bg-orb orb-1"></div>
@@ -122,13 +74,11 @@
             <p class="header-subtitle">Family Predictor</p>
           </div>
         </div>
-
         <div class="header-right">
           <div class="live-pill" role="status" aria-live="polite">
             <span class="live-dot" aria-hidden="true"></span>
             <span class="hidden sm:inline">LIVE</span>
           </div>
-
           <button id="btn-refresh" class="icon-button" aria-label="Actualizar datos" title="Actualizar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="23 4 23 10 17 10" />
@@ -136,7 +86,6 @@
               <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
             </svg>
           </button>
-
           <button id="btn-share" class="icon-button" aria-label="Compartir porra" title="Compartir">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="18" cy="5" r="3" />
@@ -161,17 +110,14 @@
               </svg>
               <span>FIFA World Cup 2026™</span>
             </div>
-
             <h2 id="hero-title" class="hero-title">
               La porra del Mundial
               <span class="gradient-text">reinventada.</span>
             </h2>
-
             <p class="hero-subtitle">
               Resultados en tiempo real, clasificación familiar automática,
               relojes mundiales y una experiencia premium inspirada en Apple.
             </p>
-
             <div class="hero-actions">
               <button class="btn-primary" onclick="document.getElementById('grid-fixture').scrollIntoView({behavior:'smooth'})">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -198,7 +144,6 @@
                 <div id="totalPartidos" class="stat-number" aria-live="polite">--</div>
               </div>
             </article>
-
             <article class="stat-card">
               <div class="stat-icon stat-icon-green" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -210,7 +155,6 @@
                 <div id="totalJugados" class="stat-number text-emerald-400" aria-live="polite">--</div>
               </div>
             </article>
-
             <article class="stat-card">
               <div class="stat-icon stat-icon-red" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -223,7 +167,6 @@
                 <div id="totalLive" class="stat-number text-red-400" aria-live="polite">--</div>
               </div>
             </article>
-
             <article class="stat-card">
               <div class="stat-icon stat-icon-purple" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -249,7 +192,6 @@
 
           <!-- SIDEBAR (solo desktop) -->
           <aside class="sidebar" aria-label="Panel lateral">
-
             <section class="glass-card p-4">
               <div class="flex items-center justify-between mb-4">
                 <h2 class="section-title">
@@ -266,7 +208,6 @@
                   </svg>
                 </button>
               </div>
-
               <ul id="lista-usuarios" class="user-list" role="list">
                 <li class="empty-state">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
@@ -292,7 +233,6 @@
                   LIVE
                 </div>
               </div>
-
               <div id="tabla-clasificacion" class="leaderboard-container" role="list">
                 <div class="skeleton-leaderboard" aria-hidden="true">
                   <div class="skeleton-item"></div>
@@ -312,78 +252,48 @@
                 Mundial 2026
               </h2>
               <dl class="info-list">
-                <div class="info-row">
-                  <dt>📍 Sedes</dt>
-                  <dd>USA · México · Canadá</dd>
-                </div>
-                <div class="info-row">
-                  <dt>⚽ Equipos</dt>
-                  <dd>48 selecciones</dd>
-                </div>
-                <div class="info-row">
-                  <dt>🏟️ Estadios</dt>
-                  <dd>16 recintos</dd>
-                </div>
-                <div class="info-row">
-                  <dt>📅 Final</dt>
-                  <dd>19 Julio 2026</dd>
-                </div>
+                <div class="info-row"><dt>📍 Sedes</dt><dd>USA · México · Canadá</dd></div>
+                <div class="info-row"><dt>⚽ Equipos</dt><dd>48 selecciones</dd></div>
+                <div class="info-row"><dt>🏟️ Estadios</dt><dd>16 recintos</dd></div>
+                <div class="info-row"><dt>📅 Final</dt><dd>19 Julio 2026</dd></div>
               </dl>
             </section>
-
           </aside>
 
           <!-- CONTENT -->
           <section class="content-area" aria-label="Partidos del Mundial">
 
-            <!-- FILTERS BAR -->
+            <!-- FILTERS BAR (con SELECT desplegable) -->
             <div class="glass-card filters-bar">
               <div class="filters-inner">
-                
-                <!-- SELECT DE GRUPOS (reemplaza los tabs) -->
                 <div class="group-select-wrapper">
                   <label for="select-grupo" class="select-label">Grupo:</label>
-                  <select id="select-grupo" class="group-select" aria-label="Seleccionar grupo">
-                    <!-- Las opciones se generan con JS -->
-                  </select>
+                  <select id="select-grupo" class="group-select" aria-label="Seleccionar grupo"></select>
                   <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </div>
-
-                <!-- FILTROS RÁPIDOS -->
                 <div class="filter-wrapper" role="group" aria-label="Filtros rápidos">
-                  <button id="btn-filtro-grupo" class="filter-button active-filter" role="tab" aria-selected="true">
-                    Grupo
-                  </button>
-                  <button id="btn-filtro-espana" class="filter-button" role="tab" aria-selected="false">
-                    🇪🇸 España
-                  </button>
-                  <button id="btn-filtro-todos" class="filter-button" role="tab" aria-selected="false">
-                    Todo
-                  </button>
+                  <button id="btn-filtro-grupo" class="filter-button active-filter" role="tab" aria-selected="true">Grupo</button>
+                  <button id="btn-filtro-espana" class="filter-button" role="tab" aria-selected="false">🇪🇸 España</button>
+                  <button id="btn-filtro-todos" class="filter-button" role="tab" aria-selected="false">Todo</button>
                 </div>
               </div>
             </div>
 
-            <!-- STATUS -->
             <div class="status-bar">
-              <div id="txt-contador" class="status-text" aria-live="polite">
-                Cargando partidos...
-              </div>
+              <div id="txt-contador" class="status-text" aria-live="polite">Cargando partidos...</div>
               <div class="live-pill-mini">
                 <span class="live-dot-mini" aria-hidden="true"></span>
                 AUTO SYNC
               </div>
             </div>
 
-            <!-- MATCHES GRID -->
             <div id="grid-fixture" class="matches-grid" role="list">
               <div class="skeleton-match glass-card" aria-hidden="true"></div>
               <div class="skeleton-match glass-card" aria-hidden="true"></div>
               <div class="skeleton-match glass-card" aria-hidden="true"></div>
             </div>
-
           </section>
 
         </div>
@@ -393,17 +303,10 @@
     <!-- FOOTER -->
     <footer class="app-footer" role="contentinfo">
       <div class="container">
-        <p>
-          <strong>World Cup Predictor 2026</strong> ·
-          Experiencia Apple Ultra ·
-          Hecho con ❤️ para la familia
-        </p>
-        <p class="text-xs mt-2 opacity-60">
-          Datos proporcionados por football-data.org
-        </p>
+        <p><strong>World Cup Predictor 2026</strong> · Experiencia Apple Ultra · Hecho con ❤️ para la familia</p>
+        <p class="text-xs mt-2 opacity-60">Datos proporcionados por football-data.org</p>
       </div>
     </footer>
-
   </div>
 
   <!-- FAB -->
@@ -446,20 +349,9 @@
       <div class="modal-handle" aria-hidden="true"></div>
       <h3 id="modal-title" class="modal-title">Añadir familiar</h3>
       <p class="modal-subtitle">Escribe el nombre del participante</p>
-
       <form id="form-add-user" class="modal-form" autocomplete="off">
         <label for="input-usuario-modal" class="sr-only">Nombre del participante</label>
-        <input
-          id="input-usuario-modal"
-          type="text"
-          placeholder="Ej: Papá, María, Abuelo..."
-          maxlength="20"
-          required
-          class="premium-input"
-          autocomplete="off"
-          autocapitalize="words"
-          spellcheck="false"
-        />
+        <input id="input-usuario-modal" type="text" placeholder="Ej: Papá, María, Abuelo..." maxlength="20" required class="premium-input" autocomplete="off" autocapitalize="words" spellcheck="false" />
         <div class="modal-actions">
           <button type="button" class="btn-secondary" data-close-modal>Cancelar</button>
           <button type="submit" class="btn-primary">
@@ -494,10 +386,8 @@
     </div>
   </div>
 
-  <!-- TOAST -->
   <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- OFFLINE BANNER -->
   <div id="offline-banner" class="offline-banner" role="alert" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <line x1="1" y1="1" x2="23" y2="23" />
@@ -506,9 +396,7 @@
     <span>Sin conexión · Mostrando datos guardados</span>
   </div>
 
-  <!-- SCRIPTS -->
   <script src="./script.js" defer></script>
-
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -518,6 +406,5 @@
       });
     }
   </script>
-
 </body>
 </html>
