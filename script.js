@@ -785,51 +785,42 @@ const Fixture = {
 };
 
 /* ======================================================
-   12. FILTERS & TABS
-   ====================================================== */
-
+12. FILTERS & TABS (con <select> desplegable)
+====================================================== */
 const Filters = {
   renderTabs() {
-    const cont = document.getElementById('contenedor-tabs');
-    if (!cont) return;
+    const select = document.getElementById('select-grupo');
+    if (!select) return;
     
-    cont.innerHTML = CONFIG.GROUPS.map(g => `
-      <button
-        class="tab-button ${State.grupoActivo === g && State.filtroActivo === 'grupo' ? 'active-tab' : ''}"
-        data-action="select-group"
-        data-group="${g}"
-        role="tab"
-        aria-selected="${State.grupoActivo === g}"
-      >
-        Grupo ${g}
-      </button>
-    `).join('');
+    // Solo regenerar si está vacío
+    if (select.options.length === 0) {
+      select.innerHTML = CONFIG.GROUPS.map(g => 
+        `<option value="${g}" ${State.grupoActivo === g ? 'selected' : ''}>Grupo ${g}</option>`
+      ).join('');
+    } else {
+      // Solo actualizar el selected
+      select.value = State.grupoActivo;
+    }
   },
-  
   setActiveFilter(filtro) {
     State.filtroActivo = filtro;
     this.updateButtons();
-    
     if ('startViewTransition' in document) {
       document.startViewTransition(() => Fixture.render());
     } else {
       Fixture.render();
     }
   },
-  
   selectGroup(g) {
     State.grupoActivo = g;
     State.filtroActivo = 'grupo';
-    this.renderTabs();
     this.updateButtons();
-    
     if ('startViewTransition' in document) {
       document.startViewTransition(() => Fixture.render());
     } else {
       Fixture.render();
     }
   },
-  
   updateButtons() {
     ['grupo', 'espana', 'todos'].forEach(btn => {
       const el = document.getElementById(`btn-filtro-${btn}`);
@@ -839,7 +830,6 @@ const Filters = {
         : 'filter-button';
       el.setAttribute('aria-selected', State.filtroActivo === btn);
     });
-    this.renderTabs();
   }
 };
 
@@ -1021,6 +1011,13 @@ const Events = {
         case 'refresh':
           App.refresh();
           break;
+// Select de grupos
+const selectGrupo = document.getElementById('select-grupo');
+if (selectGrupo) {
+  selectGrupo.addEventListener('change', (e) => {
+    Filters.selectGroup(e.target.value);
+  });
+}
       }
     });
     

@@ -8,9 +8,7 @@
 
   <title>World Cup 2026 • Family Predictor</title>
 
-  <!-- =========================================================
-       SEO + SOCIAL
-  ========================================================= -->
+  <!-- SEO + SOCIAL -->
   <meta name="description" content="Porra familiar del Mundial 2026 con resultados en vivo, clasificación automática y experiencia Apple Ultra." />
   <meta name="keywords" content="mundial 2026, world cup, porra, quiniela, predictor, FIFA, España" />
   <meta name="author" content="Family Predictor" />
@@ -44,9 +42,7 @@
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png" />
 
-  <!-- =========================================================
-       PRECONNECT / PRELOAD
-  ========================================================= -->
+  <!-- PRECONNECT / PRELOAD -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://flagcdn.com" />
@@ -54,16 +50,13 @@
   <link rel="dns-prefetch" href="https://flagcdn.com" />
   <link rel="dns-prefetch" href="https://api.football-data.org" />
 
-  <!-- Preload fuente crítica -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" />
   </noscript>
 
-  <!-- =========================================================
-       JSON-LD (Google Rich Results)
-  ========================================================= -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -83,12 +76,10 @@
   }
   </script>
 
-  <!-- =========================================================
-       CSS
-  ========================================================= -->
+  <!-- CSS -->
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- Tailwind (Play CDN) -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -104,14 +95,9 @@
 
 <body class="bg-[#020617] text-white min-h-screen overflow-x-hidden antialiased">
 
-  <!-- =========================================================
-       SKIP LINK (Accesibilidad)
-  ========================================================= -->
   <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
-  <!-- =========================================================
-       BACKGROUND ORBS
-  ========================================================= -->
+  <!-- BACKGROUND ORBS -->
   <div class="fixed inset-0 z-[-2] bg-[#020617]" aria-hidden="true"></div>
   <div class="fixed inset-0 z-[-1] pointer-events-none" aria-hidden="true">
     <div class="bg-orb orb-1"></div>
@@ -119,18 +105,11 @@
     <div class="bg-orb orb-3"></div>
   </div>
 
-  <!-- =========================================================
-       APP SHELL
-  ========================================================= -->
   <div class="app-shell">
 
-    <!-- =========================================================
-         HEADER (Sticky con Safe-Area)
-    ========================================================= -->
+    <!-- HEADER -->
     <header class="app-header" role="banner">
       <div class="header-inner">
-
-        <!-- LEFT: Logo -->
         <div class="header-left">
           <div class="logo-ball" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -144,7 +123,6 @@
           </div>
         </div>
 
-        <!-- RIGHT: Live + Refresh -->
         <div class="header-right">
           <div class="live-pill" role="status" aria-live="polite">
             <span class="live-dot" aria-hidden="true"></span>
@@ -169,18 +147,13 @@
             </svg>
           </button>
         </div>
-
       </div>
     </header>
 
-    <!-- =========================================================
-         HERO (Compacto en móvil)
-    ========================================================= -->
+    <!-- HERO -->
     <section class="hero-section" aria-labelledby="hero-title">
       <div class="container">
         <div class="hero-grid">
-
-          <!-- LEFT: Copy -->
           <div class="hero-content">
             <div class="premium-badge">
               <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -212,9 +185,8 @@
             </div>
           </div>
 
-          <!-- RIGHT: Stats Grid (compacta en móvil) -->
           <div class="stats-grid" role="region" aria-label="Estadísticas del torneo">
-            <article class="glass-card stat-card">
+            <article class="stat-card">
               <div class="stat-icon stat-icon-blue" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -227,7 +199,7 @@
               </div>
             </article>
 
-            <article class="glass-card stat-card">
+            <article class="stat-card">
               <div class="stat-icon stat-icon-green" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="20 6 9 17 4 12" />
@@ -239,7 +211,7 @@
               </div>
             </article>
 
-            <article class="glass-card stat-card">
+            <article class="stat-card">
               <div class="stat-icon stat-icon-red" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="12" cy="12" r="10" />
@@ -252,7 +224,7 @@
               </div>
             </article>
 
-            <article class="glass-card stat-card">
+            <article class="stat-card">
               <div class="stat-icon stat-icon-purple" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -266,27 +238,20 @@
               </div>
             </article>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         MAIN
-    ========================================================= -->
+    <!-- MAIN -->
     <main id="main-content" class="main-content">
       <div class="container">
         <div class="main-grid">
 
-          <!-- =========================================================
-               SIDEBAR (Desktop) / Acordeones (Mobile)
-               En móvil se muestra como <details> colapsables
-          ========================================================= -->
+          <!-- SIDEBAR (solo desktop) -->
           <aside class="sidebar" aria-label="Panel lateral">
 
-            <!-- USERS - Desplegable en móvil -->
-            <details class="sidebar-section glass-card" id="section-users" open>
-              <summary class="sidebar-summary">
+            <section class="glass-card p-4">
+              <div class="flex items-center justify-between mb-4">
                 <h2 class="section-title">
                   <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -294,35 +259,29 @@
                   </svg>
                   Participantes
                 </h2>
-                <button id="btn-open-add-user" class="icon-button-sm" aria-label="Añadir participante" onclick="event.stopPropagation()">
+                <button id="btn-open-add-user" class="icon-button-sm" aria-label="Añadir participante">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </button>
-                <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </summary>
-
-              <div class="sidebar-content">
-                <ul id="lista-usuarios" class="user-list" role="list">
-                  <li class="empty-state">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="8" x2="12" y2="12" />
-                      <line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                    <span>Sin participantes aún</span>
-                  </li>
-                </ul>
               </div>
-            </details>
 
-            <!-- LEADERBOARD - Desplegable en móvil -->
-            <details class="sidebar-section glass-card" id="section-leaderboard" open>
-              <summary class="sidebar-summary">
-                <h2 class="section-title" id="leaderboard-title">
+              <ul id="lista-usuarios" class="user-list" role="list">
+                <li class="empty-state">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <span>Sin participantes aún</span>
+                </li>
+              </ul>
+            </section>
+
+            <section class="glass-card p-4" aria-labelledby="leaderboard-title">
+              <div class="flex items-center justify-between mb-4">
+                <h2 id="leaderboard-title" class="section-title">
                   <svg class="title-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M6 9L4 5H20L18 9M6 9V20H18V9M6 9H18M10 14H14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
@@ -332,93 +291,76 @@
                   <span class="live-dot-mini" aria-hidden="true"></span>
                   LIVE
                 </div>
-                <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </summary>
+              </div>
 
-              <div class="sidebar-content">
-                <div id="tabla-clasificacion" class="leaderboard-container" role="list">
-                  <div class="skeleton-leaderboard" aria-hidden="true">
-                    <div class="skeleton-item"></div>
-                    <div class="skeleton-item"></div>
-                    <div class="skeleton-item"></div>
-                  </div>
+              <div id="tabla-clasificacion" class="leaderboard-container" role="list">
+                <div class="skeleton-leaderboard" aria-hidden="true">
+                  <div class="skeleton-item"></div>
+                  <div class="skeleton-item"></div>
+                  <div class="skeleton-item"></div>
                 </div>
               </div>
-            </details>
+            </section>
 
-            <!-- INFO - Solo desktop (oculto en móvil, se integra abajo) -->
-            <details class="sidebar-section glass-card info-section hidden xl:block" open>
-              <summary class="sidebar-summary">
-                <h2 class="section-title">
-                  <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                  Mundial 2026
-                </h2>
-                <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9" />
+            <section class="glass-card p-4 hidden xl:block">
+              <h2 class="section-title mb-4">
+                <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                 </svg>
-              </summary>
-
-              <div class="sidebar-content">
-                <dl class="info-list">
-                  <div class="info-row">
-                    <dt>📍 Sedes</dt>
-                    <dd>USA · México · Canadá</dd>
-                  </div>
-                  <div class="info-row">
-                    <dt>⚽ Equipos</dt>
-                    <dd>48 selecciones</dd>
-                  </div>
-                  <div class="info-row">
-                    <dt>🏟️ Estadios</dt>
-                    <dd>16 recintos</dd>
-                  </div>
-                  <div class="info-row">
-                    <dt>📅 Final</dt>
-                    <dd>19 Julio 2026</dd>
-                  </div>
-                </dl>
-              </div>
-            </details>
+                Mundial 2026
+              </h2>
+              <dl class="info-list">
+                <div class="info-row">
+                  <dt>📍 Sedes</dt>
+                  <dd>USA · México · Canadá</dd>
+                </div>
+                <div class="info-row">
+                  <dt>⚽ Equipos</dt>
+                  <dd>48 selecciones</dd>
+                </div>
+                <div class="info-row">
+                  <dt>🏟️ Estadios</dt>
+                  <dd>16 recintos</dd>
+                </div>
+                <div class="info-row">
+                  <dt>📅 Final</dt>
+                  <dd>19 Julio 2026</dd>
+                </div>
+              </dl>
+            </section>
 
           </aside>
 
-          <!-- =========================================================
-               CONTENT
-          ========================================================= -->
+          <!-- CONTENT -->
           <section class="content-area" aria-label="Partidos del Mundial">
 
-            <!-- FILTERS BAR (compacta en móvil) -->
+            <!-- FILTERS BAR -->
             <div class="glass-card filters-bar">
               <div class="filters-inner">
-                <div id="contenedor-tabs" class="tabs-scroll" role="tablist" aria-label="Filtrar por grupo"></div>
+                
+                <!-- SELECT DE GRUPOS (reemplaza los tabs) -->
+                <div class="group-select-wrapper">
+                  <label for="select-grupo" class="select-label">Grupo:</label>
+                  <select id="select-grupo" class="group-select" aria-label="Seleccionar grupo">
+                    <!-- Las opciones se generan con JS -->
+                  </select>
+                  <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
 
+                <!-- FILTROS RÁPIDOS -->
                 <div class="filter-wrapper" role="group" aria-label="Filtros rápidos">
                   <button id="btn-filtro-grupo" class="filter-button active-filter" role="tab" aria-selected="true">
-                    <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <rect x="3" y="3" width="7" height="7" rx="1" />
-                      <rect x="14" y="3" width="7" height="7" rx="1" />
-                      <rect x="3" y="14" width="7" height="7" rx="1" />
-                      <rect x="14" y="14" width="7" height="7" rx="1" />
-                    </svg>
-                    <span>Grupo</span>
+                    Grupo
                   </button>
                   <button id="btn-filtro-espana" class="filter-button" role="tab" aria-selected="false">
-                    <span class="filter-flag" aria-hidden="true">🇪🇸</span>
-                    <span>España</span>
+                    🇪🇸 España
                   </button>
                   <button id="btn-filtro-todos" class="filter-button" role="tab" aria-selected="false">
-                    <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="2" y1="12" x2="22" y2="12" />
-                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                    </svg>
-                    <span>Todo</span>
+                    Todo
                   </button>
                 </div>
               </div>
@@ -437,7 +379,6 @@
 
             <!-- MATCHES GRID -->
             <div id="grid-fixture" class="matches-grid" role="list">
-              <!-- Skeleton inicial -->
               <div class="skeleton-match glass-card" aria-hidden="true"></div>
               <div class="skeleton-match glass-card" aria-hidden="true"></div>
               <div class="skeleton-match glass-card" aria-hidden="true"></div>
@@ -449,9 +390,7 @@
       </div>
     </main>
 
-    <!-- =========================================================
-         FOOTER
-    ========================================================= -->
+    <!-- FOOTER -->
     <footer class="app-footer" role="contentinfo">
       <div class="container">
         <p>
@@ -467,9 +406,7 @@
 
   </div>
 
-  <!-- =========================================================
-       FLOATING ACTION BUTTON (Móvil)
-  ========================================================= -->
+  <!-- FAB -->
   <button id="fab-add-user" class="fab" aria-label="Añadir participante">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
       <line x1="12" y1="5" x2="12" y2="19" />
@@ -477,9 +414,7 @@
     </svg>
   </button>
 
-  <!-- =========================================================
-       BOTTOM NAVIGATION (Móvil)
-  ========================================================= -->
+  <!-- BOTTOM NAV -->
   <nav class="bottom-nav" aria-label="Navegación principal">
     <button class="bottom-nav-item active" data-section="matches" aria-current="page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -504,9 +439,7 @@
     </button>
   </nav>
 
-  <!-- =========================================================
-       MODAL: ADD USER (Bottom Sheet en móvil)
-  ========================================================= -->
+  <!-- MODAL: ADD USER -->
   <div id="modal-add-user" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-sheet">
@@ -540,9 +473,7 @@
     </div>
   </div>
 
-  <!-- =========================================================
-       MODAL: CONFIRM (Reemplaza confirm())
-  ========================================================= -->
+  <!-- MODAL: CONFIRM -->
   <div id="modal-confirm" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" hidden>
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-sheet modal-alert-sheet">
@@ -563,14 +494,10 @@
     </div>
   </div>
 
-  <!-- =========================================================
-       TOAST CONTAINER
-  ========================================================= -->
+  <!-- TOAST -->
   <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <!-- =========================================================
-       OFFLINE BANNER
-  ========================================================= -->
+  <!-- OFFLINE BANNER -->
   <div id="offline-banner" class="offline-banner" role="alert" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <line x1="1" y1="1" x2="23" y2="23" />
@@ -579,12 +506,9 @@
     <span>Sin conexión · Mostrando datos guardados</span>
   </div>
 
-  <!-- =========================================================
-       SCRIPTS
-  ========================================================= -->
+  <!-- SCRIPTS -->
   <script src="./script.js" defer></script>
 
-  <!-- PWA Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
