@@ -1,7 +1,7 @@
-<!-- =========================
+<!-- ======================================================
 INDEX.HTML
-APPLE EDITION • WORLD CUP 2026
-========================= -->
+WORLD CUP 2026 • APPLE EDITION • FIXED VERSION
+====================================================== -->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -18,20 +18,26 @@ APPLE EDITION • WORLD CUP 2026
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+/>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./style.css">
 
 </head>
 
-<body class="bg-[#020617] text-white overflow-x-hidden">
+<body class="bg-[#020617] text-white overflow-x-hidden min-h-screen">
 
-<!-- BACKGROUND -->
+<!-- ======================================================
+BACKGROUND
+====================================================== -->
+
 <div class="fixed inset-0 z-[-2] bg-[#020617]"></div>
 
-<div class="fixed inset-0 z-[-1]">
+<div class="fixed inset-0 z-[-1] pointer-events-none">
 
     <div class="absolute top-[-200px] left-[-200px] w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[120px]"></div>
 
@@ -41,11 +47,15 @@ APPLE EDITION • WORLD CUP 2026
 
 </div>
 
-<!-- NAV -->
+<!-- ======================================================
+NAVBAR
+====================================================== -->
+
 <header class="sticky top-0 z-50 backdrop-blur-2xl border-b border-white/5 bg-black/20">
 
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
+        <!-- LEFT -->
         <div class="flex items-center gap-4">
 
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-blue-500/20">
@@ -68,14 +78,21 @@ APPLE EDITION • WORLD CUP 2026
 
         </div>
 
+        <!-- RIGHT -->
         <div class="hidden md:flex items-center gap-3">
 
             <div class="live-pill">
+
                 <span class="live-dot"></span>
+
                 LIVE DATA
+
             </div>
 
-            <button onclick="actualizarResultadosAPI()" class="premium-button">
+            <button
+                onclick="actualizarResultadosAPI()"
+                class="premium-button"
+            >
                 Actualizar
             </button>
 
@@ -85,13 +102,17 @@ APPLE EDITION • WORLD CUP 2026
 
 </header>
 
-<!-- HERO -->
+<!-- ======================================================
+HERO
+====================================================== -->
+
 <section class="relative pt-20 pb-16">
 
     <div class="max-w-7xl mx-auto px-6">
 
         <div class="grid lg:grid-cols-2 gap-14 items-center">
 
+            <!-- LEFT -->
             <div>
 
                 <div class="inline-flex items-center gap-2 premium-badge mb-6">
@@ -112,7 +133,8 @@ APPLE EDITION • WORLD CUP 2026
 
                 <p class="hero-subtitle">
 
-                    Resultados automáticos en vivo, estadísticas premium, clasificación familiar y experiencia inspirada en Apple.
+                    Resultados automáticos, clasificación familiar,
+                    relojes mundiales en vivo y experiencia premium.
 
                 </p>
 
@@ -122,7 +144,10 @@ APPLE EDITION • WORLD CUP 2026
                         Empezar
                     </button>
 
-                    <button class="hero-secondary-button">
+                    <button
+                        onclick="window.scrollTo({top:900,behavior:'smooth'})"
+                        class="hero-secondary-button"
+                    >
                         Ver Calendario
                     </button>
 
@@ -130,7 +155,7 @@ APPLE EDITION • WORLD CUP 2026
 
             </div>
 
-            <!-- STATS -->
+            <!-- RIGHT STATS -->
             <div class="grid grid-cols-2 gap-5">
 
                 <div class="glass-card p-7">
@@ -139,7 +164,10 @@ APPLE EDITION • WORLD CUP 2026
                         PARTIDOS
                     </div>
 
-                    <div id="totalPartidos" class="stat-number">
+                    <div
+                        id="totalPartidos"
+                        class="stat-number"
+                    >
                         0
                     </div>
 
@@ -151,7 +179,10 @@ APPLE EDITION • WORLD CUP 2026
                         JUGADOS
                     </div>
 
-                    <div id="totalJugados" class="stat-number text-emerald-400">
+                    <div
+                        id="totalJugados"
+                        class="stat-number text-emerald-400"
+                    >
                         0
                     </div>
 
@@ -163,7 +194,10 @@ APPLE EDITION • WORLD CUP 2026
                         EN DIRECTO
                     </div>
 
-                    <div id="totalLive" class="stat-number text-red-400">
+                    <div
+                        id="totalLive"
+                        class="stat-number text-red-400"
+                    >
                         0
                     </div>
 
@@ -175,7 +209,10 @@ APPLE EDITION • WORLD CUP 2026
                         PARTICIPANTES
                     </div>
 
-                    <div id="totalUsers" class="stat-number text-blue-400">
+                    <div
+                        id="totalUsers"
+                        class="stat-number text-blue-400"
+                    >
                         0
                     </div>
 
@@ -189,15 +226,21 @@ APPLE EDITION • WORLD CUP 2026
 
 </section>
 
-<!-- MAIN -->
+<!-- ======================================================
+MAIN
+====================================================== -->
+
 <main class="max-w-7xl mx-auto px-6 pb-24">
 
     <div class="grid xl:grid-cols-4 gap-8">
 
-        <!-- SIDEBAR -->
+        <!-- ======================================================
+        SIDEBAR
+        ====================================================== -->
+
         <aside class="xl:col-span-1 space-y-8">
 
-            <!-- ADD USER -->
+            <!-- USERS -->
             <div class="glass-card p-6">
 
                 <div class="section-title">
@@ -213,10 +256,11 @@ APPLE EDITION • WORLD CUP 2026
                         class="premium-input flex-1"
                     >
 
-                    <button onclick="registrarUsuario()" class="premium-button">
-
+                    <button
+                        onclick="registrarUsuario()"
+                        class="premium-button"
+                    >
                         +
-
                     </button>
 
                 </div>
@@ -238,7 +282,16 @@ APPLE EDITION • WORLD CUP 2026
 
                 </div>
 
-                <div id="tabla-clasificacion" class="space-y-4"></div>
+                <div
+                    id="tabla-clasificacion"
+                    class="space-y-4"
+                >
+
+                    <div class="empty-state">
+                        No hay participantes
+                    </div>
+
+                </div>
 
             </div>
 
@@ -252,23 +305,35 @@ APPLE EDITION • WORLD CUP 2026
                 <div class="space-y-4 text-sm text-slate-400">
 
                     <div class="info-row">
+
                         <span>📍 Países</span>
+
                         <span>USA • México • Canadá</span>
+
                     </div>
 
                     <div class="info-row">
+
                         <span>⚽ Equipos</span>
+
                         <span>48 Selecciones</span>
+
                     </div>
 
                     <div class="info-row">
+
                         <span>🏟 Estadios</span>
+
                         <span>16</span>
+
                     </div>
 
                     <div class="info-row">
+
                         <span>📅 Final</span>
+
                         <span>19 Julio 2026</span>
+
                     </div>
 
                 </div>
@@ -277,7 +342,10 @@ APPLE EDITION • WORLD CUP 2026
 
         </aside>
 
-        <!-- CONTENT -->
+        <!-- ======================================================
+        CONTENT
+        ====================================================== -->
+
         <section class="xl:col-span-3">
 
             <!-- FILTERS -->
@@ -285,21 +353,36 @@ APPLE EDITION • WORLD CUP 2026
 
                 <div class="flex flex-col xl:flex-row gap-6 xl:items-center justify-between">
 
-                    <!-- TABS -->
-                    <div id="contenedor-tabs" class="flex gap-2 overflow-x-auto pb-2"></div>
+                    <!-- GROUP TABS -->
+                    <div
+                        id="contenedor-tabs"
+                        class="flex gap-2 overflow-x-auto pb-2"
+                    ></div>
 
                     <!-- FILTER BUTTONS -->
                     <div class="filter-wrapper">
 
-                        <button id="btn-filtro-grupo" onclick="cambiarFiltroVista('grupo')" class="filter-button active-filter">
+                        <button
+                            id="btn-filtro-grupo"
+                            onclick="cambiarFiltroVista('grupo')"
+                            class="filter-button active-filter"
+                        >
                             Grupo
                         </button>
 
-                        <button id="btn-filtro-espana" onclick="cambiarFiltroVista('espana')" class="filter-button">
+                        <button
+                            id="btn-filtro-espana"
+                            onclick="cambiarFiltroVista('espana')"
+                            class="filter-button"
+                        >
                             🇪🇸 España
                         </button>
 
-                        <button id="btn-filtro-todos" onclick="cambiarFiltroVista('todos')" class="filter-button">
+                        <button
+                            id="btn-filtro-todos"
+                            onclick="cambiarFiltroVista('todos')"
+                            class="filter-button"
+                        >
                             Todo
                         </button>
 
@@ -312,19 +395,32 @@ APPLE EDITION • WORLD CUP 2026
             <!-- STATUS -->
             <div class="flex items-center justify-between mb-6">
 
-                <div id="txt-contador" class="text-sm font-semibold text-slate-400">
-                    Cargando...
+                <div
+                    id="txt-contador"
+                    class="text-sm font-semibold text-slate-400"
+                >
+                    Cargando partidos...
                 </div>
 
                 <div class="live-pill">
+
                     <span class="live-dot"></span>
+
                     AUTO SYNC
+
                 </div>
 
             </div>
 
-            <!-- MATCH GRID -->
-            <div id="grid-fixture" class="grid lg:grid-cols-2 gap-7"></div>
+            <!-- FIXTURE GRID -->
+            <div
+                id="grid-fixture"
+                class="grid lg:grid-cols-2 gap-7"
+            >
+
+                <!-- MATCHES LOADED HERE -->
+
+            </div>
 
         </section>
 
@@ -332,7 +428,10 @@ APPLE EDITION • WORLD CUP 2026
 
 </main>
 
-<!-- FOOTER -->
+<!-- ======================================================
+FOOTER
+====================================================== -->
+
 <footer class="border-t border-white/5 py-10 text-center text-sm text-slate-500">
 
     <div class="max-w-7xl mx-auto px-6">
@@ -343,8 +442,11 @@ APPLE EDITION • WORLD CUP 2026
 
 </footer>
 
-<!-- SCRIPT -->
-<script src="script.js"></script>
+<!-- ======================================================
+SCRIPT
+====================================================== -->
+
+<script src="./script.js"></script>
 
 </body>
 
