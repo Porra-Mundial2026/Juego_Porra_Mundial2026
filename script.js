@@ -1,6 +1,6 @@
 /* ======================================================
 WORLD CUP 2026
-APPLE EDITION • LIVE API VERSION
+APPLE EDITION • PRO ENGINE
 football-data.org powered
 ====================================================== */
 
@@ -8,7 +8,7 @@ football-data.org powered
 CONFIG
 ====================================================== */
 
-const API_KEY = "TU_API_KEY_AQUI";
+const API_KEY = "a1b2c3d4e5f6g7";
 
 const API_URL =
 "https://api.football-data.org/v4/competitions/WC/matches";
@@ -26,9 +26,6 @@ JSON.parse(localStorage.getItem("f_usuarios")) || [];
 
 let porras =
 JSON.parse(localStorage.getItem("f_porras")) || {};
-
-let reales =
-JSON.parse(localStorage.getItem("f_reales")) || {};
 
 let grupoSeleccionado = "A";
 let filtroActual = "grupo";
@@ -116,9 +113,9 @@ window.onload = async ()=>{
 
         alternarBotones();
 
-        ejecutarMotor();
-
         iniciarRelojes();
+
+        ejecutarMotor();
 
         actualizarStats();
 
@@ -131,7 +128,7 @@ window.onload = async ()=>{
 };
 
 /* ======================================================
-API FOOTBALL DATA
+API
 ====================================================== */
 
 async function cargarPartidos(){
@@ -149,7 +146,7 @@ async function cargarPartidos(){
         if(!response.ok){
 
             console.warn(
-                "API FALLBACK → matches.json"
+                "API FALLBACK → JSON"
             );
 
             return await cargarJSONLocal();
@@ -170,7 +167,7 @@ async function cargarPartidos(){
 
         actualizarStats();
 
-        dibujarFixture();
+        ejecutarMotor();
 
     }catch(err){
 
@@ -183,7 +180,7 @@ async function cargarPartidos(){
 }
 
 /* ======================================================
-LOCAL FALLBACK
+LOCAL JSON
 ====================================================== */
 
 async function cargarJSONLocal(){
@@ -198,7 +195,7 @@ async function cargarJSONLocal(){
 
         actualizarStats();
 
-        dibujarFixture();
+        ejecutarMotor();
 
     }catch(err){
 
@@ -228,14 +225,12 @@ function transformarPartidosAPI(matches){
         const utc =
         new Date(m.utcDate);
 
-        const grupo =
-        obtenerGrupo(index);
-
         return{
 
             id:m.id || index,
 
-            grupo:grupo,
+            grupo:
+            obtenerGrupo(index),
 
             fecha:
             utc.toLocaleDateString("es-ES"),
@@ -280,10 +275,17 @@ function transformarPartidosAPI(matches){
             ),
 
             scoreA:
-            m.score?.fullTime?.home,
+            m.status === "FINISHED"
+            ? m.score?.fullTime?.home
+            : null,
 
             scoreB:
-            m.score?.fullTime?.away,
+            m.status === "FINISHED"
+            ? m.score?.fullTime?.away
+            : null,
+
+            utcDate:
+            m.utcDate,
 
             status:
             m.status
@@ -364,8 +366,6 @@ function registrarUsuario(){
 
     input.value = "";
 
-    actualizarStats();
-
     ejecutarMotor();
 
 }
@@ -382,8 +382,6 @@ function darDeBaja(nombre){
         JSON.stringify(registrados)
     );
 
-    actualizarStats();
-
     ejecutarMotor();
 
 }
@@ -394,11 +392,25 @@ POINTS ENGINE
 
 function ejecutarMotor(){
 
-    const puntos = {};
+    const ranking = {};
 
-    registrados.forEach(u=>{
+    registrados.forEach(user=>{
 
-        puntos[u] = 0;
+        ranking[user] = {
+
+            puntos:0,
+            exactos:0,
+            acertados:0,
+            golesExactos:0,
+            diferenciaExacta:0,
+            bonusEspana:0,
+            fallados:0,
+            partidos:0,
+            porcentaje:0,
+            rachaActual:0,
+            mejorRacha:0
+
+        };
 
     });
 
@@ -411,91 +423,214 @@ function ejecutarMotor(){
 
         registrados.forEach(user=>{
 
-            const pA =
-            parseInt(
-                porras[
-                    `p_${user}_${p.id}_A`
-                ]
+            const pA = parseInt(
+                porras[`p_${user}_${p.id}_A`]
             );
 
-            const pB =
-            parseInt(
-                porras[
-                    `p_${user}_${p.id}_B`
-                ]
+            const pB = parseInt(
+                porras[`p_${user}_${p.id}_B`]
             );
 
             if(
                 isNaN(pA) ||
                 isNaN(pB)
-            ) return;
+            ){
+
+                ranking[user].fallados++;
+                return;
+
+            }
+
+            ranking[user].partidos++;
+
+            let puntosPartido = 0;
+
+            const ganadorReal =
+                p.scoreA > p.scoreB
+                ? "A"
+                : p.scoreA < p.scoreB
+                ? "B"
+                : "E";
+
+            const ganadorUser =
+                pA > pB
+                ? "A"
+                : pA < pB
+                ? "B"
+                : "E";
+
+            /* ======================
+            RESULTADO EXACTO
+            ====================== */
 
             if(
                 pA === p.scoreA &&
                 pB === p.scoreB
             ){
 
-                puntos[user] += 3;
+                puntosPartido += 5;
 
-            }else if(
-
-                (
-                    p.scoreA > p.scoreB &&
-                    pA > pB
-                ) ||
-
-                (
-                    p.scoreA < p.scoreB &&
-                    pA < pB
-                ) ||
-
-                (
-                    p.scoreA === p.scoreB &&
-                    pA === pB
-                )
-
-            ){
-
-                puntos[user] += 1;
+                ranking[user]
+                .exactos++;
 
             }
+
+            /* ======================
+            GANADOR
+            ====================== */
+
+            if(
+                ganadorReal === ganadorUser
+            ){
+
+                puntosPartido += 2;
+
+                ranking[user]
+                .acertados++;
+
+            }
+
+            /* ======================
+            GOLES EXACTOS
+            ====================== */
+
+            if(pA === p.scoreA){
+
+                puntosPartido += 1;
+
+                ranking[user]
+                .golesExactos++;
+
+            }
+
+            if(pB === p.scoreB){
+
+                puntosPartido += 1;
+
+                ranking[user]
+                .golesExactos++;
+
+            }
+
+            /* ======================
+            DIFERENCIA EXACTA
+            ====================== */
+
+            const diffReal =
+            p.scoreA - p.scoreB;
+
+            const diffUser =
+            pA - pB;
+
+            if(diffReal === diffUser){
+
+                puntosPartido += 1;
+
+                ranking[user]
+                .diferenciaExacta++;
+
+            }
+
+            /* ======================
+            BONUS ESPAÑA
+            ====================== */
+
+            if(
+                p.esp &&
+                pA === p.scoreA &&
+                pB === p.scoreB
+            ){
+
+                puntosPartido += 3;
+
+                ranking[user]
+                .bonusEspana++;
+
+            }
+
+            /* ======================
+            RACHAS
+            ====================== */
+
+            if(puntosPartido > 0){
+
+                ranking[user]
+                .rachaActual++;
+
+                if(
+                    ranking[user]
+                    .rachaActual >
+                    ranking[user]
+                    .mejorRacha
+                ){
+
+                    ranking[user]
+                    .mejorRacha =
+                    ranking[user]
+                    .rachaActual;
+
+                }
+
+            }else{
+
+                ranking[user]
+                .rachaActual = 0;
+
+            }
+
+            ranking[user]
+            .puntos += puntosPartido;
 
         });
 
     });
 
-    dibujarClasificacion(puntos);
+    Object.keys(ranking).forEach(user=>{
+
+        const r = ranking[user];
+
+        r.porcentaje =
+        r.partidos > 0
+        ? Math.round(
+            (
+                r.acertados /
+                r.partidos
+            ) * 100
+          )
+        : 0;
+
+    });
+
+    dibujarClasificacion(ranking);
+
+    dibujarEstadisticas(ranking);
 
     dibujarFixture();
+
+    actualizarStats();
 
 }
 
 /* ======================================================
-LEADERBOARD
+LEADERBOARD TABLE
 ====================================================== */
 
-function dibujarClasificacion(puntos){
+function dibujarClasificacion(ranking){
 
     const cont =
     document.getElementById(
         "tabla-clasificacion"
     );
 
-    cont.innerHTML = "";
+    if(!cont) return;
 
-    const ranking =
-    Object.keys(puntos)
-    .map(k=>({
-
-        name:k,
-        score:puntos[k]
-
-    }))
+    const ordenados =
+    Object.entries(ranking)
     .sort((a,b)=>
-        b.score-a.score
+        b[1].puntos - a[1].puntos
     );
 
-    if(ranking.length === 0){
+    if(ordenados.length===0){
 
         cont.innerHTML = `
             <div class="empty-state">
@@ -507,58 +642,186 @@ function dibujarClasificacion(puntos){
 
     }
 
-    ranking.forEach((u,idx)=>{
+    cont.innerHTML = `
 
-        let icon = "🔹";
+    <div class="table-wrapper">
 
-        if(idx===0) icon="👑";
-        if(idx===1) icon="🥈";
-        if(idx===2) icon="🥉";
+        <table class="ranking-table">
 
-        cont.innerHTML += `
+            <thead>
 
-        <div class="leaderboard-item">
+                <tr>
 
-            <div class="flex items-center gap-4">
+                    <th>#</th>
+                    <th>Jugador</th>
+                    <th>Pts</th>
+                    <th>🎯</th>
+                    <th>✅</th>
+                    <th>⚽</th>
+                    <th>%</th>
+                    <th>🔥</th>
+                    <th></th>
 
-                <div class="leader-icon">
-                    ${icon}
-                </div>
+                </tr>
 
-                <div>
+            </thead>
 
-                    <div class="font-bold">
-                        ${u.name}
-                    </div>
+            <tbody>
 
-                    <div class="text-xs text-slate-500">
-                        Participante
-                    </div>
+                ${ordenados.map((u,index)=>{
 
-                </div>
+                    const name = u[0];
+                    const r = u[1];
 
+                    return `
+
+                    <tr>
+
+                        <td>
+                            ${index+1}
+                        </td>
+
+                        <td>
+                            ${name}
+                        </td>
+
+                        <td>
+                            <strong>
+                                ${r.puntos}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${r.exactos}
+                        </td>
+
+                        <td>
+                            ${r.acertados}
+                        </td>
+
+                        <td>
+                            ${r.golesExactos}
+                        </td>
+
+                        <td>
+                            ${r.porcentaje}%
+                        </td>
+
+                        <td>
+                            ${r.mejorRacha}
+                        </td>
+
+                        <td>
+
+                            <button
+                                onclick="darDeBaja('${name}')"
+                                class="delete-button"
+                            >
+                                ✕
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    `;
+
+                }).join("")}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    `;
+
+}
+
+/* ======================================================
+ADVANCED STATS
+====================================================== */
+
+function dibujarEstadisticas(ranking){
+
+    const box =
+    document.getElementById(
+        "estadisticas-avanzadas"
+    );
+
+    if(!box) return;
+
+    const entries =
+    Object.entries(ranking);
+
+    if(entries.length===0){
+
+        box.innerHTML = "";
+
+        return;
+
+    }
+
+    const lider =
+    entries.sort((a,b)=>
+        b[1].puntos - a[1].puntos
+    )[0];
+
+    box.innerHTML = `
+
+    <div class="advanced-stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-title">
+                👑 Líder
             </div>
 
-            <div class="flex items-center gap-3">
-
-                <div class="score-pill">
-                    ${u.score} pts
-                </div>
-
-                <button
-                    onclick="darDeBaja('${u.name}')"
-                    class="delete-button"
-                >
-                    ✕
-                </button>
-
+            <div class="stat-value">
+                ${lider[0]}
             </div>
 
         </div>
 
-        `;
+        <div class="stat-card">
 
-    });
+            <div class="stat-title">
+                🏆 Puntos
+            </div>
+
+            <div class="stat-value">
+                ${lider[1].puntos}
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-title">
+                🎯 Exactos
+            </div>
+
+            <div class="stat-value">
+                ${lider[1].exactos}
+            </div>
+
+        </div>
+
+        <div class="stat-card">
+
+            <div class="stat-title">
+                🔥 Mejor racha
+            </div>
+
+            <div class="stat-value">
+                ${lider[1].mejorRacha}
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
 
 }
 
@@ -648,6 +911,32 @@ function alternarBotones(){
 }
 
 /* ======================================================
+LOCK PREDICTIONS
+====================================================== */
+
+function partidoBloqueado(partido){
+
+    if(!partido.utcDate){
+
+        return false;
+
+    }
+
+    const now =
+    new Date().getTime();
+
+    const inicio =
+    new Date(partido.utcDate)
+    .getTime();
+
+    const diff =
+    inicio - now;
+
+    return diff <= 15 * 60 * 1000;
+
+}
+
+/* ======================================================
 FIXTURE
 ====================================================== */
 
@@ -658,6 +947,8 @@ function dibujarFixture(){
         "grid-fixture"
     );
 
+    if(!grid) return;
+
     grid.innerHTML = "";
 
     let partidos = [];
@@ -666,8 +957,7 @@ function dibujarFixture(){
 
         partidos = FixtureOficial;
 
-    }
-    else if(
+    }else if(
         filtroActual==="espana"
     ){
 
@@ -691,6 +981,9 @@ function dibujarFixture(){
     `${partidos.length} partidos`;
 
     partidos.forEach(p=>{
+
+        const bloqueado =
+        partidoBloqueado(p);
 
         const card =
         document.createElement("div");
@@ -724,10 +1017,6 @@ function dibujarFixture(){
 
                 <div class="stadium-text">
                     📍 ${p.estadio}
-                </div>
-
-                <div class="stadium-timezone">
-                    🌍 ${p.timezone}
                 </div>
 
             </div>
@@ -805,16 +1094,6 @@ function dibujarFixture(){
 
         <div class="predictions">
 
-            ${
-                registrados.length===0
-                ? `
-                <div class="empty-state">
-                    No hay participantes
-                </div>
-                `
-                : ""
-            }
-
             ${registrados.map(user=>{
 
                 const valA =
@@ -841,6 +1120,7 @@ function dibujarFixture(){
                             type="number"
                             value="${valA}"
                             class="prediction-input"
+                            ${bloqueado ? "disabled" : ""}
                             oninput="
                             actualizarPorraUser(
                             '${user}',
@@ -856,6 +1136,7 @@ function dibujarFixture(){
                             type="number"
                             value="${valB}"
                             class="prediction-input"
+                            ${bloqueado ? "disabled" : ""}
                             oninput="
                             actualizarPorraUser(
                             '${user}',
@@ -913,15 +1194,8 @@ STATS
 
 function actualizarStats(){
 
-    document.getElementById(
-        "totalPartidos"
-    ).innerText =
+    const total =
     FixtureOficial.length;
-
-    document.getElementById(
-        "totalUsers"
-    ).innerText =
-    registrados.length;
 
     const jugados =
     FixtureOficial.filter(
@@ -931,20 +1205,24 @@ function actualizarStats(){
     ).length;
 
     document.getElementById(
-        "totalJugados"
-    ).innerText =
-    jugados;
+        "totalPartidos"
+    ).innerText = total;
 
-    const live =
-    FixtureOficial.filter(
-        p=>
-        p.status==="IN_PLAY"
-    ).length;
+    document.getElementById(
+        "totalUsers"
+    ).innerText =
+    registrados.length;
+
+    document.getElementById(
+        "totalJugados"
+    ).innerText = jugados;
 
     document.getElementById(
         "totalLive"
     ).innerText =
-    live;
+    FixtureOficial.filter(
+        p=>p.status==="IN_PLAY"
+    ).length;
 
 }
 
