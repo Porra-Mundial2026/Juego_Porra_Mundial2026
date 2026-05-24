@@ -1,10 +1,23 @@
 /* ======================================================
-APPLE WORLD CUP 2026
-ULTRA EDITION
-LIVE CLOCKS + LIVE STATS + RESPONSIVE
+WORLD CUP 2026
+APPLE EDITION • LIVE API VERSION
+football-data.org powered
 ====================================================== */
 
+/* ======================================================
+CONFIG
+====================================================== */
+
+const API_KEY = "TU_API_KEY_AQUI";
+
+const API_URL =
+"https://api.football-data.org/v4/competitions/WC/matches";
+
 const DATA_URL = "./data/matches.json";
+
+/* ======================================================
+STATE
+====================================================== */
 
 let FixtureOficial = [];
 
@@ -18,139 +31,26 @@ let reales =
 JSON.parse(localStorage.getItem("f_reales")) || {};
 
 let grupoSeleccionado = "A";
-let filtroActual = "todos";
+let filtroActual = "grupo";
 
 /* ======================================================
 FLAGS CDN
 ====================================================== */
 
-const FLAG_CDN = "https://flagcdn.com";
+function obtenerBandera(code){
 
-/* ======================================================
-COUNTRY FLAGS
-====================================================== */
+    if(!code){
 
-function obtenerBandera(pais){
+        return "https://flagcdn.com/w160/un.png";
 
-    const flags = {
+    }
 
-        "España":"es",
-        "Brasil":"br",
-        "Argentina":"ar",
-        "Francia":"fr",
-        "Alemania":"de",
-        "Portugal":"pt",
-        "Inglaterra":"gb-eng",
-        "Estados Unidos":"us",
-        "México":"mx",
-        "Canadá":"ca",
-        "Japón":"jp",
-        "Corea del Sur":"kr",
-        "Australia":"au",
-        "Uruguay":"uy",
-        "Marruecos":"ma",
-        "Croacia":"hr",
-        "Países Bajos":"nl",
-        "Bélgica":"be",
-        "Suiza":"ch",
-        "Senegal":"sn",
-        "Dinamarca":"dk",
-        "Serbia":"rs",
-        "Polonia":"pl",
-        "Arabia Saudí":"sa",
-        "Cabo Verde":"cv"
-
-    };
-
-    const code = flags[pais] || "un";
-
-    return `${FLAG_CDN}/w160/${code}.png`;
+    return `https://flagcdn.com/w160/${code.toLowerCase()}.png`;
 
 }
 
 /* ======================================================
-LOAD
-====================================================== */
-
-window.onload = async () => {
-
-    try{
-
-        await cargarPartidos();
-
-        renderTabs();
-
-        alternarBotones();
-
-        actualizarResultadosAPI();
-
-        ejecutarMotor();
-
-        iniciarRelojes();
-
-        iniciarStatsLive();
-
-        setInterval(()=>{
-
-            actualizarResultadosAPI();
-
-        },300000);
-
-    }catch(err){
-
-        console.error(err);
-
-    }
-
-};
-
-/* ======================================================
-LOAD JSON
-====================================================== */
-
-async function cargarPartidos(){
-
-    try{
-
-        const response =
-        await fetch(DATA_URL + "?v=" + Date.now());
-
-        if(!response.ok){
-
-            throw new Error("JSON ERROR");
-
-        }
-
-        FixtureOficial =
-        await response.json();
-
-        document.getElementById(
-            "totalPartidos"
-        ).innerText =
-        FixtureOficial.length;
-
-    }catch(error){
-
-        console.error(error);
-
-        document.getElementById(
-            "grid-fixture"
-        ).innerHTML = `
-
-            <div class="col-span-full text-center py-20 text-red-400">
-
-                Error cargando matches.json
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-/* ======================================================
-WORLD CLOCKS
+CLOCKS
 ====================================================== */
 
 function obtenerHoraLocal(timezone){
@@ -166,7 +66,7 @@ function obtenerHoraLocal(timezone){
 
         }).format(new Date());
 
-    }catch{
+    }catch(err){
 
         return "--:--";
 
@@ -188,7 +88,8 @@ function iniciarRelojes(){
 
 function actualizarRelojes(){
 
-    document.querySelectorAll(".live-clock")
+    document
+    .querySelectorAll(".live-clock")
     .forEach(clock=>{
 
         const timezone =
@@ -202,92 +103,229 @@ function actualizarRelojes(){
 }
 
 /* ======================================================
-LIVE STATS
+LOAD
 ====================================================== */
 
-function iniciarStatsLive(){
-
-    actualizarStats();
-
-    setInterval(()=>{
-
-        actualizarStats();
-
-    },5000);
-
-}
-
-function actualizarStats(){
-
-    const total =
-    FixtureOficial.length;
-
-    const jugados =
-    Object.keys(reales)
-    .filter(k=>k.includes("_A"))
-    .length;
-
-    const live =
-    Math.floor(jugados * 0.18);
-
-    const participantes =
-    registrados.length;
-
-    document.getElementById(
-        "totalPartidos"
-    ).innerText = total;
-
-    document.getElementById(
-        "totalJugados"
-    ).innerText = jugados;
-
-    document.getElementById(
-        "totalLive"
-    ).innerText = live;
-
-    document.getElementById(
-        "totalUsers"
-    ).innerText = participantes;
-
-}
-
-/* ======================================================
-LIVE API SIMULATION
-====================================================== */
-
-function actualizarResultadosAPI(){
+window.onload = async ()=>{
 
     try{
 
-        FixtureOficial.forEach(p=>{
+        await cargarPartidos();
 
-            const existe =
-            reales[`r_${p.id}_A`] !== undefined;
+        renderTabs();
 
-            if(!existe && Math.random() > 0.986){
-
-                reales[`r_${p.id}_A`] =
-                Math.floor(Math.random()*5);
-
-                reales[`r_${p.id}_B`] =
-                Math.floor(Math.random()*5);
-
-            }
-
-        });
-
-        localStorage.setItem(
-            "f_reales",
-            JSON.stringify(reales)
-        );
+        alternarBotones();
 
         ejecutarMotor();
+
+        iniciarRelojes();
+
+        actualizarStats();
 
     }catch(err){
 
         console.error(err);
 
     }
+
+};
+
+/* ======================================================
+API FOOTBALL DATA
+====================================================== */
+
+async function cargarPartidos(){
+
+    try{
+
+        const response = await fetch(API_URL,{
+
+            headers:{
+                "X-Auth-Token":API_KEY
+            }
+
+        });
+
+        if(!response.ok){
+
+            console.warn(
+                "API FALLBACK → matches.json"
+            );
+
+            return await cargarJSONLocal();
+
+        }
+
+        const data =
+        await response.json();
+
+        if(!data.matches){
+
+            return await cargarJSONLocal();
+
+        }
+
+        FixtureOficial =
+        transformarPartidosAPI(data.matches);
+
+        actualizarStats();
+
+        dibujarFixture();
+
+    }catch(err){
+
+        console.error(err);
+
+        await cargarJSONLocal();
+
+    }
+
+}
+
+/* ======================================================
+LOCAL FALLBACK
+====================================================== */
+
+async function cargarJSONLocal(){
+
+    try{
+
+        const response =
+        await fetch(DATA_URL);
+
+        FixtureOficial =
+        await response.json();
+
+        actualizarStats();
+
+        dibujarFixture();
+
+    }catch(err){
+
+        console.error(
+            "ERROR JSON:",
+            err
+        );
+
+    }
+
+}
+
+/* ======================================================
+TRANSFORM API
+====================================================== */
+
+function transformarPartidosAPI(matches){
+
+    return matches.map((m,index)=>{
+
+        const home =
+        m.homeTeam || {};
+
+        const away =
+        m.awayTeam || {};
+
+        const utc =
+        new Date(m.utcDate);
+
+        const grupo =
+        obtenerGrupo(index);
+
+        return{
+
+            id:m.id || index,
+
+            grupo:grupo,
+
+            fecha:
+            utc.toLocaleDateString("es-ES"),
+
+            hora:
+            utc.toLocaleTimeString("es-ES",{
+                hour:"2-digit",
+                minute:"2-digit"
+            }),
+
+            estadio:
+            m.venue || "World Cup Stadium",
+
+            ciudad:
+            m.area?.name || "",
+
+            timezone:
+            detectarTimezone(
+                m.area?.name
+            ),
+
+            eqA:
+            home.name || "TBD",
+
+            eqB:
+            away.name || "TBD",
+
+            flagA:
+            obtenerBandera(
+                home.tla
+            ),
+
+            flagB:
+            obtenerBandera(
+                away.tla
+            ),
+
+            esp:
+            (
+                home.name === "Spain" ||
+                away.name === "Spain"
+            ),
+
+            scoreA:
+            m.score?.fullTime?.home,
+
+            scoreB:
+            m.score?.fullTime?.away,
+
+            status:
+            m.status
+
+        };
+
+    });
+
+}
+
+/* ======================================================
+GROUPS
+====================================================== */
+
+function obtenerGrupo(index){
+
+    const grupos =
+    ["A","B","C","D","E","F","G","H","I","J","K","L"];
+
+    return grupos[
+        index % grupos.length
+    ];
+
+}
+
+/* ======================================================
+TIMEZONES
+====================================================== */
+
+function detectarTimezone(city){
+
+    const zonas = {
+
+        "Canada":"America/Toronto",
+        "Mexico":"America/Mexico_City",
+        "United States":"America/New_York",
+        "USA":"America/New_York"
+
+    };
+
+    return zonas[city]
+    || "Europe/Madrid";
 
 }
 
@@ -309,7 +347,9 @@ function registrarUsuario(){
 
     if(registrados.includes(nombre)){
 
-        alert("Ese usuario ya existe");
+        alert(
+            "Ese usuario ya existe"
+        );
 
         return;
 
@@ -332,23 +372,19 @@ function registrarUsuario(){
 
 function darDeBaja(nombre){
 
-    if(confirm(`Eliminar a ${nombre}?`)){
+    registrados =
+    registrados.filter(
+        u=>u!==nombre
+    );
 
-        registrados =
-        registrados.filter(
-            u=>u!==nombre
-        );
+    localStorage.setItem(
+        "f_usuarios",
+        JSON.stringify(registrados)
+    );
 
-        localStorage.setItem(
-            "f_usuarios",
-            JSON.stringify(registrados)
-        );
+    actualizarStats();
 
-        actualizarStats();
-
-        ejecutarMotor();
-
-    }
+    ejecutarMotor();
 
 }
 
@@ -368,54 +404,63 @@ function ejecutarMotor(){
 
     FixtureOficial.forEach(p=>{
 
-        const rA =
-        reales[`r_${p.id}_A`];
+        if(
+            p.scoreA == null ||
+            p.scoreB == null
+        ) return;
 
-        const rB =
-        reales[`r_${p.id}_B`];
+        registrados.forEach(user=>{
 
-        if(rA !== undefined && rB !== undefined){
+            const pA =
+            parseInt(
+                porras[
+                    `p_${user}_${p.id}_A`
+                ]
+            );
 
-            registrados.forEach(user=>{
+            const pB =
+            parseInt(
+                porras[
+                    `p_${user}_${p.id}_B`
+                ]
+            );
 
-                const pA =
-                porras[`p_${user}_${p.id}_A`];
+            if(
+                isNaN(pA) ||
+                isNaN(pB)
+            ) return;
 
-                const pB =
-                porras[`p_${user}_${p.id}_B`];
+            if(
+                pA === p.scoreA &&
+                pB === p.scoreB
+            ){
 
-                if(
-                    pA !== undefined &&
-                    pB !== undefined &&
-                    pA !== "" &&
-                    pB !== ""
-                ){
+                puntos[user] += 3;
 
-                    const gA = parseInt(pA);
-                    const gB = parseInt(pB);
+            }else if(
 
-                    if(gA === rA && gB === rB){
+                (
+                    p.scoreA > p.scoreB &&
+                    pA > pB
+                ) ||
 
-                        puntos[user] += 3;
+                (
+                    p.scoreA < p.scoreB &&
+                    pA < pB
+                ) ||
 
-                    }
-                    else if(
+                (
+                    p.scoreA === p.scoreB &&
+                    pA === pB
+                )
 
-                        (rA > rB && gA > gB) ||
-                        (rA < rB && gA < gB) ||
-                        (rA === rB && gA === gB)
+            ){
 
-                    ){
+                puntos[user] += 1;
 
-                        puntos[user] += 1;
+            }
 
-                    }
-
-                }
-
-            });
-
-        }
+        });
 
     });
 
@@ -441,21 +486,21 @@ function dibujarClasificacion(puntos){
     const ranking =
     Object.keys(puntos)
     .map(k=>({
+
         name:k,
         score:puntos[k]
+
     }))
-    .sort((a,b)=>b.score-a.score);
+    .sort((a,b)=>
+        b.score-a.score
+    );
 
     if(ranking.length === 0){
 
         cont.innerHTML = `
-
             <div class="empty-state">
-
                 No hay participantes
-
             </div>
-
         `;
 
         return;
@@ -472,33 +517,44 @@ function dibujarClasificacion(puntos){
 
         cont.innerHTML += `
 
-            <div class="leaderboard-item">
+        <div class="leaderboard-item">
 
-                <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4">
 
-                    <div class="leader-icon">
-                        ${icon}
+                <div class="leader-icon">
+                    ${icon}
+                </div>
+
+                <div>
+
+                    <div class="font-bold">
+                        ${u.name}
                     </div>
 
-                    <div>
-
-                        <div class="font-bold">
-                            ${u.name}
-                        </div>
-
-                        <div class="text-xs text-slate-500">
-                            Participante
-                        </div>
-
+                    <div class="text-xs text-slate-500">
+                        Participante
                     </div>
 
                 </div>
+
+            </div>
+
+            <div class="flex items-center gap-3">
 
                 <div class="score-pill">
                     ${u.score} pts
                 </div>
 
+                <button
+                    onclick="darDeBaja('${u.name}')"
+                    class="delete-button"
+                >
+                    ✕
+                </button>
+
             </div>
+
+        </div>
 
         `;
 
@@ -507,7 +563,7 @@ function dibujarClasificacion(puntos){
 }
 
 /* ======================================================
-GROUP TABS
+FILTERS
 ====================================================== */
 
 function renderTabs(){
@@ -526,18 +582,19 @@ function renderTabs(){
 
         cont.innerHTML += `
 
-            <button
-                onclick="seleccionarGrupo('${g}')"
-                class="
-                    tab-button
-                    ${grupoSeleccionado===g
-                        ? 'active-tab'
-                        : ''
-                    }
-                "
-            >
-                ${g}
-            </button>
+        <button
+            onclick="seleccionarGrupo('${g}')"
+            class="
+                tab-button
+                ${
+                    grupoSeleccionado===g
+                    ? 'active-tab'
+                    : ''
+                }
+            "
+        >
+            Grupo ${g}
+        </button>
 
         `;
 
@@ -558,10 +615,6 @@ function seleccionarGrupo(g){
     dibujarFixture();
 
 }
-
-/* ======================================================
-FILTERS
-====================================================== */
 
 function cambiarFiltroVista(tipo){
 
@@ -595,7 +648,7 @@ function alternarBotones(){
 }
 
 /* ======================================================
-FIXTURE UI
+FIXTURE
 ====================================================== */
 
 function dibujarFixture(){
@@ -605,28 +658,29 @@ function dibujarFixture(){
         "grid-fixture"
     );
 
-    if(!grid) return;
-
     grid.innerHTML = "";
 
     let partidos = [];
 
-    if(filtroActual === "todos"){
+    if(filtroActual==="todos"){
 
         partidos = FixtureOficial;
 
     }
-    else if(filtroActual === "espana"){
-
-        partidos =
-        FixtureOficial.filter(p=>p.esp);
-
-    }
-    else{
+    else if(
+        filtroActual==="espana"
+    ){
 
         partidos =
         FixtureOficial.filter(
-            p=>p.grupo === grupoSeleccionado
+            p=>p.esp
+        );
+
+    }else{
+
+        partidos =
+        FixtureOficial.filter(
+            p=>p.grupo===grupoSeleccionado
         );
 
     }
@@ -638,200 +692,190 @@ function dibujarFixture(){
 
     partidos.forEach(p=>{
 
-        const rA =
-        reales[`r_${p.id}_A`];
-
-        const rB =
-        reales[`r_${p.id}_B`];
-
-        const marcador =
-        (rA !== undefined)
-        ? `
-            <div class="score-live">
-                ${rA} - ${rB}
-            </div>
-        `
-        : `
-            <div class="vs-text">
-                VS
-            </div>
-        `;
-
         const card =
         document.createElement("div");
 
         card.className =
         "match-card";
 
-        let html = `
+        card.innerHTML = `
 
-            <div class="match-header">
+        <div class="match-header">
 
-                <div>
+            <div>
 
-                    <div class="flex gap-2 flex-wrap">
+                <div class="flex gap-2 flex-wrap">
 
-                        <span class="group-pill">
-                            Grupo ${p.grupo}
+                    <span class="group-pill">
+                        Grupo ${p.grupo}
+                    </span>
+
+                    ${
+                        p.esp
+                        ? `
+                        <span class="spain-pill">
+                            🇪🇸 ESPAÑA
                         </span>
-
-                        ${
-                            p.esp
-                            ? `
-                                <span class="spain-pill">
-                                    🇪🇸 ESPAÑA
-                                </span>
-                            `
-                            : ''
-                        }
-
-                    </div>
-
-                    <div class="stadium-text mt-3">
-
-                        📍 ${p.estadio || ""}
-
-                    </div>
-
-                    <div class="stadium-timezone">
-
-                        ${p.ciudad || ""}
-
-                    </div>
-
-                    <div class="stadium-timezone">
-
-                        🌍 ${p.timezone || "Europe/Madrid"}
-
-                    </div>
+                        `
+                        : ""
+                    }
 
                 </div>
 
-                <div class="text-right">
+                <div class="stadium-text">
+                    📍 ${p.estadio}
+                </div>
 
-                    <div class="date-text">
-
-                        ${p.fecha || ""}
-
-                    </div>
-
-                    <div class="hour-text">
-
-                        🇪🇸 ${p.hora || ""}
-
-                    </div>
-
-                    <div
-                        class="live-clock"
-                        data-timezone="${p.timezone || 'Europe/Madrid'}"
-                    >
-
-                        🕒 ${obtenerHoraLocal(p.timezone)}
-
-                    </div>
-
+                <div class="stadium-timezone">
+                    🌍 ${p.timezone}
                 </div>
 
             </div>
 
-            <div class="teams-grid">
+            <div class="text-right">
 
-                <div class="team-side">
-
-                    <img
-                        src="${obtenerBandera(p.eqA)}"
-                        alt="${p.eqA}"
-                        loading="lazy"
-                        class="flag-img"
-                    >
-
-                    <div class="team-name">
-
-                        ${p.eqA}
-
-                    </div>
-
+                <div class="date-text">
+                    ${p.fecha}
                 </div>
 
-                <div class="score-center">
-
-                    ${marcador}
-
+                <div class="hour-text">
+                    ${p.hora}
                 </div>
 
-                <div class="team-side">
-
-                    <img
-                        src="${obtenerBandera(p.eqB)}"
-                        alt="${p.eqB}"
-                        loading="lazy"
-                        class="flag-img"
-                    >
-
-                    <div class="team-name">
-
-                        ${p.eqB}
-
-                    </div>
-
+                <div
+                    class="live-clock"
+                    data-timezone="${p.timezone}"
+                >
+                    🕒 --
                 </div>
 
             </div>
 
-            <div class="predictions">
-        `;
+        </div>
 
-        registrados.forEach(user=>{
+        <div class="teams-grid">
 
-            const valA =
-            porras[`p_${user}_${p.id}_A`] || "";
+            <div class="team-side">
 
-            const valB =
-            porras[`p_${user}_${p.id}_B`] || "";
+                <img
+                    src="${p.flagA}"
+                    class="flag-img"
+                    loading="lazy"
+                >
 
-            html += `
+                <div class="team-name">
+                    ${p.eqA}
+                </div>
+
+            </div>
+
+            <div class="score-center">
+
+                ${
+                    p.scoreA != null
+                    ? `
+                    <div class="score-live">
+                        ${p.scoreA} - ${p.scoreB}
+                    </div>
+                    `
+                    : `
+                    <div class="vs-text">
+                        VS
+                    </div>
+                    `
+                }
+
+            </div>
+
+            <div class="team-side">
+
+                <img
+                    src="${p.flagB}"
+                    class="flag-img"
+                    loading="lazy"
+                >
+
+                <div class="team-name">
+                    ${p.eqB}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="predictions">
+
+            ${
+                registrados.length===0
+                ? `
+                <div class="empty-state">
+                    No hay participantes
+                </div>
+                `
+                : ""
+            }
+
+            ${registrados.map(user=>{
+
+                const valA =
+                porras[
+                    `p_${user}_${p.id}_A`
+                ] || "";
+
+                const valB =
+                porras[
+                    `p_${user}_${p.id}_B`
+                ] || "";
+
+                return `
 
                 <div class="prediction-row">
 
                     <div class="prediction-user">
-
                         ${user}
-
                     </div>
 
                     <div class="prediction-inputs">
 
                         <input
                             type="number"
-                            min="0"
-                            max="9"
                             value="${valA}"
-                            oninput="actualizarPorraUser('${user}',${p.id},'A',this.value)"
                             class="prediction-input"
+                            oninput="
+                            actualizarPorraUser(
+                            '${user}',
+                            ${p.id},
+                            'A',
+                            this.value
+                            )"
                         >
 
                         <span>-</span>
 
                         <input
                             type="number"
-                            min="0"
-                            max="9"
                             value="${valB}"
-                            oninput="actualizarPorraUser('${user}',${p.id},'B',this.value)"
                             class="prediction-input"
+                            oninput="
+                            actualizarPorraUser(
+                            '${user}',
+                            ${p.id},
+                            'B',
+                            this.value
+                            )"
                         >
 
                     </div>
 
                 </div>
 
-            `;
+                `;
 
-        });
+            }).join("")}
 
-        html += `</div>`;
+        </div>
 
-        card.innerHTML = html;
+        `;
 
         grid.appendChild(card);
 
@@ -840,17 +884,67 @@ function dibujarFixture(){
 }
 
 /* ======================================================
-SAVE
+SAVE BETS
 ====================================================== */
 
-function actualizarPorraUser(user,id,campo,val){
+function actualizarPorraUser(
+    user,
+    id,
+    campo,
+    val
+){
 
-    porras[`p_${user}_${id}_${campo}`] = val;
+    porras[
+        `p_${user}_${id}_${campo}`
+    ] = val;
 
     localStorage.setItem(
         "f_porras",
         JSON.stringify(porras)
     );
+
+    ejecutarMotor();
+
+}
+
+/* ======================================================
+STATS
+====================================================== */
+
+function actualizarStats(){
+
+    document.getElementById(
+        "totalPartidos"
+    ).innerText =
+    FixtureOficial.length;
+
+    document.getElementById(
+        "totalUsers"
+    ).innerText =
+    registrados.length;
+
+    const jugados =
+    FixtureOficial.filter(
+        p=>
+        p.scoreA != null &&
+        p.scoreB != null
+    ).length;
+
+    document.getElementById(
+        "totalJugados"
+    ).innerText =
+    jugados;
+
+    const live =
+    FixtureOficial.filter(
+        p=>
+        p.status==="IN_PLAY"
+    ).length;
+
+    document.getElementById(
+        "totalLive"
+    ).innerText =
+    live;
 
 }
 
