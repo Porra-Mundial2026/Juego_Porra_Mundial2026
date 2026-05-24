@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Porra Mundial 2026 Ultimate</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="text-slate-100 min-h-screen pb-24">
+
+<!-- HEADER -->
+<header class="header-main">
+
+    <div class="header-overlay"></div>
+
+    <div class="container-main">
+
+        <div class="header-flex">
+
+            <div>
+
+                <div class="badges-row">
+
+                    <span class="badge badge-indigo">
+                        ⚽ FIFA WORLD CUP 2026
+                    </span>
+
+                    <span id="connectionBadge" class="badge badge-emerald">
+                        🌐 ONLINE
+                    </span>
+
+                </div>
+
+                <h1 class="main-title">
+                    PORRA <span class="gradient-text">MUNDIAL</span>
+                </h1>
+
+                <p class="subtitle">
+                    Sistema online automático conectado a GitHub + actualizaciones live.
+                </p>
+
+            </div>
+
+            <div class="panel-glass participants-panel">
+
+                <div class="panel-top">
+
+                    <h3 class="panel-title">
+                        👨‍👩‍👧‍👦 Participantes
+                    </h3>
+
+                    <span class="online-indicator">
+                        <span class="live-dot"></span>
+                        AUTO LIVE
+                    </span>
+
+                </div>
+
+                <div class="participant-input-row">
+
+                    <input
+                        id="input-usuario-global"
+                        type="text"
+                        placeholder="Añadir familiar..."
+                        class="input-main"
+                    >
+
+                    <button
+                        onclick="registrarUsuario()"
+                        class="btn-primary"
+                    >
+                        Añadir
+                    </button>
+
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-label">Partidos</div>
+                        <div class="stat-number" id="totalPartidos">0</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Jugados</div>
+                        <div class="stat-number text-emerald-400" id="totalJugados">0</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Online</div>
+                        <div class="stat-number text-indigo-400" id="apiStatus">OK</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- MAIN -->
+<main class="container-main mt-8 grid-main">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar-space">
+
+        <div class="sticky-box">
+
+            <!-- LEADERBOARD -->
+            <div class="panel-glass card-padding">
+
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        🏆 Leaderboard
+                    </h2>
+
+                    <span class="panel-small">
+                        Auto Update
+                    </span>
+                </div>
+
+                <div id="tabla-clasificacion" class="leaderboard-list"></div>
+
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="panel-glass card-padding">
+
+                <h3 class="panel-title mb-4">
+                    ⚙️ Control
+                </h3>
+
+                <button
+                    onclick="actualizarDesdeGitHub()"
+                    class="btn-success full-btn"
+                >
+                    🔄 Actualizar Fixture
+                </button>
+
+                <button
+                    onclick="resetearTodo()"
+                    class="btn-danger full-btn mt-3"
+                >
+                    🗑 Reset Local
+                </button>
+
+                <div class="small-text mt-5">
+                    El sistema descarga automáticamente los partidos desde GitHub.
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- CONTENT -->
+    <section class="content-space">
+
+        <!-- TABS -->
+        <div class="panel-glass tabs-wrapper">
+
+            <div class="tabs-flex">
+
+                <div id="contenedor-tabs" class="tabs-groups"></div>
+
+                <div class="filter-box">
+
+                    <button
+                        id="btn-filtro-grupo"
+                        onclick="cambiarFiltroVista('grupo')"
+                        class="filter-btn active"
+                    >
+                        Grupo
+                    </button>
+
+                    <button
+                        id="btn-filtro-espana"
+                        onclick="cambiarFiltroVista('espana')"
+                        class="filter-btn"
+                    >
+                        🇪🇸 España
+                    </button>
+
+                    <button
+                        id="btn-filtro-todos"
+                        onclick="cambiarFiltroVista('todos')"
+                        class="filter-btn"
+                    >
+                        Todo
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- STATUS -->
+        <div class="status-row">
+
+            <div id="txt-contador" class="status-text"></div>
+
+            <div class="status-small">
+                Hora España 🇪🇸
+            </div>
+
+        </div>
+
+        <!-- FIXTURE -->
+        <div id="grid-fixture" class="fixture-grid"></div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
