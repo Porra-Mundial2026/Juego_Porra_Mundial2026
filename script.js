@@ -1,8 +1,9 @@
 'use strict';
 /* ======================================================
-   WORLD CUP 2026 • APPLE EDITION • PRO ENGINE 2.0
-   Optimizado para Android Mobile
+   WORLD CUP 2026 • APPLE EDITION • PRO ENGINE 2.1
+   Optimizado para Android Mobile - Versión Corregida
 ====================================================== */
+
 const CONFIG = {
   API_KEY: '6a2a522096e243a4afec1a2de793e623',
   API_URL: 'https://api.football-data.org/v4/competitions/WC/matches',
@@ -87,7 +88,7 @@ const Clock = {
   interval: null,
   getTime(tz) { try { return getFormatter('es-ES', { hour:'2-digit', minute:'2-digit', second:'2-digit', timeZone: tz || 'Europe/Madrid' }).format(new Date()); } catch { return '--:--'; } },
   start() { this.update(); this.interval = setInterval(() => this.update(), 1000); },
-  update() { document.querySelectorAll('.live-clock').forEach(c => { c.textContent = `🕒 ${this.getTime(c.dataset.timezone)};` }); }
+  update() { document.querySelectorAll('.live-clock').forEach(c => { c.textContent = `🕒 ${this.getTime(c.dataset.timezone)}`; }); }
 };
 
 const API = {
@@ -130,18 +131,6 @@ const API = {
       };
     });
   },
-  transformLocal(matches) {
-    return matches.map((m, i) => {
-      const h = m.homeTeam || {}, a = m.awayTeam || {}, u = m.kickoffUTC ? new Date(m.kickoffUTC) : new Date();
-      return { id: m.id || i, grupo: m.group || CONFIG.GROUPS[i % CONFIG.GROUPS.length],
-        fecha: getFormatter('es-ES', { day:'2-digit', month:'short', year:'numeric' }).format(u),
-        hora: getFormatter('es-ES', { hour:'2-digit', minute:'2-digit' }).format(u),
-        estadio: m.venue?.stadium || 'Estadio', ciudad: m.venue?.city || '', timezone: m.localTime?.timezone || 'Europe/Madrid',
-        eqA: h.name || 'TBD', eqB: a.name || 'TBD', flagA: obtenerBandera(h.code), flagB: obtenerBandera(a.code),
-        esp: h.name?.includes('España') || a.name?.includes('España'),
-        scoreA: m.score?.home ?? null, scoreB: m.score?.away ?? null, utcDate: m.kickoffUTC || u.toISOString(), status: m.status || 'SCHEDULED' };
-    });
-  },
   detectGroup(m, i) { return m.group?.replace('GROUP_', '') || CONFIG.GROUPS[i % CONFIG.GROUPS.length]; },
   detectTimezone(city) { for (const [k, v] of Object.entries(CONFIG.TIMEZONES)) if (city?.includes(k)) return v; return 'Europe/Madrid'; }
 };
@@ -164,42 +153,41 @@ const Users = {
 };
 
 const Engine = {
-  run() { const r = this.calculateRanking(); this.renderLeaderboard(r); this.renderStats(r); Fixture.render(); Stats.update(); },
+  run() { requestAnimationFrame(() => { const r = this.calculateRanking(); this.renderLeaderboard(r); this.renderStats(r); Fixture.render(); Stats.update(); }); },
   calculateRanking() {
-    const r = {}; State.usuarios.forEach(u => { r[u] = { puntos: 0, exactos: 0, acertados: 0, golesExactos: 0, diferenciaExacta: 0, bonusEspana: 0, fallados: 0, partidos: 0, porcentaje: 0, rachaActual: 0, mejorRacha: 0 }; });
+    const r = {}; State.usuarios.forEach(u => { r[u] = { puntos: 0, exactos: 0, acertados: 0, rachaActual: 0, mejorRacha: 0, partidos: 0 }; });
     State.fixture.forEach(p => {
       if (p.scoreA == null || p.scoreB == null) return;
       State.usuarios.forEach(u => {
         const a = parseInt(State.porras[`p_${u}_${p.id}_A`]), b = parseInt(State.porras[`p_${u}_${p.id}_B`]);
-        if (isNaN(a) || isNaN(b)) return r[u].fallados++;
+        if (isNaN(a) || isNaN(b)) return;
         r[u].partidos++; r[u].puntos += this.calculatePoints(p, a, b, r[u]);
       });
     });
-    Object.values(r).forEach(s => s.porcentaje = s.partidos ? Math.round((s.acertados / s.partidos) * 100) : 0);
     return r;
   },
   calculatePoints(p, a, b, s) {
     let pts = 0; const wReal = p.scoreA > p.scoreB ? 'A' : p.scoreA < p.scoreB ? 'B' : 'E', wUser = a > b ? 'A' : a < b ? 'B' : 'E';
     if (a === p.scoreA && b === p.scoreB) { pts += 5; s.exactos++; }
     if (wReal === wUser) { pts += 2; s.acertados++; }
-    if (a === p.scoreA) { pts++; s.golesExactos++; } if (b === p.scoreB) { pts++; s.golesExactos++; }
-    if (p.scoreA - p.scoreB === a - b) { pts++; s.diferenciaExacta++; }
-    if (p.esp && a === p.scoreA && b === p.scoreB) { pts += 3; s.bonusEspana++; }
+    if (a === p.scoreA) pts++; if (b === p.scoreB) pts++;
+    if ((p.scoreA - p.scoreB) === (a - b)) pts++;
+    if (p.esp && a === p.scoreA && b === p.scoreB) pts += 3;
     if (pts > 0) { s.rachaActual++; if (s.rachaActual > s.mejorRacha) s.mejorRacha = s.rachaActual; } else s.rachaActual = 0;
     return pts;
   },
   renderLeaderboard(r) {
     const c = document.getElementById('tabla-clasificacion'); if (!c) return;
     const sorted = Object.entries(r).sort((a, b) => b[1].puntos - a[1].puntos);
-    c.innerHTML = sorted.length === 0 ? `<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Sin participantes aún</span></div>` :
-      sorted.map(([n, s], i) => `<div class="leaderboard-item" data-user="${escapeHTML(n)}"><div class="leader-rank">${i+1}</div><div class="leader-info"><div class="leader-name">${escapeHTML(n)}</div><div class="leader-stats">🎯 ${s.exactos} · ✅ ${s.acertados} · 🔥 ${s.mejorRacha}</div></div><div class="score-pill">${s.puntos}</div><button class="icon-button-sm delete-btn" data-action="delete-user" data-user="${escapeHTML(n)}" aria-label="Eliminar ${escapeHTML(n)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>`).join('');
+    c.innerHTML = sorted.length === 0 ? `<div class="empty-state"><span>Sin participantes aún</span></div>` :
+      sorted.map(([n, s], i) => `<div class="leaderboard-item"><div class="leader-rank">${i+1}</div><div class="leader-name">${escapeHTML(n)}</div><div class="score-pill">${s.puntos}</div><button class="delete-btn" data-action="delete-user" data-user="${escapeHTML(n)}">✕</button></div>`).join('');
   },
   renderStats(r) {
     const c = document.getElementById('estadisticas-avanzadas'); if (!c) return;
     const sorted = Object.entries(r).sort((a, b) => b[1].puntos - a[1].puntos);
     if (!sorted.length) return c.innerHTML = '';
     const [n, s] = sorted[0];
-    c.innerHTML = `<div class="advanced-stats-grid"><div class="stat-card"><div class="stat-title">👑 Líder</div><div class="stat-value">${escapeHTML(n)}</div></div><div class="stat-card"><div class="stat-title">🏆 Puntos</div><div class="stat-value">${s.puntos}</div></div><div class="stat-card"><div class="stat-title">🎯 Exactos</div><div class="stat-value">${s.exactos}</div></div><div class="stat-card"><div class="stat-title">🔥 Racha</div><div class="stat-value">${s.mejorRacha}</div></div></div>`;
+    c.innerHTML = `<div class="advanced-stats-grid"><div class="stat-card"><div>👑 Líder</div><div>${escapeHTML(n)}</div></div><div class="stat-card"><div>🏆 Puntos</div><div>${s.puntos}</div></div></div>`;
   }
 };
 
@@ -208,121 +196,49 @@ const Fixture = {
   getFiltered() { return State.filtroActivo === 'todos' ? State.fixture : State.filtroActivo === 'espana' ? State.fixture.filter(p => p.esp) : State.fixture.filter(p => p.grupo === State.grupoActivo); },
   render() {
     const g = document.getElementById('grid-fixture'); if (!g) return; const p = this.getFiltered();
-    document.getElementById('txt-contador').textContent = `${p.length} ${p.length === 1 ? 'partido' : 'partidos'}`;
-    if (!p.length) return g.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg><span>No hay partidos</span></div>`;
-    const f = document.createDocumentFragment(); p.forEach(m => { const c = document.createElement('article'); c.className = 'match-card glass-card'; c.setAttribute('role', 'listitem'); c.innerHTML = this.card(m); f.appendChild(c); });
-    g.innerHTML = ''; g.appendChild(f);
+    g.innerHTML = p.map(m => `<article class="match-card glass-card">${this.card(m)}</article>`).join('');
   },
   card(p) {
     const bloq = this.isLocked(p);
-    return `<div class="match-header"><div><div class="flex gap-2 flex-wrap"><span class="group-pill">Grupo ${escapeHTML(p.grupo)}</span>${p.esp ? '<span class="spain-pill">🇪🇸 ESPAÑA</span>' : ''}${this.badge(p.status)}</div><div class="stadium-text">📍 ${escapeHTML(p.estadio)}</div>${p.ciudad ? `<div class="stadium-timezone">${escapeHTML(p.ciudad)}</div>` : ''}</div><div class="text-right"><div class="date-text">${escapeHTML(p.fecha)}</div><div class="hour-text">${escapeHTML(p.hora)}</div><div class="live-clock" data-timezone="${escapeHTML(p.timezone)}">🕒 --:--</div></div></div><div class="teams-grid"><div class="team-side"><img src="${p.flagA}" class="flag-img" loading="lazy" alt="Bandera ${escapeHTML(p.eqA)}" onerror="this.src='https://flagcdn.com/w160/un.png'"><div class="team-name">${escapeHTML(p.eqA)}</div></div><div class="score-center">${p.scoreA != null ? `<div class="score-live">${p.scoreA} - ${p.scoreB}</div>` : '<div class="vs-text">VS</div>'}</div><div class="team-side"><img src="${p.flagB}" class="flag-img" loading="lazy" alt="Bandera ${escapeHTML(p.eqB)}" onerror="this.src='https://flagcdn.com/w160/un.png'"><div class="team-name">${escapeHTML(p.eqB)}</div></div></div>${State.usuarios.length ? `<div class="predictions">${State.usuarios.map(u => this.row(u, p, bloq)).join('')}</div>` : '<div class="empty-state" style="padding:1rem"><span>Añade participantes</span></div>'}`;
+    return `<div class="match-header"><span class="group-pill">G ${p.grupo}</span><span class="stadium-text">${p.estadio}</span></div><div class="teams-grid"><div class="team-side"><span>${p.eqA}</span></div><div class="score-center">${p.scoreA ?? 'VS'}</div><div class="team-side"><span>${p.eqB}</span></div></div><div class="predictions">${State.usuarios.map(u => this.row(u, p, bloq)).join('')}</div>`;
   },
   row(u, p, bloq) {
     const a = State.porras[`p_${u}_${p.id}_A`] ?? '', b = State.porras[`p_${u}_${p.id}_B`] ?? '';
-    return `<div class="prediction-row"><div class="prediction-user">${escapeHTML(u)}</div><div class="prediction-inputs"><input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" value="${a}" class="prediction-input" data-user="${escapeHTML(u)}" data-match="${p.id}" data-team="A" ${bloq?'disabled':''} aria-label="Goles ${escapeHTML(p.eqA)} para ${escapeHTML(u)}"><span>-</span><input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" value="${b}" class="prediction-input" data-user="${escapeHTML(u)}" data-match="${p.id}" data-team="B" ${bloq?'disabled':''} aria-label="Goles ${escapeHTML(p.eqB)} para ${escapeHTML(u)}"></div></div>`;
-  },
-  badge(s) { return { 'IN_PLAY':'<span class="live-pill-mini"><span class="live-dot-mini"></span>EN VIVO</span>', 'PAUSED':'<span class="spain-pill">DESCANSO</span>', 'FINISHED':'<span class="group-pill">FINALIZADO</span>' }[s] || ''; }
-};
-
-const Filters = {
-  renderTabs() {
-    const s = document.getElementById('select-grupo'); if (!s) return;
-    if (!s.options.length) s.innerHTML = CONFIG.GROUPS.map(g => `<option value="${g}" ${State.grupoActivo===g?'selected':''}>Grupo ${g}</option>`).join('');
-    s.value = State.grupoActivo;
-  },
-  setActive(f) { State.filtroActivo = f; this.update(); Fixture.render(); },
-  selectGroup(g) { State.grupoActivo = g; State.filtroActivo = 'grupo'; this.update(); Fixture.render(); },
-  update() { ['grupo','espana','todos'].forEach(b => { const e = document.getElementById(`btn-filtro-${b}`); if (!e) return; e.className = State.filtroActivo===b ? 'filter-button active-filter' : 'filter-button'; }); }
-};
-
-const Stats = {
-  update() {
-    document.getElementById('totalPartidos').textContent = State.fixture.length;
-    document.getElementById('totalJugados').textContent = State.fixture.filter(p => p.scoreA!=null && p.scoreB!=null).length;
-    document.getElementById('totalLive').textContent = State.fixture.filter(p => p.status==='IN_PLAY').length;
-    document.getElementById('totalUsers').textContent = State.usuarios.length;
+    return `<div class="prediction-row"><span>${escapeHTML(u)}</span><input type="number" value="${a}" class="prediction-input" data-user="${escapeHTML(u)}" data-match="${p.id}" data-team="A" ${bloq?'disabled':''}><span>-</span><input type="number" value="${b}" class="prediction-input" data-user="${escapeHTML(u)}" data-match="${p.id}" data-team="B" ${bloq?'disabled':''}></div>`;
   }
 };
 
 const savePorra = debounce((user, matchId, team, val) => {
-  if (val !== '' && isNaN(parseInt(val))) return;
   State.porras[`p_${user}_${matchId}_${team}`] = val;
   localStorage.setItem('f_porras', JSON.stringify(State.porras)); haptic(5); Engine.run();
 }, CONFIG.DEBOUNCE_MS);
 
-const Share = {
-  async open() {
-    const r = Engine.calculateRanking(), sorted = Object.entries(r).sort((a, b) => b[1].puntos - a[1].puntos);
-    if (!sorted.length) return Toast.warning('Añade participantes primero');
-    const txt = sorted.slice(0,5).map(([n, s], i) => `${['🥇','🥈','🥉','4️⃣','5️⃣'][i]} ${n}: ${s.puntos} pts`).join('\n');
-    try { await (navigator.share ? navigator.share({ title: '🏆 Clasificación WC2026', text: `Clasificación:\n\n${txt}` }) : navigator.clipboard.writeText(txt)); Toast.success(navigator.share ? '¡Compartido!' : 'Copiado'); } catch(e) { if(e.name!=='AbortError') Toast.error('Error al compartir'); }
-  }
-};
-
-const Network = {
-  init() { window.addEventListener('online', () => this.up(true)); window.addEventListener('offline', () => this.up(false)); this.up(navigator.onLine); },
-  up(on) { State.isOnline = on; const b = document.getElementById('offline-banner'); if(b) b.hidden = on; Toast[on?'success':'warning'](on ? 'Conexión restaurada' : 'Sin conexión'); }
-};
-
-const BottomNav = {
-  init() { document.querySelectorAll('.bottom-nav-item').forEach(b => b.addEventListener('click', e => this.act(e.currentTarget.dataset.section))); },
-  act(sec) { document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.toggle('active', b.dataset.section===sec)); const t = { matches:'#grid-fixture', leaderboard:'#tabla-clasificacion', users:'#modal-add-user' }[sec]; if(t?.startsWith('#modal')) Modal.show(t); else document.querySelector(t)?.scrollIntoView({ behavior:'smooth' }); }
-};
-
 const Events = {
   init() {
-    document.addEventListener('click', e => {
-      const t = e.target.closest('[data-action]'); if (!t) return;
-      const a = t.dataset.action;
-      if (a === 'select-group') Filters.selectGroup(t.dataset.group);
-      else if (a === 'delete-user') Users.remove(t.dataset.user);
-      else if (a === 'refresh') App.refresh();
-    });
-
-    document.getElementById('select-grupo')?.addEventListener('change', e => Filters.selectGroup(e.target.value));
-
     document.addEventListener('input', e => {
       if (e.target.classList.contains('prediction-input')) {
-        // Sanitización Android: solo números
-        e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 2);
         savePorra(e.target.dataset.user, e.target.dataset.match, e.target.dataset.team, e.target.value);
       }
     });
-
-    document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.classList.contains('prediction-input')) { e.preventDefault(); const i = [...document.querySelectorAll('.prediction-input:not([disabled])')], x = i.indexOf(e.target); if(x>=0 && x<i.length-1) i[x+1].focus(); } });
-
-    document.querySelectorAll('[data-close-modal]').forEach(b => b.addEventListener('click', () => { b.closest('.modal').hidden = true; document.body.style.overflow = ''; }));
-    
-    document.getElementById('form-add-user')?.addEventListener('submit', e => { e.preventDefault(); const i = document.getElementById('input-usuario-modal'); if (Users.add(i.value)) { i.value = ''; Modal.hide('modal-add-user'); } });
-    document.getElementById('btn-refresh')?.addEventListener('click', () => App.refresh());
-    document.getElementById('btn-share')?.addEventListener('click', () => Share.open());
-    document.getElementById('fab-add-user')?.addEventListener('click', () => Modal.show('modal-add-user'));
-    ['grupo','espana','todos'].forEach(f => document.getElementById(`btn-filtro-${f}`)?.addEventListener('click', () => Filters.setActive(f)));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal:not([hidden])').forEach(m => { m.hidden = true; document.body.style.overflow = ''; }); });
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-action]');
+      if (t?.dataset.action === 'delete-user') Users.remove(t.dataset.user);
+    });
   }
 };
 
 const App = {
   async init() {
-    Toast.init(); Network.init(); BottomNav.init(); Events.init();
-    this.showSkeletons();
-    try {
-      State.fixture = await API.getMatches();
-      if (!State.fixture.length) Toast.warning('No hay partidos');
-      else Toast.success(`${State.fixture.length} partidos cargados`);
-      Filters.renderTabs(); Filters.update(); Clock.start(); Engine.run(); this.autoRefresh();
-    } catch (e) { console.error(e); Toast.error('Error al cargar'); }
+    Toast.init(); Events.init();
+    try { State.fixture = await API.getMatches(); Engine.run(); } 
+    catch (e) { Toast.error('Error al cargar'); }
   },
-  showSkeletons() { const g = document.getElementById('grid-fixture'); if(g) g.innerHTML = Array(3).fill('<div class="skeleton-match glass-card"></div>').join(''); },
-  autoRefresh() { if (State.fixture.some(p => p.status==='IN_PLAY')) setInterval(() => this.refresh(false), 60000); },
-  async refresh(show = true) {
-    if (State.isLoading) return; State.isLoading = true;
-    const b = document.getElementById('btn-refresh'); if(b) b.disabled = true;
-    try { localStorage.removeItem(CONFIG.CACHE_KEY); State.fixture = await API.getMatches(); Engine.run(); Clock.update(); if(show) Toast.success('Actualizado'); haptic([10,50,10]); } 
-    catch { if(show) Toast.error('Error al actualizar'); } 
-    finally { State.isLoading = false; if(b) b.disabled = false; }
+  async refresh() {
+    localStorage.removeItem(CONFIG.CACHE_KEY);
+    State.fixture = await API.getMatches();
+    Engine.run();
+    Toast.success('Actualizado');
   }
 };
 
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => App.init()); else App.init();
-window.resetearTodo = () => Modal.confirm('¿Borrar TODO?', () => { localStorage.clear(); location.reload(); }, 'Resetear');
+document.addEventListener('DOMContentLoaded', () => App.init());
