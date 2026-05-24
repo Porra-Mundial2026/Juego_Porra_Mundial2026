@@ -1237,3 +1237,142 @@ img, video, iframe {
   max-width: 100%;
   height: auto;
 }
+
+/* === SIDEBAR SECTIONS (Desplegables) === */
+.sidebar-section {
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.sidebar-section[open] {
+  padding: 0;
+}
+
+.sidebar-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.sidebar-summary::-webkit-details-marker {
+  display: none;
+}
+
+.sidebar-summary::marker {
+  display: none;
+  content: '';
+}
+
+.sidebar-summary .section-title {
+  margin-bottom: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.sidebar-section[open] .summary-chevron {
+  transform: rotate(180deg);
+}
+
+.sidebar-content {
+  padding: 0 16px 16px;
+}
+
+/* Filtros con iconos */
+.filter-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.filter-flag {
+  font-size: 14px;
+}
+
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* En desktop, las secciones siempre abiertas y sin chevron */
+@media (min-width: 1024px) {
+  .summary-chevron {
+    display: none;
+  }
+  
+  .sidebar-summary {
+    cursor: default;
+  }
+  
+  .sidebar-section {
+    padding: 20px;
+  }
+  
+  .sidebar-content {
+    padding: 0;
+  }
+}
+
+/* Modal alert sheet */
+.modal-alert-sheet {
+  text-align: center;
+  padding: 24px 20px;
+  padding-bottom: calc(24px + var(--safe-bottom));
+}
+
+.alert-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.alert-icon-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+}
+
+.alert-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.alert-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.alert-message {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.alert-actions > * {
+  flex: 1;
+}
