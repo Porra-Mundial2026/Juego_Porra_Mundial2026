@@ -1,6 +1,7 @@
 <!-- ======================================================
 INDEX.HTML
-WORLD CUP 2026 • APPLE EDITION • FIXED VERSION
+WORLD CUP 2026 • APPLE ULTRA EDITION
+RESPONSIVE + LIVE CLOCKS + PREMIUM UI
 ====================================================== -->
 
 <!DOCTYPE html>
@@ -9,13 +10,26 @@ WORLD CUP 2026 • APPLE EDITION • FIXED VERSION
 <head>
 
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+/>
 
 <title>Porra Mundial 2026</title>
 
-<meta name="theme-color" content="#020617">
+<meta
+    name="theme-color"
+    content="#020617"
+/>
+
+<meta
+    name="description"
+    content="Porra premium del Mundial 2026 con resultados en vivo, clasificación y relojes mundiales."
+/>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
@@ -23,27 +37,46 @@ href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;90
 rel="stylesheet"
 />
 
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="stylesheet" href="./style.css">
+<link
+rel="stylesheet"
+href="./style.css"
+/>
 
 </head>
 
-<body class="bg-[#020617] text-white overflow-x-hidden min-h-screen">
+<body>
 
 <!-- ======================================================
-BACKGROUND
+BACKGROUND FX
 ====================================================== -->
 
-<div class="fixed inset-0 z-[-2] bg-[#020617]"></div>
+<div class="fixed inset-0 z-[-3] bg-[#020617]"></div>
 
-<div class="fixed inset-0 z-[-1] pointer-events-none">
+<div class="fixed inset-0 z-[-2] overflow-hidden pointer-events-none">
 
-    <div class="absolute top-[-200px] left-[-200px] w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[120px]"></div>
+    <div
+        class="absolute top-[-250px] left-[-250px]
+        w-[700px] h-[700px]
+        rounded-full
+        bg-blue-500/10
+        blur-[140px]"
+    ></div>
 
-    <div class="absolute bottom-[-300px] right-[-200px] w-[700px] h-[700px] rounded-full bg-indigo-500/10 blur-[150px]"></div>
+    <div
+        class="absolute bottom-[-300px] right-[-250px]
+        w-[800px] h-[800px]
+        rounded-full
+        bg-indigo-500/10
+        blur-[160px]"
+    ></div>
 
-    <div class="absolute top-[40%] left-[45%] w-[300px] h-[300px] rounded-full bg-cyan-500/5 blur-[100px]"></div>
+    <div
+        class="absolute top-[40%] left-[45%]
+        w-[350px] h-[350px]
+        rounded-full
+        bg-cyan-500/5
+        blur-[110px]"
+    ></div>
 
 </div>
 
@@ -51,50 +84,176 @@ BACKGROUND
 NAVBAR
 ====================================================== -->
 
-<header class="sticky top-0 z-50 backdrop-blur-2xl border-b border-white/5 bg-black/20">
+<header class="hero-header">
 
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="hero-overlay"></div>
 
-        <!-- LEFT -->
-        <div class="flex items-center gap-4">
+    <div class="container-main">
 
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-2xl shadow-blue-500/20">
+        <div class="hero-content">
 
-                <span class="text-2xl">⚽</span>
+            <!-- LEFT -->
+            <div class="hero-left">
+
+                <div class="hero-badges">
+
+                    <div class="hero-badge">
+                        🏆 FIFA WORLD CUP 2026
+                    </div>
+
+                    <div class="hero-badge">
+                        🌍 USA • MÉXICO • CANADÁ
+                    </div>
+
+                    <div class="hero-badge">
+                        ⚡ LIVE DATA
+                    </div>
+
+                </div>
+
+                <h1 class="hero-title">
+
+                    La porra del Mundial<br>
+
+                    reinventada.
+
+                </h1>
+
+                <p class="hero-description">
+
+                    Resultados automáticos, relojes en vivo,
+                    clasificación premium, estadísticas avanzadas
+                    y experiencia inspirada en Apple.
+
+                </p>
 
             </div>
 
-            <div>
+            <!-- RIGHT PANEL -->
+            <div class="glass-card top-panel p-6">
 
-                <h1 class="text-2xl font-black tracking-tight">
-                    World Cup 2026
-                </h1>
+                <div class="panel-header">
 
-                <div class="text-xs text-slate-400">
-                    Family Predictor Ultimate
+                    <div>
+
+                        <div class="section-title">
+                            ⚽ Match Center
+                        </div>
+
+                        <div class="section-mini-text">
+                            Sincronización automática
+                        </div>
+
+                    </div>
+
+                    <div class="live-status">
+
+                        <span class="live-dot"></span>
+
+                        LIVE
+
+                    </div>
+
+                </div>
+
+                <!-- USERS -->
+                <div class="user-form">
+
+                    <input
+                        id="input-usuario-global"
+                        type="text"
+                        placeholder="Añadir participante..."
+                        class="main-input"
+                    >
+
+                    <button
+                        onclick="registrarUsuario()"
+                        class="main-button"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <!-- SEARCH -->
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Buscar selección..."
+                        oninput="buscarPartidos(this.value)"
+                    >
+
+                </div>
+
+                <!-- STATS -->
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+                            PARTIDOS
+                        </div>
+
+                        <div
+                            id="totalPartidos"
+                            class="stat-number"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+                            JUGADOS
+                        </div>
+
+                        <div
+                            id="totalJugados"
+                            class="stat-number green"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+                            LIVE
+                        </div>
+
+                        <div
+                            id="totalLive"
+                            class="stat-number red"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-label">
+                            USERS
+                        </div>
+
+                        <div
+                            id="totalUsers"
+                            class="stat-number blue"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-
-        <!-- RIGHT -->
-        <div class="hidden md:flex items-center gap-3">
-
-            <div class="live-pill">
-
-                <span class="live-dot"></span>
-
-                LIVE DATA
-
-            </div>
-
-            <button
-                onclick="actualizarResultadosAPI()"
-                class="premium-button"
-            >
-                Actualizar
-            </button>
 
         </div>
 
@@ -103,193 +262,76 @@ NAVBAR
 </header>
 
 <!-- ======================================================
-HERO
+MAIN LAYOUT
 ====================================================== -->
 
-<section class="relative pt-20 pb-16">
+<main class="container-main">
 
-    <div class="max-w-7xl mx-auto px-6">
-
-        <div class="grid lg:grid-cols-2 gap-14 items-center">
-
-            <!-- LEFT -->
-            <div>
-
-                <div class="inline-flex items-center gap-2 premium-badge mb-6">
-
-                    <span>🏆</span>
-
-                    FIFA World Cup 2026™
-
-                </div>
-
-                <h2 class="hero-title">
-
-                    La porra del Mundial<br>
-
-                    reinventada.
-
-                </h2>
-
-                <p class="hero-subtitle">
-
-                    Resultados automáticos, clasificación familiar,
-                    relojes mundiales en vivo y experiencia premium.
-
-                </p>
-
-                <div class="flex flex-wrap gap-4 mt-10">
-
-                    <button class="hero-primary-button">
-                        Empezar
-                    </button>
-
-                    <button
-                        onclick="window.scrollTo({top:900,behavior:'smooth'})"
-                        class="hero-secondary-button"
-                    >
-                        Ver Calendario
-                    </button>
-
-                </div>
-
-            </div>
-
-            <!-- RIGHT STATS -->
-            <div class="grid grid-cols-2 gap-5">
-
-                <div class="glass-card p-7">
-
-                    <div class="stat-label">
-                        PARTIDOS
-                    </div>
-
-                    <div
-                        id="totalPartidos"
-                        class="stat-number"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-                <div class="glass-card p-7">
-
-                    <div class="stat-label">
-                        JUGADOS
-                    </div>
-
-                    <div
-                        id="totalJugados"
-                        class="stat-number text-emerald-400"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-                <div class="glass-card p-7">
-
-                    <div class="stat-label">
-                        EN DIRECTO
-                    </div>
-
-                    <div
-                        id="totalLive"
-                        class="stat-number text-red-400"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-                <div class="glass-card p-7">
-
-                    <div class="stat-label">
-                        PARTICIPANTES
-                    </div>
-
-                    <div
-                        id="totalUsers"
-                        class="stat-number text-blue-400"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ======================================================
-MAIN
-====================================================== -->
-
-<main class="max-w-7xl mx-auto px-6 pb-24">
-
-    <div class="grid xl:grid-cols-4 gap-8">
+    <div class="main-layout">
 
         <!-- ======================================================
         SIDEBAR
         ====================================================== -->
 
-        <aside class="xl:col-span-1 space-y-8">
-
-            <!-- USERS -->
-            <div class="glass-card p-6">
-
-                <div class="section-title">
-                    👨‍👩‍👧‍👦 Participantes
-                </div>
-
-                <div class="flex gap-3 mt-5">
-
-                    <input
-                        id="input-usuario-global"
-                        type="text"
-                        placeholder="Añadir familiar..."
-                        class="premium-input flex-1"
-                    >
-
-                    <button
-                        onclick="registrarUsuario()"
-                        class="premium-button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
+        <aside class="sidebar">
 
             <!-- LEADERBOARD -->
-            <div class="glass-card p-6">
+            <div class="glass-card p-6 sidebar-card">
 
-                <div class="flex items-center justify-between mb-6">
+                <div class="section-title-row">
 
                     <div class="section-title">
                         🏆 Leaderboard
                     </div>
 
-                    <div class="text-xs text-slate-500">
-                        Live
+                    <div class="section-mini-text">
+                        Actualizado
                     </div>
 
                 </div>
 
                 <div
                     id="tabla-clasificacion"
-                    class="space-y-4"
+                    class="leaderboard-list"
                 >
 
                     <div class="empty-state">
                         No hay participantes
                     </div>
+
+                </div>
+
+            </div>
+
+            <!-- CONTROL -->
+            <div class="glass-card p-6">
+
+                <div class="section-title mb-5">
+                    ⚙️ Control
+                </div>
+
+                <div class="control-buttons">
+
+                    <button
+                        onclick="actualizarResultadosAPI()"
+                        class="control-btn blue-btn"
+                    >
+                        🔄 Actualizar Resultados
+                    </button>
+
+                    <button
+                        onclick="resetearTodo()"
+                        class="control-btn red-btn"
+                    >
+                        🗑 Resetear Todo
+                    </button>
+
+                </div>
+
+                <div class="info-box">
+
+                    Los resultados y estadísticas
+                    se sincronizan automáticamente.
 
                 </div>
 
@@ -302,21 +344,21 @@ MAIN
                     🌍 Mundial 2026
                 </div>
 
-                <div class="space-y-4 text-sm text-slate-400">
+                <div class="worldcup-info">
 
                     <div class="info-row">
 
                         <span>📍 Países</span>
 
-                        <span>USA • México • Canadá</span>
+                        <span>3</span>
 
                     </div>
 
                     <div class="info-row">
 
-                        <span>⚽ Equipos</span>
+                        <span>⚽ Selecciones</span>
 
-                        <span>48 Selecciones</span>
+                        <span>48</span>
 
                     </div>
 
@@ -332,7 +374,7 @@ MAIN
 
                         <span>📅 Final</span>
 
-                        <span>19 Julio 2026</span>
+                        <span>19 Jul 2026</span>
 
                     </div>
 
@@ -346,26 +388,26 @@ MAIN
         CONTENT
         ====================================================== -->
 
-        <section class="xl:col-span-3">
+        <section>
 
             <!-- FILTERS -->
-            <div class="glass-card p-5 mb-8">
+            <div class="glass-card p-5">
 
-                <div class="flex flex-col xl:flex-row gap-6 xl:items-center justify-between">
+                <div class="filters-layout">
 
-                    <!-- GROUP TABS -->
+                    <!-- GROUPS -->
                     <div
                         id="contenedor-tabs"
-                        class="flex gap-2 overflow-x-auto pb-2"
+                        class="tabs-scroll"
                     ></div>
 
                     <!-- FILTER BUTTONS -->
-                    <div class="filter-wrapper">
+                    <div class="filter-buttons">
 
                         <button
                             id="btn-filtro-grupo"
                             onclick="cambiarFiltroVista('grupo')"
-                            class="filter-button active-filter"
+                            class="filter-btn filter-active"
                         >
                             Grupo
                         </button>
@@ -373,7 +415,7 @@ MAIN
                         <button
                             id="btn-filtro-espana"
                             onclick="cambiarFiltroVista('espana')"
-                            class="filter-button"
+                            class="filter-btn"
                         >
                             🇪🇸 España
                         </button>
@@ -381,9 +423,9 @@ MAIN
                         <button
                             id="btn-filtro-todos"
                             onclick="cambiarFiltroVista('todos')"
-                            class="filter-button"
+                            class="filter-btn"
                         >
-                            Todo
+                            🌍 Todos
                         </button>
 
                     </div>
@@ -393,16 +435,16 @@ MAIN
             </div>
 
             <!-- STATUS -->
-            <div class="flex items-center justify-between mb-6">
+            <div class="status-bar">
 
                 <div
                     id="txt-contador"
-                    class="text-sm font-semibold text-slate-400"
+                    class="status-text"
                 >
                     Cargando partidos...
                 </div>
 
-                <div class="live-pill">
+                <div class="live-status">
 
                     <span class="live-dot"></span>
 
@@ -412,13 +454,13 @@ MAIN
 
             </div>
 
-            <!-- FIXTURE GRID -->
+            <!-- MATCHES -->
             <div
                 id="grid-fixture"
-                class="grid lg:grid-cols-2 gap-7"
+                class="matches-grid"
             >
 
-                <!-- MATCHES LOADED HERE -->
+                <!-- JS -->
 
             </div>
 
@@ -432,15 +474,35 @@ MAIN
 FOOTER
 ====================================================== -->
 
-<footer class="border-t border-white/5 py-10 text-center text-sm text-slate-500">
+<footer class="footer">
 
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="container-main">
 
-        World Cup Predictor 2026 — Apple Inspired Experience
+        <div class="footer-content">
+
+            <div>
+
+                World Cup Predictor 2026
+
+            </div>
+
+            <div>
+
+                Apple Inspired Premium Experience
+
+            </div>
+
+        </div>
 
     </div>
 
 </footer>
+
+<!-- ======================================================
+TAILWIND
+====================================================== -->
+
+<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- ======================================================
 SCRIPT

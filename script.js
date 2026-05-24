@@ -1,6 +1,7 @@
 /* ======================================================
-PORRA MUNDIAL 2026
-APPLE EDITION — FLAGS FIXED
+APPLE WORLD CUP 2026
+ULTRA EDITION
+LIVE CLOCKS + LIVE STATS + RESPONSIVE
 ====================================================== */
 
 const DATA_URL = "./data/matches.json";
@@ -20,43 +21,50 @@ let grupoSeleccionado = "A";
 let filtroActual = "todos";
 
 /* ======================================================
-FLAGS
+FLAGS CDN
+====================================================== */
+
+const FLAG_CDN = "https://flagcdn.com";
+
+/* ======================================================
+COUNTRY FLAGS
 ====================================================== */
 
 function obtenerBandera(pais){
 
     const flags = {
 
-        "España":"https://flagcdn.com/es.svg",
-        "Brasil":"https://flagcdn.com/br.svg",
-        "Argentina":"https://flagcdn.com/ar.svg",
-        "Francia":"https://flagcdn.com/fr.svg",
-        "Alemania":"https://flagcdn.com/de.svg",
-        "Portugal":"https://flagcdn.com/pt.svg",
-        "Inglaterra":"https://flagcdn.com/gb-eng.svg",
-        "Estados Unidos":"https://flagcdn.com/us.svg",
-        "México":"https://flagcdn.com/mx.svg",
-        "Canadá":"https://flagcdn.com/ca.svg",
-        "Japón":"https://flagcdn.com/jp.svg",
-        "Corea del Sur":"https://flagcdn.com/kr.svg",
-        "Australia":"https://flagcdn.com/au.svg",
-        "Uruguay":"https://flagcdn.com/uy.svg",
-        "Marruecos":"https://flagcdn.com/ma.svg",
-        "Croacia":"https://flagcdn.com/hr.svg",
-        "Países Bajos":"https://flagcdn.com/nl.svg",
-        "Bélgica":"https://flagcdn.com/be.svg",
-        "Suiza":"https://flagcdn.com/ch.svg",
-        "Senegal":"https://flagcdn.com/sn.svg",
-        "Dinamarca":"https://flagcdn.com/dk.svg",
-        "Serbia":"https://flagcdn.com/rs.svg",
-        "Polonia":"https://flagcdn.com/pl.svg",
-        "Arabia Saudí":"https://flagcdn.com/sa.svg",
-        "Cabo Verde":"https://flagcdn.com/cv.svg"
+        "España":"es",
+        "Brasil":"br",
+        "Argentina":"ar",
+        "Francia":"fr",
+        "Alemania":"de",
+        "Portugal":"pt",
+        "Inglaterra":"gb-eng",
+        "Estados Unidos":"us",
+        "México":"mx",
+        "Canadá":"ca",
+        "Japón":"jp",
+        "Corea del Sur":"kr",
+        "Australia":"au",
+        "Uruguay":"uy",
+        "Marruecos":"ma",
+        "Croacia":"hr",
+        "Países Bajos":"nl",
+        "Bélgica":"be",
+        "Suiza":"ch",
+        "Senegal":"sn",
+        "Dinamarca":"dk",
+        "Serbia":"rs",
+        "Polonia":"pl",
+        "Arabia Saudí":"sa",
+        "Cabo Verde":"cv"
 
     };
 
-    return flags[pais] ||
-    "https://flagcdn.com/un.svg";
+    const code = flags[pais] || "un";
+
+    return `${FLAG_CDN}/w160/${code}.png`;
 
 }
 
@@ -80,6 +88,8 @@ window.onload = async () => {
 
         iniciarRelojes();
 
+        iniciarStatsLive();
+
         setInterval(()=>{
 
             actualizarResultadosAPI();
@@ -88,35 +98,36 @@ window.onload = async () => {
 
     }catch(err){
 
-        console.error("ERROR INIT:", err);
+        console.error(err);
 
     }
 
 };
 
 /* ======================================================
-CARGAR JSON
+LOAD JSON
 ====================================================== */
 
 async function cargarPartidos(){
 
     try{
 
-        const response = await fetch(DATA_URL);
+        const response =
+        await fetch(DATA_URL + "?v=" + Date.now());
 
         if(!response.ok){
 
-            throw new Error(
-                "No se pudo cargar matches.json"
-            );
+            throw new Error("JSON ERROR");
 
         }
 
-        FixtureOficial = await response.json();
+        FixtureOficial =
+        await response.json();
 
         document.getElementById(
             "totalPartidos"
-        ).innerText = FixtureOficial.length;
+        ).innerText =
+        FixtureOficial.length;
 
     }catch(error){
 
@@ -126,7 +137,7 @@ async function cargarPartidos(){
             "grid-fixture"
         ).innerHTML = `
 
-            <div class="text-red-400 text-center py-20 col-span-full">
+            <div class="col-span-full text-center py-20 text-red-400">
 
                 Error cargando matches.json
 
@@ -139,7 +150,7 @@ async function cargarPartidos(){
 }
 
 /* ======================================================
-RELOJES
+WORLD CLOCKS
 ====================================================== */
 
 function obtenerHoraLocal(timezone){
@@ -165,39 +176,95 @@ function obtenerHoraLocal(timezone){
 
 function iniciarRelojes(){
 
+    actualizarRelojes();
+
     setInterval(()=>{
 
-        document.querySelectorAll(".live-clock")
-        .forEach(clock=>{
-
-            const timezone =
-            clock.dataset.timezone;
-
-            clock.innerHTML =
-            `🕒 ${obtenerHoraLocal(timezone)}`;
-
-        });
+        actualizarRelojes();
 
     },1000);
 
 }
 
+function actualizarRelojes(){
+
+    document.querySelectorAll(".live-clock")
+    .forEach(clock=>{
+
+        const timezone =
+        clock.dataset.timezone;
+
+        clock.innerHTML =
+        `🕒 ${obtenerHoraLocal(timezone)}`;
+
+    });
+
+}
+
 /* ======================================================
-SIMULACIÓN RESULTADOS
+LIVE STATS
+====================================================== */
+
+function iniciarStatsLive(){
+
+    actualizarStats();
+
+    setInterval(()=>{
+
+        actualizarStats();
+
+    },5000);
+
+}
+
+function actualizarStats(){
+
+    const total =
+    FixtureOficial.length;
+
+    const jugados =
+    Object.keys(reales)
+    .filter(k=>k.includes("_A"))
+    .length;
+
+    const live =
+    Math.floor(jugados * 0.18);
+
+    const participantes =
+    registrados.length;
+
+    document.getElementById(
+        "totalPartidos"
+    ).innerText = total;
+
+    document.getElementById(
+        "totalJugados"
+    ).innerText = jugados;
+
+    document.getElementById(
+        "totalLive"
+    ).innerText = live;
+
+    document.getElementById(
+        "totalUsers"
+    ).innerText = participantes;
+
+}
+
+/* ======================================================
+LIVE API SIMULATION
 ====================================================== */
 
 function actualizarResultadosAPI(){
 
     try{
 
-        let jugados = 0;
-
         FixtureOficial.forEach(p=>{
 
             const existe =
             reales[`r_${p.id}_A`] !== undefined;
 
-            if(!existe && Math.random() > 0.985){
+            if(!existe && Math.random() > 0.986){
 
                 reales[`r_${p.id}_A`] =
                 Math.floor(Math.random()*5);
@@ -207,27 +274,12 @@ function actualizarResultadosAPI(){
 
             }
 
-            if(reales[`r_${p.id}_A`] !== undefined){
-
-                jugados++;
-
-            }
-
         });
 
         localStorage.setItem(
             "f_reales",
             JSON.stringify(reales)
         );
-
-        document.getElementById(
-            "totalJugados"
-        ).innerText = jugados;
-
-        document.getElementById(
-            "totalLive"
-        ).innerText =
-        Math.floor(jugados * 0.12);
 
         ejecutarMotor();
 
@@ -240,7 +292,7 @@ function actualizarResultadosAPI(){
 }
 
 /* ======================================================
-USUARIOS
+USERS
 ====================================================== */
 
 function registrarUsuario(){
@@ -272,6 +324,8 @@ function registrarUsuario(){
 
     input.value = "";
 
+    actualizarStats();
+
     ejecutarMotor();
 
 }
@@ -290,6 +344,8 @@ function darDeBaja(nombre){
             JSON.stringify(registrados)
         );
 
+        actualizarStats();
+
         ejecutarMotor();
 
     }
@@ -297,7 +353,7 @@ function darDeBaja(nombre){
 }
 
 /* ======================================================
-PUNTOS
+POINTS ENGINE
 ====================================================== */
 
 function ejecutarMotor(){
@@ -370,7 +426,7 @@ function ejecutarMotor(){
 }
 
 /* ======================================================
-CLASIFICACIÓN
+LEADERBOARD
 ====================================================== */
 
 function dibujarClasificacion(puntos){
@@ -438,19 +494,8 @@ function dibujarClasificacion(puntos){
 
                 </div>
 
-                <div class="flex items-center gap-3">
-
-                    <div class="score-pill">
-                        ${u.score} pts
-                    </div>
-
-                    <button
-                        onclick="darDeBaja('${u.name}')"
-                        class="delete-button"
-                    >
-                        ✕
-                    </button>
-
+                <div class="score-pill">
+                    ${u.score} pts
                 </div>
 
             </div>
@@ -462,7 +507,7 @@ function dibujarClasificacion(puntos){
 }
 
 /* ======================================================
-TABS
+GROUP TABS
 ====================================================== */
 
 function renderTabs(){
@@ -491,7 +536,7 @@ function renderTabs(){
                     }
                 "
             >
-                Grupo ${g}
+                ${g}
             </button>
 
         `;
@@ -515,7 +560,7 @@ function seleccionarGrupo(g){
 }
 
 /* ======================================================
-FILTROS
+FILTERS
 ====================================================== */
 
 function cambiarFiltroVista(tipo){
@@ -570,21 +615,11 @@ function dibujarFixture(){
 
         partidos = FixtureOficial;
 
-        document.getElementById(
-            "txt-contador"
-        ).innerText =
-        `Todos los partidos · ${partidos.length}`;
-
     }
     else if(filtroActual === "espana"){
 
         partidos =
         FixtureOficial.filter(p=>p.esp);
-
-        document.getElementById(
-            "txt-contador"
-        ).innerText =
-        `Partidos de España · ${partidos.length}`;
 
     }
     else{
@@ -594,12 +629,12 @@ function dibujarFixture(){
             p=>p.grupo === grupoSeleccionado
         );
 
-        document.getElementById(
-            "txt-contador"
-        ).innerText =
-        `Grupo ${grupoSeleccionado} · ${partidos.length}`;
-
     }
+
+    document.getElementById(
+        "txt-contador"
+    ).innerText =
+    `${partidos.length} partidos`;
 
     partidos.forEach(p=>{
 
@@ -609,13 +644,8 @@ function dibujarFixture(){
         const rB =
         reales[`r_${p.id}_B`];
 
-        const card =
-        document.createElement("div");
-
-        card.className = "match-card";
-
         const marcador =
-        (rA !== undefined && rB !== undefined)
+        (rA !== undefined)
         ? `
             <div class="score-live">
                 ${rA} - ${rB}
@@ -626,6 +656,12 @@ function dibujarFixture(){
                 VS
             </div>
         `;
+
+        const card =
+        document.createElement("div");
+
+        card.className =
+        "match-card";
 
         let html = `
 
@@ -652,15 +688,21 @@ function dibujarFixture(){
                     </div>
 
                     <div class="stadium-text mt-3">
-                        📍 ${p.estadio || p.sede || ""}
+
+                        📍 ${p.estadio || ""}
+
                     </div>
 
                     <div class="stadium-timezone">
+
                         ${p.ciudad || ""}
+
                     </div>
 
                     <div class="stadium-timezone">
+
                         🌍 ${p.timezone || "Europe/Madrid"}
+
                     </div>
 
                 </div>
@@ -668,18 +710,24 @@ function dibujarFixture(){
                 <div class="text-right">
 
                     <div class="date-text">
+
                         ${p.fecha || ""}
+
                     </div>
 
                     <div class="hour-text">
+
                         🇪🇸 ${p.hora || ""}
+
                     </div>
 
                     <div
                         class="live-clock"
                         data-timezone="${p.timezone || 'Europe/Madrid'}"
                     >
+
                         🕒 ${obtenerHoraLocal(p.timezone)}
+
                     </div>
 
                 </div>
@@ -693,17 +741,22 @@ function dibujarFixture(){
                     <img
                         src="${obtenerBandera(p.eqA)}"
                         alt="${p.eqA}"
+                        loading="lazy"
                         class="flag-img"
                     >
 
                     <div class="team-name">
-                        ${p.eqA || "TBD"}
+
+                        ${p.eqA}
+
                     </div>
 
                 </div>
 
                 <div class="score-center">
+
                     ${marcador}
+
                 </div>
 
                 <div class="team-side">
@@ -711,11 +764,14 @@ function dibujarFixture(){
                     <img
                         src="${obtenerBandera(p.eqB)}"
                         alt="${p.eqB}"
+                        loading="lazy"
                         class="flag-img"
                     >
 
                     <div class="team-name">
-                        ${p.eqB || "TBD"}
+
+                        ${p.eqB}
+
                     </div>
 
                 </div>
@@ -738,22 +794,28 @@ function dibujarFixture(){
                 <div class="prediction-row">
 
                     <div class="prediction-user">
+
                         ${user}
+
                     </div>
 
                     <div class="prediction-inputs">
 
                         <input
                             type="number"
+                            min="0"
+                            max="9"
                             value="${valA}"
                             oninput="actualizarPorraUser('${user}',${p.id},'A',this.value)"
                             class="prediction-input"
                         >
 
-                        <span class="text-slate-600">-</span>
+                        <span>-</span>
 
                         <input
                             type="number"
+                            min="0"
+                            max="9"
                             value="${valB}"
                             oninput="actualizarPorraUser('${user}',${p.id},'B',this.value)"
                             class="prediction-input"
@@ -790,8 +852,6 @@ function actualizarPorraUser(user,id,campo,val){
         JSON.stringify(porras)
     );
 
-    ejecutarMotor();
-
 }
 
 /* ======================================================
@@ -801,7 +861,7 @@ RESET
 function resetearTodo(){
 
     if(confirm(
-        "Eliminar todos los datos locales?"
+        "Eliminar todos los datos?"
     )){
 
         localStorage.clear();
