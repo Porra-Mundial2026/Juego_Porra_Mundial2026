@@ -437,16 +437,20 @@ svg {
 /* GLASS CARD */
 .glass-card {
   background: var(--bg-card);
-
   border: 1px solid var(--border);
-
   border-radius: var(--radius);
-
   padding: 16px;
-
-  backdrop-filter: blur(18px);
-
   box-shadow: var(--shadow);
+  
+  /* REPARACIÓN DE TEXTO BORROSO: */
+  backdrop-filter: blur(8px) saturate(140%); /* Reducimos el blur para evitar bugs de GPU */
+  -webkit-backdrop-filter: blur(8px) saturate(140%); /* Soporte estricto para iPhone */
+  
+  /* Forzar al motor gráfico a usar aceleración 3D limpia */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 
@@ -647,3 +651,15 @@ svg {
     calc(var(--safe-bottom) + 12px);
 }
 
+/* Forzar suavizado de fuentes nítidas en pantallas de alta densidad (Retina/OLED) */
+body, input, span, div {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Evitar bugs visuales en las filas de los partidos */
+.match-card, .prediction-row, .team-row {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
