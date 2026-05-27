@@ -146,7 +146,7 @@ const API = {
     try { localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() })); } catch {}
   },
 
-  transformFormat(rawArray, origen) {
+transformFormat(rawArray, origen) {
     return rawArray.map((m, index) => {
       // Normalización de fechas a Horario de España (Europa/Madrid)
       const rawDateStr = m.kickoffUTC || m.utcDate;
@@ -160,22 +160,42 @@ const API = {
         timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', hour12: false 
       }).format(dateObj);
 
-      // Normalización de equipos según origen de datos (API o JSON Propio)
-      let eqA = 'TBD', eqB = 'TBD', flagA = '', flagB = '';
+      // Normalización de equipos y banderas inteligentes
+      let eqA = 'TBD', eqB = 'TBD';
+      let flagElementA = '🏳️', flagElementB = '🏳️';
       let grupo = 'A';
 
       if (origen === 'LOCAL') {
         eqA = m.homeTeam?.name || 'TBD';
         eqB = m.awayTeam?.name || 'TBD';
-        flagA = m.homeTeam?.code ? `https://flagcdn.com/w160/${m.homeTeam.code.slice(0,2).toLowerCase()}.png` : '';
-        flagB = m.awayTeam?.code ? `https://flagcdn.com/w160/${m.awayTeam.code.slice(0,2).toLowerCase()}.png` : '';
         grupo = m.group || 'A';
+
+        // Intentar usar la imagen de FlagCDN por código, si no, rescata tu emoji nativo del JSON
+        const codeA = m.homeTeam?.code?.slice(0,2).toLowerCase();
+        const codeB = m.awayTeam?.code?.slice(0,2).toLowerCase();
+        
+        flagElementA = (m.homeTeam?.code && m.homeTeam.code !== 'TBD') 
+          ? `<img src="https://flagcdn.com/w40/${codeA}.png" onerror="this.outerHTML='${m.homeTeam.flag || '🏳️'}'" style="width:24px; height:16px; border-radius:3px; object-fit:cover; box-shadow: 0 1px 3px rgba(0,0,0,0.3); display:inline-block; vertical-align:middle;">`
+          : (m.homeTeam?.flag || '🏳️');
+
+        flagElementB = (m.awayTeam?.code && m.awayTeam.code !== 'TBD') 
+          ? `<img src="https://flagcdn.com/w40/${codeB}.png" onerror="this.outerHTML='${m.awayTeam.flag || '🏳️'}'" style="width:24px; height:16px; border-radius:3px; object-fit:cover; box-shadow: 0 1px 3px rgba(0,0,0,0.3); display:inline-block; vertical-align:middle;">`
+          : (m.awayTeam?.flag || '🏳️');
       } else {
         eqA = m.homeTeam?.shortName || m.homeTeam?.name || 'TBD';
         eqB = m.awayTeam?.shortName || m.awayTeam?.name || 'TBD';
-        flagA = m.homeTeam?.tla ? `https://flagcdn.com/w160/${m.homeTeam.tla.slice(0,2).toLowerCase()}.png` : '';
-        flagB = m.awayTeam?.tla ? `https://flagcdn.com/w160/${m.awayTeam.tla.slice(0,2).toLowerCase()}.png` : '';
         grupo = m.group?.replace('GROUP_', '') || 'A';
+
+        const tlaA = m.homeTeam?.tla?.slice(0,2).toLowerCase();
+        const tlaB = m.awayTeam?.tla?.slice(0,2).toLowerCase();
+
+        flagElementA = m.homeTeam?.tla 
+          ? `<img src="https://flagcdn.com/w40/${tlaA}.png" onerror="this.outerHTML='🏳️'" style="width:24px; height:16px; border-radius:3px; object-fit:cover; box-shadow: 0 1px 3px rgba(0,0,0,0.3); display:inline-block; vertical-align:middle;">`
+          : '🏳️';
+          
+        flagElementB = m.awayTeam?.tla 
+          ? `<img src="https://flagcdn.com/w40/${tlaB}.png" onerror="this.outerHTML='🏳️'" style="width:24px; height:16px; border-radius:3px; object-fit:cover; box-shadow: 0 1px 3px rgba(0,0,0,0.3); display:inline-block; vertical-align:middle;">`
+          : '🏳️';
       }
 
       // Detectar si juega la selección de España
@@ -194,7 +214,9 @@ const API = {
         fecha: fechaEs,
         hora: horaEs,
         estadio: m.venue?.stadium || m.venue || 'Estadio Oficial',
-        eqA, eqB, flagA, flagB,
+        eqA, eqB, 
+        flagA: flagElementA, // Ahora guarda la estructura HTML lista de la bandera
+        flagB: flagElementB, 
         scoreA, scoreB,
         esp: esEspana,
         utcDate: rawDateStr,
@@ -202,7 +224,6 @@ const API = {
       };
     });
   }
-};
 
 /* ======================================================
    GESTIÓN DE PARTICIPANTES (Clan Familiar)
