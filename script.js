@@ -22,7 +22,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBTKmPAe4z5909LegTjY92l_DjlVOGWZRM",
   authDomain: "porra-mundial-2026-1f46b.firebaseapp.com",
   // Añadimos manualmente la URL de tu base de datos para que conecte directo
-  databaseURL: "https://porra-mundial-2026-1f46b-default-rtdb.firebaseio.com", 
+  databaseURL: "https://porra-mundial-2026-1f46b-default-rtdb.europe-west1.firebasedatabase.app", 
   projectId: "porra-mundial-2026-1f46b",
   storageBucket: "porra-mundial-2026-1f46b.firebasestorage.app",
   messagingSenderId: "637268106404",
