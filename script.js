@@ -1,9 +1,9 @@
-'use strict';
-
 /* ======================================================
-   WORLD CUP 2026 • MOBILE APP EDITION 3.0
-   Capacitor + Android + iPhone Ready
+   WORLD CUP 2026 • MOTOR LOGICO PREMIUM EDITION 4.0
+   Estilo Apple Titanium Dark - Conectividad Blindada
 ====================================================== */
+
+'use strict';
 
 const CONFIG = {
   API_KEY: '6a2a522096e243a4afec1a2de793e623',
@@ -24,27 +24,27 @@ const CONFIG = {
 };
 
 /* ======================================================
-   GLOBAL STATE
+   ESTADO GLOBAL DE LA APP
 ====================================================== */
 const State = {
   fixture: [],
   usuarios: JSON.parse(localStorage.getItem('f_usuarios')) || [],
   porras: JSON.parse(localStorage.getItem('f_porras')) || {},
   grupoActivo: 'A',
-  filtroActivo: 'grupo', // 'grupo', 'todos', 'espana'
+  filtroActivo: 'grupo',
   isOnline: navigator.onLine,
   isLoading: false,
   initialized: false
 };
 
 /* ======================================================
-   HELPERS
+   UTILIDADES Y HELPERS DE SISTEMA
 ====================================================== */
 const debounce = (fn, ms = CONFIG.DEBOUNCE_MS) => {
   let timeout;
   return (...args) => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => { fn(...args); }, ms);
+    timeout = setTimeout(() => { fn.apply(this, args); }, ms);
   };
 };
 
@@ -64,7 +64,7 @@ const haptic = (pattern = 10) => {
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 /* ======================================================
-   DATE FORMATTERS CACHE
+   SISTEMA INTERNO DE CACHÉ DE FORMATO DE FECHAS
 ====================================================== */
 const dateFormatters = new Map();
 const getFormatter = (locale, options) => {
@@ -76,27 +76,12 @@ const getFormatter = (locale, options) => {
 };
 
 /* ======================================================
-   TOAST
+   TOAST NOTIFICATIONS (Alineado con el CSS de Apple)
 ====================================================== */
 const Toast = {
   container: null,
   init() {
     this.container = document.getElementById('toast-container');
-    if (!this.container) {
-      this.container = document.createElement('div');
-      this.container.id = 'toast-container';
-      this.container.style.position = 'fixed';
-      this.container.style.bottom = '85px';
-      this.container.style.left = '50%';
-      this.container.style.transform = 'translateX(-50%)';
-      this.container.style.zIndex = '9999';
-      this.container.style.display = 'flex';
-      this.container.style.flexDirection = 'column';
-      this.container.style.gap = '8px';
-      this.container.style.width = '90%';
-      this.container.style.maxWidth = '360px';
-      document.body.appendChild(this.container);
-    }
   },
   show(message, type = 'info', duration = 3000) {
     this.init();
@@ -104,37 +89,27 @@ const Toast = {
 
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
-    toast.style.background = type === 'success' ? '#22c55e' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6';
-    toast.style.color = '#fff';
-    toast.style.padding = '12px 16px';
-    toast.style.borderRadius = '12px';
-    toast.style.fontSize = '14px';
-    toast.style.display = 'flex';
-    toast.style.alignItems = 'center';
-    toast.style.gap = '8px';
-    toast.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
-    toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateY(10px)';
-
-    toast.innerHTML = `<span>${this.getIcon(type)}</span> <span>${escapeHTML(message)}</span>`;
+    
+    // Asignación de colores basada en el sistema iOS Dark
+    const colorMap = {
+      success: 'var(--success-glow)',
+      error: 'var(--danger-glow)',
+      warning: 'var(--live-pulse)',
+      info: 'var(--primary-accent)'
+    };
+    
+    toast.style.borderLeft = `3px solid ${colorMap[type] || '#fff'}`;
+    toast.innerHTML = `${escapeHTML(message)}`;
+    
     this.container.appendChild(toast);
-
-    requestAnimationFrame(() => {
-      toast.style.opacity = '1';
-      toast.style.transform = 'translateY(0)';
-    });
 
     setTimeout(() => {
       toast.style.opacity = '0';
-      toast.style.transform = 'translateY(10px)';
+      toast.style.transform = 'translate(50%, 10px)';
       setTimeout(() => { toast.remove(); }, 300);
     }, duration);
 
     haptic(type === 'error' ? [40, 40, 40] : 10);
-  },
-  getIcon(type) {
-    return { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' }[type] || 'ℹ';
   },
   success(msg) { this.show(msg, 'success'); },
   error(msg) { this.show(msg, 'error', 4000); },
@@ -143,14 +118,19 @@ const Toast = {
 };
 
 /* ======================================================
-   MODALS / CLOCK / FLAGS
- ====================================================== */
+   CONTROLADORES DE INTERFAZ MÓVIL (Modales / Banderas)
+====================================================== */
 const Modal = {
   show(id) {
     const modal = document.getElementById(id);
     if (!modal) return;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
+    
+    // Foco automático al input si es el modal de añadir usuario
+    if (id === 'modal-add-user') {
+      setTimeout(() => document.getElementById('input-new-username')?.focus(), 50);
+    }
   },
   hide(id) {
     const modal = document.getElementById(id);
@@ -165,31 +145,8 @@ const obtenerBandera = (code) => {
   return `https://flagcdn.com/w160/${code.toLowerCase()}.png`;
 };
 
-const Clock = {
-  interval: null,
-  getTime(tz) {
-    try {
-      return getFormatter('es-ES', {
-        hour: '2-digit', minute: '2-digit', second: '2-digit',
-        timeZone: tz || 'Europe/Madrid'
-      }).format(new Date());
-    } catch { return '--:--'; }
-  },
-  start() {
-    this.stop();
-    this.update();
-    this.interval = setInterval(() => { this.update(); }, 1000);
-  },
-  stop() { if (this.interval) { clearInterval(this.interval); this.interval = null; } },
-  update() {
-    document.querySelectorAll('.live-clock').forEach(clock => {
-      clock.textContent = `🕒 ${this.getTime(clock.dataset.timezone)}`;
-    });
-  }
-};
-
 /* ======================================================
-   API LAYER
+   CAPA DE RED API (Conexión Blindada Externa / Interna)
 ====================================================== */
 const API = {
   async fetchWithRetry(url, options = {}, retries = CONFIG.MAX_RETRY) {
@@ -231,9 +188,9 @@ const API = {
         this.setCache(transformed);
         return transformed;
       }
-      throw new Error('Estructura API inválida');
+      throw new Error('Estructura de respuesta inválida');
     } catch (error) {
-      console.warn('API Fallback activado (Posible CORS o falta de red) → Cargando JSON local...', error);
+      console.warn('Alerta API: Activando contingencia hacia almacenamiento local...', error);
       return await this.getLocalJSON();
     }
   },
@@ -241,7 +198,7 @@ const API = {
   async getLocalJSON() {
     try {
       const response = await fetch(CONFIG.DATA_URL);
-      if (!response.ok) throw new Error('No local JSON file found');
+      if (!response.ok) throw new Error('Archivo JSON local ausente');
       const data = await response.json();
       
       let arrayPartidos = [];
@@ -253,8 +210,8 @@ const API = {
 
       return this.transformAPI(arrayPartidos);
     } catch (error) {
-      console.error('Error leyendo JSON offline:', error);
-      Toast.error('Datos offline no disponibles');
+      console.error('Fallo absoluto en conexiones de respaldo offline:', error);
+      Toast.error('Base de datos local no disponible');
       return [];
     }
   },
@@ -268,10 +225,10 @@ const API = {
 
       return {
         id: match.id || index,
-        grupo: this.detectGroup(match, index),
+        grupo: match.group?.replace('GROUP_', '') || CONFIG.GROUPS[index % CONFIG.GROUPS.length],
         fecha: getFormatter('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).format(utc),
         hora: getFormatter('es-ES', { hour: '2-digit', minute: '2-digit' }).format(utc),
-        estadio: match.venue || 'Estadio del Mundial',
+        estadio: match.venue || 'Estadio Oficial Mundial 2026',
         ciudad: match.area?.name || '',
         timezone: this.detectTimezone(match.area?.name),
         eqA: home.shortName || home.name || 'TBD',
@@ -287,10 +244,6 @@ const API = {
     });
   },
 
-  detectGroup(match, index) {
-    return match.group?.replace('GROUP_', '') || CONFIG.GROUPS[index % CONFIG.GROUPS.length];
-  },
-
   detectTimezone(city) {
     for (const [key, value] of Object.entries(CONFIG.TIMEZONES)) {
       if (city?.includes(key)) return value;
@@ -300,20 +253,20 @@ const API = {
 };
 
 /* ======================================================
-   PARTICIPANTES (Users)
+   GESTIÓN INTEGRADA DE PARTICIPANTES (Usuarios)
 ====================================================== */
 const Users = {
   add(name) {
-    name = name?.trim();
-    if (!name) { Toast.warning('Escribe un nombre'); return false; }
-    if (name.length > 20) { Toast.warning('Máximo 20 caracteres'); return false; }
+    name = name.trim();
+    if (!name) { Toast.warning('Introduce un nombre válido'); return false; }
+    if (name.length > 20) { Toast.warning('Límite de 20 caracteres excedido'); return false; }
 
     const exists = State.usuarios.some(u => u.toLowerCase() === name.toLowerCase());
-    if (exists) { Toast.warning('Ese usuario ya existe'); return false; }
+    if (exists) { Toast.warning('Este usuario ya está registrado'); return false; }
 
     State.usuarios.push(name);
     this.save();
-    Toast.success(`${name} añadido`);
+    Toast.success(`${name} se unió a la porra`);
     haptic(20);
     return true;
   },
@@ -324,31 +277,26 @@ const Users = {
     });
     this.save();
     localStorage.setItem('f_porras', JSON.stringify(State.porras));
-    Engine.run({ refreshFixture: true });
-    Toast.info(`${name} eliminado`);
+    Engine.run();
+    Toast.info(`${name} fue eliminado`);
   },
   save() {
     localStorage.setItem('f_usuarios', JSON.stringify(State.usuarios));
-    Engine.run({ refreshFixture: true });
+    Engine.run();
   }
 };
 
 /* ======================================================
-   ENGINE (Optimizado para evitar re-renderizados destructivos)
+   ENGINE (Cálculo de Reglas y Renderizado Apple Premium)
 ====================================================== */
 const Engine = {
-  // Ahora acepta opciones para decidir si redibujar las tarjetas de partidos o no
-  run(options = { refreshFixture: false }) {
+  run() {
     requestAnimationFrame(() => {
       const ranking = this.calculateRanking();
       this.renderLeaderboard(ranking);
       this.renderStats(ranking);
+      Fixture.render();
       Stats.update();
-      
-      // SOLO redibujamos el fixture si cambia un grupo o usuario, nunca mientras se escribe un input
-      if (options.refreshFixture) {
-        Fixture.render();
-      }
     });
   },
 
@@ -404,18 +352,45 @@ const Engine = {
 
     const sorted = Object.entries(ranking).sort((a, b) => b[1].puntos - a[1].puntos);
     if (sorted.length === 0) {
-      container.innerHTML = `<div class="empty-state" style="text-align:center;padding:20px;opacity:0.6;"><span>Sin participantes todavía</span></div>`;
+      container.innerHTML = `
+        <h3 class="leaderboard-title">📊 Clasificación Familiar</h3>
+        <div style="text-align:center; padding:24px; color:var(--titanium-gray); font-size:13px;">
+          Sin miembros en el clan. ¡Añade uno desde el menú inferior!
+        </div>`;
       return;
     }
 
-    container.innerHTML = `<h3 style="margin-bottom:12px; font-size:16px;">📊 Clasificación Familiar</h3>` + sorted.map(([name, stats], index) => `
-      <div class="leaderboard-item">
-        <div class="leader-rank" style="font-weight:800; color:var(--primary); width:24px;">#${index + 1}</div>
-        <div class="leader-name" style="flex:1; font-weight:600;">${escapeHTML(name)}</div>
-        <div class="score-pill" style="background:rgba(59,130,246,0.15); color:var(--primary); padding:4px 10px; border-radius:8px; font-weight:800;">${stats.puntos} pts</div>
-        <button class="delete-btn" data-action="delete-user" data-user="${escapeHTML(name)}" style="color:var(--danger); margin-left:8px; font-weight:bold; padding:4px;">✕</button>
-      </div>
-    `).join('');
+    let tableHtml = `
+      <h3 class="leaderboard-title">📊 Clasificación Familiar</h3>
+      <table class="premium-table">
+        <thead>
+          <tr>
+            <th style="width: 45px;">Rank</th>
+            <th>Participante</th>
+            <th style="text-align: center; width: 60px;">Porras</th>
+            <th style="text-align: right; padding-right: 8px;">Puntos</th>
+            <th style="width: 35px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    sorted.forEach(([name, stats], index) => {
+      tableHtml += `
+        <tr>
+          <td class="row-position">#${index + 1}</td>
+          <td class="row-username">${escapeHTML(name)}</td>
+          <td style="text-align: center; color: var(--titanium-gray); font-size: 12px; font-weight: 600;">${stats.partidos}</td>
+          <td class="row-points">${stats.puntos} <span style="font-size:10px; font-weight:500; opacity:0.6;">PTS</span></td>
+          <td style="text-align: center;">
+            <button data-action="delete-user" data-user="${escapeHTML(name)}" style="background:none; border:none; color:var(--danger-glow); font-weight:bold; cursor:pointer; font-size:14px; padding:4px;">✕</button>
+          </td>
+        </tr>
+      `;
+    });
+
+    tableHtml += `</tbody></table>`;
+    container.innerHTML = tableHtml;
   },
 
   renderStats(ranking) {
@@ -423,18 +398,19 @@ const Engine = {
     if (!container) return;
 
     const sorted = Object.entries(ranking).sort((a, b) => b[1].puntos - a[1].puntos);
-    if (!sorted.length) { container.innerHTML = ''; return; }
+    if (!sorted.length) { container.style.display = 'none'; return; }
 
+    container.style.display = 'block';
     const [name, stats] = sorted[0];
     container.innerHTML = `
-      <div class="advanced-stats-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-        <div class="stat-card">
-          <div class="stat-label">👑 Líder Provisional</div>
-          <div class="stat-number" style="color:var(--warning); font-size:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHTML(name)}</div>
+      <div style="display:flex; gap:12px;">
+        <div class="stat-card" style="display:block; width:50%; flex:none;">
+          <span class="stat-label">👑 Líder Oro</span>
+          <div class="stat-number" style="color:var(--warning-glow); text-overflow:ellipsis; overflow:hidden; white-space:nowrap; font-size:15px;">${escapeHTML(name)}</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">🏆 Puntuación Máxima</div>
-          <div class="stat-number" style="color:var(--success);">${stats.puntos}</div>
+        <div class="stat-card" style="display:block; width:50%; flex:none;">
+          <span class="stat-label">🎯 Record Exacto</span>
+          <div class="stat-number" style="color:var(--success-glow); font-size:15px;">${stats.exactos} <span style="font-size:10px; opacity:0.5;">plenos</span></div>
         </div>
       </div>
     `;
@@ -442,7 +418,7 @@ const Engine = {
 };
 
 /* ======================================================
-   FIXTURE
+   FIXTURE (Tarjetas de Partidos con Inyección Avanzada)
 ====================================================== */
 const Fixture = {
   isLocked(match) {
@@ -452,7 +428,6 @@ const Fixture = {
 
   getFiltered() {
     if (State.filtroActivo === 'todos') return State.fixture;
-    if (State.filtroActivo === 'espana') return State.fixture.filter(match => match.esp);
     return State.fixture.filter(match => match.grupo === State.grupoActivo);
   },
 
@@ -462,12 +437,12 @@ const Fixture = {
 
     const matches = this.getFiltered();
     if (matches.length === 0) {
-      grid.innerHTML = `<div style="text-align:center; padding:30px; opacity:0.5;">No hay partidos cargados en este grupo.</div>`;
+      grid.innerHTML = `<div style="text-align:center; padding:40px; color:var(--titanium-gray); font-size:13px;">No hay encuentros disponibles para este sector.</div>`;
       return;
     }
 
     grid.innerHTML = matches.map(match => `
-      <article class="match-card glass-card">
+      <article class="match-card">
         ${this.card(match)}
       </article>
     `).join('');
@@ -477,34 +452,44 @@ const Fixture = {
     const blocked = this.isLocked(match);
     const scoreRealA = match.scoreA ?? '-';
     const scoreRealB = match.scoreB ?? '-';
+    const isLive = match.status === 'IN_PLAY' || match.status === 'LIVE';
 
     return `
-      <div class="match-header" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:11px; opacity:0.6;">
-        <span class="group-pill" style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:6px; font-weight:700;">GRUPO ${match.grupo}</span>
-        <span class="stadium-text" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:180px;">🏟️ ${escapeHTML(match.estadio)}</span>
-        <span style="color:var(--primary); font-weight:600;">${match.hora}</span>
+      <div class="match-header">
+        <span class="match-stage">GRUPO ${match.grupo}</span>
+        <span class="match-status-badge ${isLive ? 'live' : ''}" style="${!isLive ? 'background:rgba(255,255,255,0.04); color:var(--titanium-gray); border:1px solid rgba(255,255,255,0.05);' : ''}">
+          ${isLive ? '• EN VIVO' : 'PROGRAMADO'}
+        </span>
       </div>
 
-      <div class="teams-container" style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px; background:rgba(0,0,0,0.15); padding:10px; border-radius:10px;">
-        <div class="team-row">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <img src="${match.flagA}" alt="" style="width:20px; height:14px; border-radius:2px; object-fit:cover;">
-            <span class="team-name">${escapeHTML(match.eqA)}</span>
-          </div>
-          <span style="font-weight:800; font-size:16px; color:var(--primary);">${scoreRealA}</span>
+      <div class="match-body-row">
+        <div class="team-container">
+          <img src="${match.flagA}" class="team-flag" style="width:22px; height:15px; object-fit:cover; border-radius:2px;" alt="">
+          <span class="team-name-text">${escapeHTML(match.eqA)}</span>
         </div>
-        <div class="team-row">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <img src="${match.flagB}" alt="" style="width:20px; height:14px; border-radius:2px; object-fit:cover;">
-            <span class="team-name">${escapeHTML(match.eqB)}</span>
-          </div>
-          <span style="font-weight:800; font-size:16px; color:var(--primary);">${scoreRealB}</span>
+        <div class="score-zone">
+          <span class="real-score-box">${scoreRealA}</span>
         </div>
       </div>
 
-      <div class="predictions" style="border-top:1px solid rgba(255,255,255,0.05); padding-top:10px; display:flex; flex-direction:column; gap:8px;">
-        ${State.usuarios.length === 0 ? '<div style="font-size:12px; opacity:0.5; text-align:center;">Agrega participantes para apostar</div>' : ''}
+      <div class="match-body-row" style="margin-bottom:14px;">
+        <div class="team-container">
+          <img src="${match.flagB}" class="team-flag" style="width:22px; height:15px; object-fit:cover; border-radius:2px;" alt="">
+          <span class="team-name-text">${escapeHTML(match.eqB)}</span>
+        </div>
+        <div class="score-zone">
+          <span class="real-score-box">${scoreRealB}</span>
+        </div>
+      </div>
+
+      <div class="predictions" style="border-top:1px solid rgba(255,255,255,0.04); padding-top:12px; display:flex; flex-direction:column; gap:10px;">
+        ${State.usuarios.length === 0 ? '<div style="font-size:12px; color:var(--titanium-gray); text-align:center; padding:4px;">Asigna participantes en la barra inferior para apostar</div>' : ''}
         ${State.usuarios.map(user => this.row(user, match, blocked)).join('')}
+      </div>
+
+      <div class="match-footer" style="margin-top:12px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.02);">
+        <span>📍 ${escapeHTML(match.estadio)}</span>
+        <span style="font-weight:600; color:var(--titanium-light);">${match.fecha} • ${match.hora}</span>
       </div>
     `;
   },
@@ -514,15 +499,15 @@ const Fixture = {
     const b = State.porras[`p_${user}_${match.id}_B`] ?? '';
 
     return `
-      <div class="prediction-row" style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-        <span style="font-size:13px; font-weight:500; opacity:0.8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:120px;">👤 ${escapeHTML(user)}</span>
-        <div class="score-wrapper">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <span style="font-size:13px; font-weight:500; color:var(--titanium-light); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:140px;">👤 ${escapeHTML(user)}</span>
+        <div class="score-zone" style="gap:4px;">
           <input
             type="number" inputmode="numeric" min="0" max="20" value="${a}"
             class="prediction-input" data-user="${escapeHTML(user)}" data-match="${match.id}" data-team="A"
             ${blocked ? 'disabled' : ''}
           >
-          <span style="opacity:0.4; font-weight:bold;">-</span>
+          <span style="opacity:0.3; font-weight:700; color:#fff; font-size:12px;">:</span>
           <input
             type="number" inputmode="numeric" min="0" max="20" value="${b}"
             class="prediction-input" data-user="${escapeHTML(user)}" data-match="${match.id}" data-team="B"
@@ -535,42 +520,37 @@ const Fixture = {
 };
 
 /* ======================================================
-   CONTADORES / STATS 
+   PANEL CENTRAL DE ESTADÍSTICAS E INDICADORES (Hero)
 ====================================================== */
 const Stats = {
   update() {
-    const totalPartidos = State.fixture.length;
-    const totalJugados = State.fixture.filter(m => m.scoreA != null && m.scoreB != null).length;
-    const totalLive = State.fixture.filter(m => m.status === 'IN_PLAY' || m.status === 'LIVE').length;
-
-    this.set('totalPartidos', totalPartidos);
-    this.set('totalJugados', totalJugados);
-    this.set('totalLive', totalLive);
+    this.set('totalMatches', State.fixture.length);
+    this.set('totalPlayed', State.fixture.filter(m => m.scoreA != null && m.scoreB != null).length);
+    this.set('totalLive', State.fixture.filter(m => m.status === 'IN_PLAY' || m.status === 'LIVE').length);
     this.set('totalUsers', State.usuarios.length);
   },
   set(id, value) {
     const el = document.getElementById(id);
-    if (el) el.textContent = value;
+    if (el) el.textContent = value || '0';
   }
 };
 
 /* ======================================================
-   DEBOUNCE SAVE PORRA
+   SALVAGUARDA DE ENTRADAS CON CONTROL ANTIRREBOTES
 ====================================================== */
 const savePorra = debounce((user, matchId, team, value) => {
   State.porras[`p_${user}_${matchId}_${team}`] = value;
   localStorage.setItem('f_porras', JSON.stringify(State.porras));
-  haptic(5);
-  // Ejecutamos SIN refrescar la lista de partidos, resguardando el foco del input
-  Engine.run({ refreshFixture: false });
+  haptic(6);
+  Engine.run();
 }, CONFIG.DEBOUNCE_MS);
 
 /* ======================================================
-   EVENTS MANAGEMENT
+   SISTEMA INTEGRAL DE EVENTOS Y DIÁLOGOS NATIVOS
 ====================================================== */
 const Events = {
   init() {
-    // Interceptar cambios en inputs de pronósticos
+    // Escucha táctil de entradas en porras
     document.addEventListener('input', event => {
       const target = event.target;
       if (target.classList.contains('prediction-input')) {
@@ -578,74 +558,56 @@ const Events = {
       }
     });
 
-    // Interceptar clics y acciones globales
+    // Delegación estricta de pulsaciones (Acciones del clan)
     document.addEventListener('click', event => {
       const target = event.target.closest('[data-action]');
       if (!target) return;
 
-      // Acción de eliminar usuario
       if (target.dataset.action === 'delete-user') {
-        if (confirm(`¿Eliminar a ${target.dataset.user}?`)) {
+        if (confirm(`¿Confirmas la eliminación completa de ${target.dataset.user}? Su registro de puntos se perderá.`)) {
           Users.remove(target.dataset.user);
-        }
-      }
-      
-      // Acción de refrescar datos manualmente
-      if (target.dataset.action === 'refresh') {
-        App.refresh();
-      }
-
-      // Solución al evento dinámico para AÑADIR USUARIOS
-      // Funciona si tienes un botón con data-action="add-user"
-      if (target.dataset.action === 'add-user') {
-        const input = document.getElementById('nuevo-usuario-input');
-        if (input) {
-          if (Users.add(input.value)) input.value = '';
-        } else {
-          // Fallback en caso de que no uses input de texto en el HTML
-          const name = prompt('Nombre del nuevo participante:');
-          if (name) Users.add(name);
         }
       }
     });
 
-    // Control visual dinámico del cartel de Red Offline
-    const banner = document.getElementById('offline-banner');
-    const syncBanner = () => {
-      if (banner) {
+    // Vinculación explícita del botón superior de Refresco Síncrono
+    document.getElementById('btn-refresh')?.addEventListener('click', () => {
+      App.refresh();
+    });
+
+    // Gestión inteligente de sincronización e indicadores de red
+    const indicatorIsland = document.getElementById('offline-indicator');
+    const verificarConectividad = () => {
+      if (indicatorIsland) {
         if (State.isOnline) {
-          banner.hidden = true;
-          banner.style.display = 'none';
+          indicatorIsland.hidden = true;
+          indicatorIsland.style.display = 'none';
         } else {
-          banner.hidden = false;
-          banner.style.display = 'flex';
+          indicatorIsland.hidden = false;
+          indicatorIsland.style.display = 'flex';
         }
       }
     };
 
-    syncBanner();
+    verificarConectividad();
 
     window.addEventListener('online', () => {
       State.isOnline = true;
-      syncBanner();
-      Toast.success('Conexión restaurada');
+      verificarConectividad();
+      Toast.success('Se restableció el enlace con los servidores');
       App.refresh();
     });
 
     window.addEventListener('offline', () => {
       State.isOnline = false;
-      syncBanner();
-      Toast.warning('Trabajando en modo offline');
-    });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) { Clock.stop(); } else { Clock.start(); }
+      verificarConectividad();
+      Toast.warning('Modo Local Activo: Datos guardados en el almacenamiento del dispositivo');
     });
   }
 };
 
 /* ======================================================
-   APP INITIALIZATION ENTRYPOINT
+   INICIALIZACIÓN DE LA APLICACIÓN (Punto de entrada)
 ====================================================== */
 const App = {
   async init() {
@@ -654,14 +616,13 @@ const App = {
 
     Toast.init();
     Events.init();
-    Clock.start();
-
-    // Renderizado base de los botones de grupo dinámicos
+    
+    // Inyección de la barra deslizante de fases del Mundial (Filtros)
     const filtersBar = document.querySelector('.filters-bar');
     if (filtersBar) {
       filtersBar.innerHTML = CONFIG.GROUPS.map(g => `
         <button class="filter-btn ${State.grupoActivo === g ? 'active' : ''}" data-group="${g}">
-          Grp ${g}
+          Grupo ${g}
         </button>
       `).join('');
 
@@ -670,25 +631,72 @@ const App = {
         if (!btn) return;
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
-        // SOLUCIÓN: Forzar a que el filtro activo cambie a modo 'grupo'
-        State.filtroActivo = 'grupo';
         State.grupoActivo = btn.dataset.group;
         Fixture.render();
       });
     }
 
+    // Inyección del Dock de navegación inferior estilo iOS
+    const bottomNav = document.querySelector('.bottom-nav');
+    if (bottomNav) {
+      bottomNav.innerHTML = `
+        <button class="nav-item active" id="nav-action-fixture">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+          <span>Partidos</span>
+        </button>
+        <button class="nav-item" id="nav-action-user">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          <span>+ Integrante</span>
+        </button>
+      `;
+
+      document.getElementById('nav-action-fixture').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        Toast.info('Visualizando fase de grupos');
+      });
+
+      document.getElementById('nav-action-user').addEventListener('click', () => {
+        Modal.show('modal-add-user');
+      });
+    }
+
+    // Inicialización interna del Modal estructural para añadir familiares
+    const modalContainer = document.getElementById('modal-add-user');
+    if (modalContainer) {
+      modalContainer.innerHTML = `
+        <div class="apple-card-metallic" style="width: 100%; max-width: 320px; border: 1px solid var(--border-brushed);">
+          <h3 style="margin-bottom: 14px; font-size: 15px; font-weight: 700; text-align: center; color:var(--titanium-light);">Añadir un Competidor</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <input type="text" id="input-new-username" placeholder="Nombre del familiar" style="width: 100%; height: 40px; background: #000; border: 1px solid var(--border-brushed); border-radius: 8px; color: #fff; padding: 0 12px; font-size: 14px; outline: none;">
+            <div style="display: flex; gap: 8px; margin-top: 4px;">
+              <button id="btn-modal-close" style="flex: 1; height: 36px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-metallic); border-radius: 8px; color: var(--titanium-gray); font-weight: 600; cursor: pointer; font-size: 13px;">Cerrar</button>
+              <button id="btn-modal-add" style="flex: 1; height: 36px; background: var(--primary-accent); border: none; border-radius: 8px; color: #000; font-weight: 700; cursor: pointer; font-size: 13px;">Guardar</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('btn-modal-close').addEventListener('click', () => Modal.hide('modal-add-user'));
+      document.getElementById('btn-modal-add').addEventListener('click', () => {
+        const input = document.getElementById('input-new-username');
+        if (Users.add(input.value)) {
+          input.value = '';
+          Modal.hide('modal-add-user');
+        }
+      });
+    }
+
+    // Carga asíncrona de partidos
     try {
       State.isLoading = true;
       const grid = document.getElementById('grid-fixture');
-      if (grid) grid.innerHTML = `<div style="text-align:center;padding:20px;opacity:0.6;">Cargando partidos...</div>`;
+      if (grid) grid.innerHTML = `<div style="text-align:center; padding:30px; color:var(--titanium-gray); font-size:13px;">Sincronizando con la central del Mundial...</div>`;
       
       State.fixture = await API.getMatches();
-      // Inicialización inicial requiere pintar todo
-      Engine.run({ refreshFixture: true });
+      Engine.run();
     } catch (error) {
       console.error(error);
-      Toast.error('Error al inicializar partidos');
+      Toast.error('Error al instanciar el fixture de partidos');
     } finally {
       State.isLoading = false;
     }
@@ -697,13 +705,13 @@ const App = {
   async refresh() {
     try {
       localStorage.removeItem(CONFIG.CACHE_KEY);
-      Toast.info('Actualizando partidos...');
+      Toast.info('Actualizando resultados...');
       State.fixture = await API.getMatches();
-      Engine.run({ refreshFixture: true });
-      Toast.success('Datos actualizados');
+      Engine.run();
+      Toast.success('Marcadores e indicadores actualizados');
     } catch (error) {
       console.error(error);
-      Toast.error('No se pudo actualizar la lista');
+      Toast.error('Incapaz de refrescar los datos desde el servidor');
     }
   }
 };
