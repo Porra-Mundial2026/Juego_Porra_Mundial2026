@@ -2,237 +2,86 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
   <meta name="theme-color" content="#020617">
-  <meta name="color-scheme" content="dark">
-
-  <!-- iOS -->
+  
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="WC 2026">
-
-  <!-- Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-
-  <meta
-    name="description"
-    content="Porra familiar del Mundial 2026. Resultados en vivo, clasificación automática y experiencia Apple Ultra."
-  >
-
-  <!-- IMPORTANTE: rutas relativas para Capacitor -->
-  <link rel="manifest" href="./manifest.json">
-
-  <link
-    rel="icon"
-    href="./icons/icon-192.png"
-    type="image/png"
-  >
-
-  <link
-    rel="apple-touch-icon"
-    href="./icons/icon-180.png"
-  >
-
-  <link rel="stylesheet" href="./style.css">
-
+  <meta name="description" content="Porra familiar del Mundial 2026. Resultados en vivo, clasificación automática y experiencia Apple Ultra.">
+  
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/icons/icon-180.png">
+  <link rel="stylesheet" href="/style.css">
+  
   <title>World Cup 2026 • Family Predictor</title>
 </head>
-
 <body>
-
-  <!-- OFFLINE -->
-  <div
-    id="offline-banner"
-    hidden
-    class="offline-banner"
-    role="status"
-  >
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 14v-4m0-4h.01"/>
-    </svg>
-
+  
+  <div id="offline-banner" hidden class="offline-banner" role="status">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 14v-4m0-4h.01"/></svg>
     <span>Sin conexión · Trabajando offline</span>
   </div>
 
-
-  <!-- HEADER -->
   <header class="app-header">
-
     <div class="header-inner">
-
       <div class="header-left">
-
         <div class="logo-ball">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20zm0 0v20"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20zm0 0v20"/></svg>
         </div>
-
         <div>
           <h1 class="header-title">World Cup 2026</h1>
           <p class="header-subtitle">Family Predictor</p>
         </div>
-
       </div>
-
-
       <div class="header-right">
-
-        <button
-          id="btn-refresh"
-          class="icon-button"
-          data-action="refresh"
-          aria-label="Actualizar datos"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M23 4v6h-6M1 20v-6h6"/>
-            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-          </svg>
+        <button id="btn-refresh" class="icon-button" data-action="refresh" aria-label="Actualizar datos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
         </button>
-
-
-        <button
-          id="btn-share"
-          class="icon-button"
-          aria-label="Compartir clasificación"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="18" cy="5" r="3"/>
-            <circle cx="6" cy="12" r="3"/>
-            <circle cx="18" cy="19" r="3"/>
-            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-          </svg>
+        <button id="btn-share" class="icon-button" aria-label="Compartir clasificación">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         </button>
-
       </div>
-
     </div>
-
   </header>
 
-
-  <!-- MAIN -->
   <main id="main-content" class="container app-shell">
-
     <section class="hero-section">
-
       <div class="premium-badge">
-        <svg
-          class="badge-icon"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-        </svg>
-
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span>Experiencia Apple Ultra</span>
       </div>
-
-
-      <h2 class="hero-title">
-        La porra del Mundial<br>
-        reinventada.
-      </h2>
-
-
-      <!-- STATS -->
+      <h2 class="hero-title">La porra del Mundial<br>reinventada.</h2>
+      
       <div class="stats-grid">
-
-        <div class="stat-card">
-          <div class="stat-label">Partidos</div>
-          <div class="stat-number" id="totalPartidos">--</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-label">Jugados</div>
-          <div class="stat-number" id="totalJugados">--</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-label">En Directo</div>
-          <div class="stat-number" id="totalLive">--</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-label">Familia</div>
-          <div class="stat-number" id="totalUsers">--</div>
-        </div>
-
+        <div class="stat-card"><div class="stat-label">Partidos</div><div class="stat-number" id="totalPartidos">--</div></div>
+        <div class="stat-card"><div class="stat-label">Jugados</div><div class="stat-number" id="totalJugados">--</div></div>
+        <div class="stat-card"><div class="stat-label">En Directo</div><div class="stat-number" id="totalLive">--</div></div>
+        <div class="stat-card"><div class="stat-label">Familia</div><div class="stat-number" id="totalUsers">--</div></div>
       </div>
-
     </section>
 
+    <section class="filters-bar">
+      </section>
 
-    <!-- FILTROS -->
-    <section class="filters-bar"></section>
-
-
-    <!-- PARTIDOS -->
-    <section
-      id="grid-fixture"
-      class="matches-grid"
-      aria-live="polite"
-    ></section>
-
-
-    <!-- ESTADÍSTICAS -->
-    <section
-      id="estadisticas-avanzadas"
-      class="glass-card"
-      style="margin-top: 16px;"
-    ></section>
-
-
-    <!-- CLASIFICACIÓN -->
-    <section
-      id="tabla-clasificacion"
-      class="leaderboard-container glass-card"
-      style="margin-top: 16px; margin-bottom: 20px;"
-    ></section>
-
+    <section id="grid-fixture" class="matches-grid" aria-live="polite"></section>
+    <section id="estadisticas-avanzadas" class="glass-card" style="margin-top: 16px;"></section>
+    <section id="tabla-clasificacion" class="leaderboard-container glass-card" style="margin-top: 16px; margin-bottom: 20px;"></section>
   </main>
 
+  <nav class="bottom-nav" aria-label="Navegación principal">
+    </nav>
 
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav" aria-label="Navegación principal"></nav>
+  <div id="modal-add-user" class="modal" hidden role="dialog" aria-modal="true"></div>
+  <div id="modal-confirm" class="modal" hidden role="alertdialog" aria-modal="true"></div>
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
-
-  <!-- MODAL -->
-  <div
-    id="modal-add-user"
-    class="modal"
-    hidden
-    role="dialog"
-    aria-modal="true"
-  ></div>
-
-
-  <!-- SCRIPT PRINCIPAL -->
-  <script src="./script.js"></script>
-
-
-  <!-- SERVICE WORKER -->
+  <script src="/script.js" defer></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', async () => {
-        try {
-          await navigator.serviceWorker.register('./sw.js');
-          console.log('SW registrado correctamente');
-        } catch (err) {
-          console.error('Error registrando SW:', err);
-        }
-      });
+      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
     }
   </script>
-
 </body>
 </html>

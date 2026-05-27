@@ -1,21 +1,24 @@
-{
-  "name": "worldcup2026-app",
-  "version": "1.0.0",
-  "private": true,
+const config = {
+  appId: 'com.worldcup2026.predictor',
+  appName: 'World Cup 2026',
+  webDir: '.',
+  bundledWebRuntime: false,
 
-  "scripts": {
-    "start": "npx serve .",
-    "build": "echo build complete",
-    "android": "npx cap open android"
+  server: {
+    androidScheme: 'https'
   },
 
-  "dependencies": {
-    "@capacitor/android": "^7.0.0",
-    "@capacitor/core": "^7.0.0"
-  },
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      backgroundColor: '#020617',
+      showSpinner: false
+    },
 
-  "devDependencies": {
-    "@capacitor/cli": "^7.0.0",
-    "serve": "^14.2.1"
+    StatusBar: {
+      style: 'DARK'
+    }
   }
-}
+};
+
+export default config;
