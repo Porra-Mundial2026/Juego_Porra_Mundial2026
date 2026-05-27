@@ -284,12 +284,11 @@ html, body {
   gap: 12px;
 }
 
-.match-card {
-  background: linear-gradient(145deg, rgba(32,32,35,0.7) 0%, rgba(20,20,22,0.85) 100%);
-  border: 1px solid var(--border-metallic);
-  border-radius: var(--radius-ios);
-  padding: 14px;
-  box-shadow: var(--shadow-premium);
+.match-card img {
+  max-width: 24px;
+  max-height: 16px;
+  object-fit: cover;
+  border-radius: 3px;
 }
 
 /* Cabecera interna del partido */
