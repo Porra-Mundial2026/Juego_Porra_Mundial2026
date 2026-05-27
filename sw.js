@@ -6,7 +6,7 @@
    Capacitor + Android + iPhone Ready
 ====================================================== */
 
-const CACHE_VERSION = 'wc2026-v4'; // Incrementado para forzar la reinstalación limpia
+const CACHE_VERSION = 'wc2026-v4';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 
@@ -151,7 +151,7 @@ function offlineResponse() {
       message: 'Sin conexión a internet ni datos en caché.'
     }),
     {
-      status: 503, // SOLUCIÓN AL BUG 2: Retornar código 503 rompe el response.ok y despierta los catch() del script.js
+      status: 503,
       headers: {
         'Content-Type': 'application/json'
       }
