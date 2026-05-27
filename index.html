@@ -61,64 +61,47 @@
     </header>
 
     <main class="container">
-
       <section class="hero-metrics">
         <div class="stats-grid">
-          
           <div class="stat-card">
             <span class="stat-label">Partidos</span>
             <div class="stat-number" id="totalMatches">--</div>
           </div>
-
           <div class="stat-card">
             <span class="stat-label">Jugados</span>
             <div class="stat-number" id="totalPlayed">--</div>
           </div>
-
           <div class="stat-card icon-live-glow">
             <span class="stat-label">En Vivo</span>
             <div class="stat-number" id="totalLive">--</div>
           </div>
-
           <div class="stat-card">
             <span class="stat-label">Familia</span>
             <div class="stat-number" id="totalUsers">--</div>
           </div>
-
         </div>
       </section>
 
       <section class="filters-bar" aria-label="Fases del campeonato"></section>
-
-      <section id="grid-fixture" class="matches-grid" aria-live="polite">
-        </section>
-
-      <section id="estadisticas-avanzadas" class="apple-card-metallic" style="margin-top: 16px; display: none;">
-        </section>
-
-      <section id="tabla-clasificacion" class="apple-card-metallic leaderboard-section" style="margin-top: 16px; margin-bottom: 24px;">
-        </section>
-
+      <section id="grid-fixture" class="matches-grid" aria-live="polite"></section>
+      <section id="estadisticas-avanzadas" class="apple-card-metallic" style="margin-top: 16px; display: none;"></section>
+      <section id="tabla-clasificacion" class="apple-card-metallic leaderboard-section" style="margin-top: 16px; margin-bottom: 24px;"></section>
     </main>
   </div>
 
   <div id="toast-container"></div>
-
   <nav class="bottom-nav" aria-label="Navegación principal"></nav>
-
-  <div id="modal-add-user" class="modal-overlay" hidden role="dialog" aria-modal="true">
-    </div>
+  <div id="modal-add-user" class="modal-overlay" hidden role="dialog" aria-modal="true"></div>
 
   <script src="./script.js"></script>
 
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', async () => {
-        try {
-          const reg = await navigator.serviceWorker.register('./sw.js');
-          console.log('Premium Service Worker operativo en rango:', reg.scope);
-        } catch (err) {
-          console.error('Fallo en el despliegue del Service Worker local:', err);
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister().then(() => {
+            console.log("Limpieza exitosa: Service Worker antiguo eliminado.");
+          });
         }
       });
     }
