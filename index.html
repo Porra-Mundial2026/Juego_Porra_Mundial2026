@@ -1,110 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
-  
-  <meta name="theme-color" content="#090a0f">
-  <meta name="color-scheme" content="dark">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="WC 2026">
-  <meta name="mobile-web-app-capable" content="yes">
-  
-  <meta name="description" content="Porra familiar del Mundial 2026. Estilo Premium Titanium Dark con resultados en tiempo real.">
-
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./icons/icon-192.png" type="image/png">
-  <link rel="apple-touch-icon" href="./icons/icon-180.png">
-  
-  <link rel="stylesheet" href="./style.css">
-
-  <title>World Cup 2026 • Premium Predictor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WC 2026 • Local Mode</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
-  <div id="offline-indicator" class="offline-island" hidden>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0119 12.5M5 12.5a10.94 10.94 0 015.83-2.84M8.46 15.94a6.8 6.8 0 0110.1 0M10.58 19.34a2.26 2.26 0 012.84 0"/>
-    </svg>
-    <span>Modo sin conexión activa</span>
-  </div>
-
-  <div class="app-shell">
-
-    <header class="app-header">
-      <div class="header-inner">
-        <div class="header-left">
-          <div class="logo-titanium">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-              <path d="M4 22h16"></path>
-              <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
-              <path d="M12 2a5 5 0 0 0-5 5v5a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"></path>
-            </svg>
-          </div>
-          <div>
-            <h1 class="header-title">Mundial 2026</h1>
-            <p class="header-subtitle">Porra Familiar Premium</p>
-          </div>
-        </div>
-        
-        <div class="header-right">
-          <button id="btn-refresh" class="action-circle-btn" aria-label="Sincronizar datos">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <main class="container">
-      <section class="hero-metrics">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-label">Partidos</span>
-            <div class="stat-number" id="totalMatches">--</div>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Jugados</span>
-            <div class="stat-number" id="totalPlayed">--</div>
-          </div>
-          <div class="stat-card icon-live-glow">
-            <span class="stat-label">En Vivo</span>
-            <div class="stat-number" id="totalLive">--</div>
-          </div>
-          <div class="stat-card">
-            <span class="stat-label">Familia</span>
-            <div class="stat-number" id="totalUsers">--</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="filters-bar" aria-label="Fases del campeonato"></section>
-      <section id="grid-fixture" class="matches-grid" aria-live="polite"></section>
-      <section id="estadisticas-avanzadas" class="apple-card-metallic" style="margin-top: 16px; display: none;"></section>
-      <section id="tabla-clasificacion" class="apple-card-metallic leaderboard-section" style="margin-top: 16px; margin-bottom: 24px;"></section>
-    </main>
-  </div>
-
-  <div id="toast-container"></div>
-  <nav class="bottom-nav" aria-label="Navegación principal"></nav>
-  <div id="modal-add-user" class="modal-overlay" hidden role="dialog" aria-modal="true"></div>
-
-  <script src="./script.js"></script>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for (let registration of registrations) {
-          registration.unregister().then(() => {
-            console.log("Limpieza exitosa: Service Worker antiguo eliminado.");
-          });
-        }
-      });
-    }
-  </script>
+    <div class="app-shell">
+        <main class="container">
+            <h1 style="color: white; text-align: center;">Mundial 2026</h1>
+            <div id="grid-fixture" style="color: white;">Cargando partidos...</div>
+        </main>
+    </div>
+    <script src="./script.js"></script>
 </body>
 </html>
